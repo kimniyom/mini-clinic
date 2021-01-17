@@ -1,0 +1,194 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+
+
+/*
+    Created on : Nov 23, 2016, 11:18:24 PM
+    Author     : apple
+*/
+
+@charset "utf-8";
+
+/* CSS Document */
+
+@font-face {
+    font-family: Th;
+    src: url('font-th/TH K2D July8 Bold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: Thsarabun;
+    src: url('ThSaraban/THSarabun.ttf') format('truetype');
+}
+@font-face {
+    font-family: Thsarabun-B;
+    src: url('ThSaraban/THSarabun Bold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: RSU-Th;
+    src: url('rsufont/RSU_BOLD.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: SPMK-Th;
+    src: url('supermarket/supermarket.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: thaisanslite;
+    src: url('thaisanslite/thaisanslite_r1.ttf') format('truetype');
+}
+
+hr {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#bg-alert {
+    background: #ff0000;
+}
+
+#wrapper #box-profile {
+    color: #00cccc;
+}
+
+#heading-panel {
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ebf1f6+0,abd3ee+50,89c3eb+51,d5ebfb+100;Blue+Gloss+%234 */
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#d7e6f6+0,ccddf4+50,b6ceef+51,c9dbf3+100 */
+    background: #FFFFFF;
+    box-shadow: none;
+    /*
+    background: -moz-linear-gradient(top, #d7e6f6 0%, #ccddf4 50%, #b6ceef 51%, #c9dbf3 100%);
+    background: -webkit-linear-gradient(top, #d7e6f6 0%, #ccddf4 50%, #b6ceef 51%, #c9dbf3 100%);
+    background: linear-gradient(to bottom, #d7e6f6 0%, #ccddf4 50%, #b6ceef 51%, #c9dbf3 100%);
+    filter:DXImageTransform.Microsoft.gradient( startColorstr='#d7e6f6', endColorstr='#c9dbf3', GradientType=0);
+    color: #006599;
+    */
+}
+
+
+/*
+table thead tr th {
+    border-radius: 0px;
+    background: #d7e6f6;
+    background: -moz-linear-gradient(top, #d7e6f6 0%, #ccddf4 50%, #b6ceef 51%, #c9dbf3 100%);
+    background: -webkit-linear-gradient(top, #d7e6f6 0%, #ccddf4 50%, #b6ceef 51%, #c9dbf3 100%);
+    background: linear-gradient(to bottom, #d7e6f6 0%, #ccddf4 50%, #b6ceef 51%, #c9dbf3 100%);
+    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#d7e6f6', endColorstr='#c9dbf3', GradientType=0);
+    color: #0083b8;
+}
+*/
+
+table {
+    /*border: #cccccc solid 1px;*/
+    /*background: #FFFFFF;*/
+    font-size: 18px;
+    font-family: thaisanslite;
+}
+
+#sidebar-wrapper .panel-heading {
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#d7e6f6+0,ccddf4+50,b6ceef+51,c9dbf3+100 */
+    background: #2a323b;
+    /* Old browsers */
+    border-bottom: #3c4754 solid 1px;
+    color: #FFFFFF;
+    /*
+    background: -moz-linear-gradient(top,  #d7e6f6 0%, #ccddf4 50%, #b6ceef 51%, #c9dbf3 100%);
+    background: -webkit-linear-gradient(top,  #d7e6f6 0%,#ccddf4 50%,#b6ceef 51%,#c9dbf3 100%);
+    background: linear-gradient(to bottom,  #d7e6f6 0%,#ccddf4 50%,#b6ceef 51%,#c9dbf3 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d7e6f6', endColorstr='#c9dbf3',GradientType=0 );
+    */
+    /*color: #999999*/
+    ;
+}
+
+#sidebar-wrapper .panel-footer {
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#d7e6f6+0,ccddf4+50,b6ceef+51,c9dbf3+100 */
+    background: #2a323b;
+    /* Old browsers */
+    border-bottom: #3c4754 solid 1px;
+    border-top: #3c4754 solid 1px;
+    color: #FFFFFF;
+    border-radius: 0px;
+    /*
+    background: -moz-linear-gradient(top,  #d7e6f6 0%, #ccddf4 50%, #b6ceef 51%, #c9dbf3 100%);
+    background: -webkit-linear-gradient(top,  #d7e6f6 0%,#ccddf4 50%,#b6ceef 51%,#c9dbf3 100%);
+    background: linear-gradient(to bottom,  #d7e6f6 0%,#ccddf4 50%,#b6ceef 51%,#c9dbf3 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d7e6f6', endColorstr='#c9dbf3',GradientType=0 );
+    */
+    /*color: #999999*/
+    ;
+}
+
+#sidebar-wrapper .panel-footer a {
+    color: #FFFFFF;
+}
+
+#nav-bar {
+    border-radius: 0px;
+    margin-bottom: 0px;
+    /*border-bottom: #191919 solid 1px;*/
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    background: #191919;
+    border-bottom: none;
+}
+
+body table thead th {
+    /*white-space: nowrap;*/
+}
+
+body table tbody td {
+    /*white-space: nowrap;*/
+}
+
+.box-home-menu {
+    color: #cccccc;
+    background: none;
+    /*border: #e3e3e3 solid 1px;
+    width: 100%;
+    position: relative;
+    padding: 5px;
+    */
+    width: 120px;
+    float: left;
+    position: relative;
+    padding: 5px;
+    margin-right: 5px;
+    border-radius: 10px;
+    transition: background .25s ease-in-out;
+    -moz-transition: background .25s ease-in-out;
+    -webkit-transition: background .25s ease-in-out;
+    -ms-transition: background .25s ease-in-out;
+    -o-transition: background .25s ease-in-out;
+}
+
+.box-home-menu:hover {
+    background: #e3e3e3;
+    color: #3c4754;
+}
+
+.box-home-menu-disabled {
+    background: #3c4754;
+    width: 100%;
+    position: relative;
+    padding: 5px;
+    border-radius: 10px;
+}
+
+body .breadcrumb .breadcrumbs a {
+    color: #cccccc;
+}
+
+body .breadcrumb .breadcrumbs a:hover {
+    color: #FFFFFF;
+}
+
+body .breadcrumb {
+    color: #ffffff;
+}

@@ -1,0 +1,95 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+
+
+/* 
+    Created on : Nov 23, 2016, 11:18:24 PM
+    Author     : apple
+*/
+
+@charset "utf-8";
+/* CSS Document */
+
+@font-face {
+    font-family:Th;
+    src: url('font-th/TH K2D July8 Bold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family:RSU-Th;
+    src: url('rsufont/RSU_BOLD.ttf') format('truetype');
+}
+
+@font-face {
+    font-family:SPMK-Th;
+    src: url('supermarket/supermarket.ttf') format('truetype');
+}
+
+@font-face {
+    font-family:thaisanslite;
+    src: url('thaisanslite/thaisanslite_r1.ttf') format('truetype');
+}
+
+hr{
+    margin-top:10px;
+    margin-bottom:10px;
+}
+#bg-alert {
+    background: #ff0000;
+}
+
+
+
+#wrapper #box-profile {
+    color: #0083b8;
+}
+
+#heading-panel {
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ebf1f6+0,abd3ee+50,89c3eb+51,d5ebfb+100;Blue+Gloss+%234 */
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#d7e6f6+0,ccddf4+50,b6ceef+51,c9dbf3+100 */
+    background: #FFFFFF;
+    box-shadow: none;
+    /*
+    background: -moz-linear-gradient(top, #d7e6f6 0%, #ccddf4 50%, #b6ceef 51%, #c9dbf3 100%);
+    background: -webkit-linear-gradient(top, #d7e6f6 0%, #ccddf4 50%, #b6ceef 51%, #c9dbf3 100%);
+    background: linear-gradient(to bottom, #d7e6f6 0%, #ccddf4 50%, #b6ceef 51%, #c9dbf3 100%);
+    filter:DXImageTransform.Microsoft.gradient( startColorstr='#d7e6f6', endColorstr='#c9dbf3', GradientType=0);
+    color: #006599;
+    */
+}
+
+/*
+table thead tr th {
+    border-radius: 0px;
+    background: #d7e6f6;
+    background: -moz-linear-gradient(top, #d7e6f6 0%, #ccddf4 50%, #b6ceef 51%, #c9dbf3 100%);
+    background: -webkit-linear-gradient(top, #d7e6f6 0%, #ccddf4 50%, #b6ceef 51%, #c9dbf3 100%);
+    background: linear-gradient(to bottom, #d7e6f6 0%, #ccddf4 50%, #b6ceef 51%, #c9dbf3 100%);
+    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#d7e6f6', endColorstr='#c9dbf3', GradientType=0);
+    color: #0083b8;
+}
+*/
+table {
+    border: #cccccc solid 1px;
+    background: #FFFFFF;
+    font-size: 18px;
+    font-family: thaisanslite;
+}
+
+#sidebar-wrapper .panel-heading{
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#d7e6f6+0,ccddf4+50,b6ceef+51,c9dbf3+100 */
+    background: #FFFFFF; /* Old browsers */
+    border-bottom: #eeeeee solid 1px;
+    /*
+    background: -moz-linear-gradient(top,  #d7e6f6 0%, #ccddf4 50%, #b6ceef 51%, #c9dbf3 100%);
+    background: -webkit-linear-gradient(top,  #d7e6f6 0%,#ccddf4 50%,#b6ceef 51%,#c9dbf3 100%); 
+    background: linear-gradient(to bottom,  #d7e6f6 0%,#ccddf4 50%,#b6ceef 51%,#c9dbf3 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d7e6f6', endColorstr='#c9dbf3',GradientType=0 );
+*/
+    /*color: #999999*/;
+}
+
+
