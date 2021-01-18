@@ -125,14 +125,14 @@ class Orders extends CActiveRecord {
         return $std_id;
     }
 
-    function Getlistorder($order_id = null,$branch = null) {
+    function Getlistorder($order_id = null, $branch = null) {
 
         $sql = "SELECT l.id,l.product_id,l.number,
             l.distcountpercent,l.distcountprice,
             p.product_price,p.costs,c.unit,p.product_name,p.product_nameclinic,u.unit AS unitname
                 FROM listorder l INNER JOIN clinic_stockproduct c ON l.product_id = c.product_id
                 INNER JOIN center_stockproduct p ON c.product_id = p.product_id
-                LEFT JOIN unit u ON c.unit = u.id 
+                LEFT JOIN unit u ON c.unit = u.id
                 WHERE l.order_id = '$order_id' AND c.branch = '$branch' ";
         return Yii::app()->db->createCommand($sql)->queryAll();
     }
@@ -150,13 +150,13 @@ class Orders extends CActiveRecord {
     function GetorderInBranch($branch) {
         $sql = "SELECT o.*,SUM(l.number) AS total,SUM(l.pricetotal) AS pricetotal
                 FROM orders o INNER JOIN listorder l ON o.order_id = l.order_id
-                WHERE o.branch = '$branch' 
+                WHERE o.branch = '$branch'
                 GROUP BY o.order_id ";
         return Yii::app()->db->createCommand($sql)->queryAll();
     }
 
-    function SearchOrder($datestart = null, $dateend = null, $status = null, $branch = null,$order_id = null) {
-        if($order_id != ''){
+    function SearchOrder($datestart = null, $dateend = null, $status = null, $branch = null, $order_id = null) {
+        if ($order_id != '') {
             $WAREORDER = "o.order_id = '$order_id'";
         } else {
             $WAREORDER = " 1=1";
@@ -166,8 +166,8 @@ class Orders extends CActiveRecord {
         } else {
             $WARESTATUS = "";
         }
-        
-        if($branch == "99"){
+
+        if ($branch == "99") {
             $wherebranch = "";
         } else {
             $wherebranch = " AND o.branch = '$branch' ";
@@ -182,7 +182,7 @@ class Orders extends CActiveRecord {
                 FROM orders o INNER JOIN listorder l ON o.order_id = l.order_id
                 LEFT JOIN employee e ON o.author = e.id
                 LEFT JOIN branch b ON o.branch = b.id
-                WHERE o.create_date BETWEEN '$datestart' AND '$dateend' AND $WAREORDER $wherebranch $WARESTATUS 
+                WHERE o.create_date BETWEEN '$datestart' AND '$dateend' AND $WAREORDER $wherebranch $WARESTATUS
                 GROUP BY o.order_id ";
         return Yii::app()->db->createCommand($sql)->queryAll();
     }
@@ -194,7 +194,7 @@ class Orders extends CActiveRecord {
             $statusVal = "อยู่ระหว่างการจัดส่ง";
         } else if ($status == '2') {
             $statusVal = "จัดส่งสินค้าแล้ว";
-        } else if($status == '3'){
+        } else if ($status == '3') {
             $statusVal = "สินค้าถึงผู้รับ";
         }
 

@@ -56,7 +56,7 @@ $BranchModel = Branch::model()->find("id = '$branch'");
     </div>
     <hr/>
     <div>
-        <label>ชื่อผู้ติดต่อ</label> <?php echo $BranchModel['menagers'] ?> 
+        <label>ชื่อผู้ติดต่อ</label> <?php echo $BranchModel['menagers'] ?>
         <label>โทรศัพท์</label> <?php echo $BranchModel['telmenager'] ?>
     </div>
     <div class="well">
@@ -115,12 +115,10 @@ $BranchModel = Branch::model()->find("id = '$branch'");
                 <label for="">จำนวน*</label><br/>
                 <input type="text" class="form-control" id="number" value="1"/>
             </div>
-            <!--
             <div class="col-md-3 col-lg-3">
                 <label for="">ส่วนลด%</label>
                 <input type="text" class="form-control" id="distcountpersent" value="0"/>
             </div>
-            -->
             <div class="col-lg-1 col-md-2">
                 <button type="button" class="btn btn-block btn-success" style=" margin-top: 25px;" onclick="AddproductInlist()">เพิ่ม</button>
             </div>
@@ -137,12 +135,12 @@ $BranchModel = Branch::model()->find("id = '$branch'");
 
 <script type="text/javascript">
     loaddata();
-    $(document).ready(function () {
-        $("#producttype").change(function () {
+    $(document).ready(function() {
+        $("#producttype").change(function() {
             var type_id = $("#producttype").val();
             var url = "<?php echo Yii::app()->createUrl('producttype/getsubproduct') ?>";
             var data = {type_id: type_id};
-            $.post(url, data, function (datas) {
+            $.post(url, data, function(datas) {
                 $("#boxsubproducttype").html(datas);
             });
         });
@@ -154,8 +152,12 @@ $BranchModel = Branch::model()->find("id = '$branch'");
     function loaddata() {
         var url = "<?php echo Yii::app()->createUrl('orders/loaddata') ?>";
         var order_id = "<?php echo $order_id ?>";
-        var data = {order_id: order_id};
-        $.post(url, data, function (datas) {
+        var branch = "<?php echo $branch ?>";
+        var data = {
+            order_id: order_id,
+            branch: branch
+        };
+        $.post(url, data, function(datas) {
             $("#orderlist").html(datas);
         });
     }
@@ -185,7 +187,7 @@ $BranchModel = Branch::model()->find("id = '$branch'");
             distcount: distcount
         };
 
-        $.post(url, data, function (success) {
+        $.post(url, data, function(success) {
             loaddata();
         });
     }

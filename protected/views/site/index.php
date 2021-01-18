@@ -22,12 +22,12 @@ $loglogin = Yii::app()->db->createCommand($sql)->queryAll();
 <script>
     var socket = io.connect("<?php echo $config->LinkNode() ?>");
     socket.on('connect', function() {
-      $("#statusserver").html("<span class='text-success'><i class='fa fa-check'></i> Server Online</span>");
+        $("#statusserver").html("<span class='text-success'><i class='fa fa-check'></i> Server Online</span>");
     });
 
     socket.on('disconnect', function() {
-      console.log('check 2', socket.connected);
-      $("#statusserver").html("<span class='text-danger'><i class='fa fa-remove'></i> Server Offline</span>");
+        console.log('check 2', socket.connected);
+        $("#statusserver").html("<span class='text-danger'><i class='fa fa-remove'></i> Server Offline</span>");
     });
 
     $(document).ready(function() {
@@ -110,7 +110,7 @@ $loglogin = Yii::app()->db->createCommand($sql)->queryAll();
                                         <div class="col-md-2 col-lg-2 col-sm-2 col-xs-4" style=" margin-bottom: 0px; padding: 5px;opacity: 0.4;">
                                             <div class="box-home-menu-disabled">
                                                 <center>
-                                                    <img src="<?php //echo Yii::app()->baseUrl;                               ?>/images/<?php //echo $icon ?>" height="48px"/><br/>
+                                                    <img src="<?php //echo Yii::app()->baseUrl;                                 ?>/images/<?php //echo $icon   ?>" height="48px"/><br/>
                                                     <div id="text-menus" style=" width: 99%;height: 40px; overflow: hidden;">
                                 <?php //echo $mn['menu']   ?>
                                                     </div>
@@ -234,7 +234,31 @@ $loglogin = Yii::app()->db->createCommand($sql)->queryAll();
                                 </div>
                             </a>
                         </div>
+                        <div class="col-md-6 col-lg-6 col-xs-6" style=" margin-bottom: 20px;">
+                            <a href="<?php echo Yii::app()->createUrl('repair') ?>">
+                                <span class="badge" style=" position: absolute;top:0px; right: 0px; background: <?php echo ($alet->AlertRepair() > 0) ? "#ff0033;" : "#111111;"; ?>">
+                                    <?php echo $alet->AlertRepair(); ?>
+                                </span>
+                                <div class="btn btn-default btn-block">
+                                    <img src="<?php echo Yii::app()->baseUrl; ?>/images/alert-icon.png"
+                                         height="48px" /><br/>
+                                    แจ้งเตือนซ่อม - บำรุง
+                                </div>
+                            </a>
+                        </div>
 
+                        <div class="col-md-6 col-lg-6 col-xs-6" style=" margin-bottom: 20px;">
+                            <a href="<?php echo Yii::app()->createUrl('returnproduct/view') ?>">
+                                <span class="badge" style=" position: absolute;top:0px; right: 0px; background: <?php echo ($alet->AlertreturnProduct() > 0) ? "#ff0033;" : "#111111;"; ?>">
+                                    <?php echo $alet->AlertreturnProduct(); ?>
+                                </span>
+                                <div class="btn btn-default btn-block">
+                                    <img src="<?php echo Yii::app()->baseUrl; ?>/images/alert-icon.png"
+                                         height="48px" /><br/>
+                                    แจ้งเตือนส่งคืนสินค้า
+                                </div>
+                            </a>
+                        </div>
 
                     </div>
 

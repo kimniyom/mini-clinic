@@ -19,6 +19,7 @@ $Thaibath = new Thaibaht();
             <th style=" text-align: center;">จำนวน</th>
             <th style=" text-align: center;">หน่วยนับ</th>
             <th style=" text-align: center;">ราคา/หน่วย</th>
+            <th>ส่วนลด</th>
             <th>จำนวนเงิน</th>
             <th style=" text-align: center;">ยกเลิก</th>
         </tr>
@@ -41,6 +42,7 @@ $Thaibath = new Thaibaht();
                 <td style=" text-align: center;"><?php echo number_format($rs['number']) ?></td>
                 <td style=" text-align: center;"><?php echo $rs['unitname'] ?></td>
                 <td style=" text-align: right;"><?php echo number_format($rs['costs'], 2) ?></td>
+                <td style=" text-align: right;"><?php echo $rs['distcountpercent'] ?></td>
                 <td style=" text-align: right;"><?php echo number_format($sumrow, 2) ?></td>
                 <td style=" text-align: center;">
                     <a href="javascript:deleteproduct('<?php echo $rs['id'] ?>')"><i class="fa fa-remove"></i></a></td>
@@ -49,7 +51,7 @@ $Thaibath = new Thaibaht();
     </tbody>
     <tfoot>
         <tr>
-            <td colspan="5" rowspan="4">
+            <td colspan="6" rowspan="4">
                 หมายเหตุ
             </td>
         </tr>
@@ -73,20 +75,20 @@ $Thaibath = new Thaibaht();
             </td>
             <td></td>
         </tr>
-<!--
-        <tr>
-            <td>ภาษี 7%</td>
-            <td style=" text-align: right;">
-                <?php
-                /*
-                $tax = ($priceresult * 7) / 100;
-                $taxresult = number_format($tax, 2);
-                echo $taxresult;
-                */
-                ?>
-            </td>
-            <td></td>
-        </tr>
+        <!--
+                <tr>
+                    <td>ภาษี 7%</td>
+                    <td style=" text-align: right;">
+        <?php
+        /*
+          $tax = ($priceresult * 7) / 100;
+          $taxresult = number_format($tax, 2);
+          echo $taxresult;
+         */
+        ?>
+                    </td>
+                    <td></td>
+                </tr>
         -->
         <tr>
             <td colspan="5" style=" text-align: center;">
@@ -118,7 +120,7 @@ $Thaibath = new Thaibaht();
         if (r == true) {
             var url = "<?php echo Yii::app()->createUrl('listorder/deleteproduct') ?>";
             var data = {id: id};
-            $.post(url, data, function (success) {
+            $.post(url, data, function(success) {
                 loaddata();
             });
         }

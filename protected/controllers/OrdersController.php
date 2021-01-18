@@ -32,7 +32,7 @@ class OrdersController extends Controller {
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
                 'actions' => array('create', 'update', 'loaddata', 'save', 'search',
                     'deleteorder', 'confirmorder', 'cutitems', 'print', 'bill', 'updatestatus',
-                    'checklistorder', 'adddistcount','editnumber'),
+                    'checklistorder', 'adddistcount', 'editnumber'),
                 'users' => array('@'),
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -57,7 +57,7 @@ class OrdersController extends Controller {
         $data['BranchModel'] = Branch::model()->find("id = '$branchId'");
         $OrderModel = new Orders();
         $data['order'] = $order;
-        $data['orderlist'] = $OrderModel->Getlistorder($order_id,$branchId);
+        $data['orderlist'] = $OrderModel->Getlistorder($order_id, $branchId);
 
         if (Yii::app()->session['status'] == '1' || Yii::app()->session['status'] == '8') {
             $ModelMix = new CenterStockmix();
@@ -65,26 +65,26 @@ class OrdersController extends Controller {
             $productInorder = $OrderModel->GetlistorderSum($order_id);
             $data['product'] = $productInorder;
             /*
-            foreach ($productInorder as $product) {
-                $product_id = $product['product_id'];
-                $number = $product['number'];
-                
-                $mixer = $ModelMix->GetiteminproductTotal($product_id, $number);
-                foreach ($mixer as $rx):
-                    $columns = array(
-                        "itemid" => $rx['itemid'],
-                        "order_id" => $order_id,
-                        "itemcode" => $rx['itemcodes'],
-                        "number" => $rx['itemtotal'],
-                        "itemname" => $rx['itemname'],
-                        "unit" => $rx['unit']
-                    );
-                    Yii::app()->db->createCommand()->insert("temp_item", $columns);
-                endforeach;
-            }
-            $sql = "SELECT t.*,SUM(t.number) AS number FROM temp_item t GROUP BY t.itemcode";
-            $data['items'] = Yii::app()->db->createCommand($sql)->queryAll();
-             * 
+              foreach ($productInorder as $product) {
+              $product_id = $product['product_id'];
+              $number = $product['number'];
+
+              $mixer = $ModelMix->GetiteminproductTotal($product_id, $number);
+              foreach ($mixer as $rx):
+              $columns = array(
+              "itemid" => $rx['itemid'],
+              "order_id" => $order_id,
+              "itemcode" => $rx['itemcodes'],
+              "number" => $rx['itemtotal'],
+              "itemname" => $rx['itemname'],
+              "unit" => $rx['unit']
+              );
+              Yii::app()->db->createCommand()->insert("temp_item", $columns);
+              endforeach;
+              }
+              $sql = "SELECT t.*,SUM(t.number) AS number FROM temp_item t GROUP BY t.itemcode";
+              $data['items'] = Yii::app()->db->createCommand($sql)->queryAll();
+             *
              */
             $this->render('viewcenter', $data);
         } else {
@@ -216,7 +216,8 @@ class OrdersController extends Controller {
         $order = Orders::model()->find("order_id = '$orderId'");
         $OrderModel = new Orders();
         $data['orders'] = $order;
-        $data['order'] = $OrderModel->Getlistorder($orderId,$branch);
+        $data['order'] = $OrderModel->Getlistorder($orderId, $branch);
+        //print_r($data['order']);
         $this->renderPartial('listdata', $data);
     }
 
@@ -248,7 +249,7 @@ class OrdersController extends Controller {
     public function actionCaculatororder($orderId) {
         $OrderModel = new Orders();
         $Model = Orders::model()->find("order_id = '$orderId'");
-        $order = $OrderModel->Getlistorder($orderId,$Model['branch']);
+        $order = $OrderModel->Getlistorder($orderId, $Model['branch']);
         $sumdistcount = 0;
         $sumproduct = 0;
         foreach ($order as $rs):
@@ -269,7 +270,7 @@ class OrdersController extends Controller {
         $status = Yii::app()->request->getPost('status');
         $branch = Yii::app()->request->getPost('branch');
         $order_id = Yii::app()->request->getPost('order_id');
-       
+
         $data['order'] = $Model->SearchOrder($datestart, $dateend, $status, $branch, $order_id);
         $this->renderPartial('resultsearch', $data);
     }
@@ -330,7 +331,7 @@ class OrdersController extends Controller {
         $OrderModel = new Orders();
         $data['order'] = $order;
         $data['order_id'] = $order_id;
-        $data['orderlist'] = $OrderModel->Getlistorder($order_id,$branchId);
+        $data['orderlist'] = $OrderModel->Getlistorder($order_id, $branchId);
 
 
 
@@ -355,7 +356,7 @@ class OrdersController extends Controller {
         $OrderModel = new Orders();
         $data['order'] = $order;
         $data['order_id'] = $order_id;
-        $data['orderlist'] = $OrderModel->Getlistorder($order_id,$branchId);
+        $data['orderlist'] = $OrderModel->Getlistorder($order_id, $branchId);
 
 
 
@@ -401,20 +402,20 @@ class OrdersController extends Controller {
         Yii::app()->db->createCommand()
                 ->update("orders", $columns, "order_id = '$order_id'");
     }
-    
-    public function actionEditnumber(){
+
+    public function actionEditnumber() {
         $id = Yii::app()->request->getPost('id');
         $number = Yii::app()->request->getPost('newsnumber');
         $product_id = Yii::app()->request->getPost('product_id');
         $product = CenterStockproduct::model()->find("product_id=:product_id", array(":product_id" => $product_id));
         $costs = $product['costs'];
         $product_price = $product['product_price'];
-        
+
         $pricetotal = ($costs * $number);
-        
-        $columns = array("number" => $number,"pricetotal" => $pricetotal);
+
+        $columns = array("number" => $number, "pricetotal" => $pricetotal);
         Yii::app()->db->createCommand()
-                ->update("listorder", $columns,"id='$id'");
+                ->update("listorder", $columns, "id='$id'");
     }
 
 }

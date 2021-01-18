@@ -8,8 +8,8 @@
 /* @var $model Orders */
 
 $this->breadcrumbs = array(
-	'ใบสั่งสินค้า (สาขา' . $branchModel->branchname . ")" => array('index', "branch" => $branch),
-	'สร้างใบสั่ง (สาขา' . $branchModel->branchname . ")",
+    'ใบสั่งสินค้า (สาขา' . $branchModel->branchname . ")" => array('index', "branch" => $branch),
+    'สร้างใบสั่ง (สาขา' . $branchModel->branchname . ")",
 );
 
 $companySell = Companycenter::model()->find("id = '1'");
@@ -19,8 +19,8 @@ $BranchModel = Branch::model()->find("id = '$branch'");
     <div class="panel-body" style=" border-radius: 0px; position: relative;" id="boxorders">
         <div style=" text-align: center;">
             <!--
-            <h4 style=" margin-bottom: 0px;"><?php //echo $BranchModel['branchname']; ?></h4><br/>
-        -->
+            <h4 style=" margin-bottom: 0px;"><?php //echo $BranchModel['branchname'];   ?></h4><br/>
+            -->
             <?php echo $BranchModel['address']; ?><br/>
             <?php echo $BranchModel['contact']; ?><br/>
             <h4 style=" margin: 0px;">ใบสั่งซื้อสินค้า</h4>
@@ -30,16 +30,16 @@ $BranchModel = Branch::model()->find("id = '$branch'");
                 <!--
                 <table id="companysell">
                     <tr>
-                        <td>ผู้ขาย : <?php //echo $companySell['companyname'] ?></td>
+                        <td>ผู้ขาย : <?php //echo $companySell['companyname']   ?></td>
                     </tr>
                     <tr>
-                        <td>ที่อยู่ : <?php //echo $companySell['address'] ?></td>
+                        <td>ที่อยู่ : <?php //echo $companySell['address']   ?></td>
                     </tr>
                     <tr>
-                        <td>ติดต่อ : คุณ <?php //echo $companySell['memager'] ?> โทร. <?php //echo $companySell['tel'] ?></td>
+                        <td>ติดต่อ : คุณ <?php //echo $companySell['memager']   ?> โทร. <?php //echo $companySell['tel']   ?></td>
                     </tr>
                 </table>
-            -->
+                -->
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6">
                 <div style=" padding: 10px; position: relative; height: 100px;" class="box-codenumber">
@@ -67,25 +67,25 @@ $BranchModel = Branch::model()->find("id = '$branch'");
             <div class="col-md-6 col-lg-3">
                 <label for="">หมวดสินค้า*</label><br/>
                 <?php
-$this->widget('booster.widgets.TbSelect2', array(
-	//'model' => $model,
-	'asDropDownList' => true,
-	//'attribute' => 'itemid',
-	'name' => 'producttype',
-	'id' => 'producttype',
-	'data' => CHtml::listData(ProductType::model()->findAll("upper is null"), 'id', 'type_name'),
-	//'value' => $model,
-	'options' => array(
-		'allowClear' => true,
-		//$model,
-		//'oid',
-		//'tags' => array('clever', 'is', 'better', 'clevertech'),
-		'placeholder' => '== หมวดสินค้า ==',
-		'width' => '100%',
-		//'tokenSeparators' => array(',', ' ')
-	),
-));
-?>
+                $this->widget('booster.widgets.TbSelect2', array(
+                    //'model' => $model,
+                    'asDropDownList' => true,
+                    //'attribute' => 'itemid',
+                    'name' => 'producttype',
+                    'id' => 'producttype',
+                    'data' => CHtml::listData(ProductType::model()->findAll("upper is null"), 'id', 'type_name'),
+                    //'value' => $model,
+                    'options' => array(
+                        'allowClear' => true,
+                        //$model,
+                        //'oid',
+                        //'tags' => array('clever', 'is', 'better', 'clevertech'),
+                        'placeholder' => '== หมวดสินค้า ==',
+                        'width' => '100%',
+                    //'tokenSeparators' => array(',', ' ')
+                    ),
+                ));
+                ?>
             </div>
             <div class="col-lg-3 col-md-6">
                 <label for="">ประเภทสินค้า*</label>
@@ -117,12 +117,12 @@ $this->widget('booster.widgets.TbSelect2', array(
                 <label for="">จำนวน*</label><br/>
                 <input type="text" class="form-control" id="number" value="1"/>
             </div>
-            <!--
+
             <div class="col-md-3 col-lg-3">
                 <label for="">ส่วนลด%</label>
                 <input type="text" class="form-control" id="distcountpersent" value="0"/>
             </div>
-            -->
+
             <div class="col-lg-1 col-md-2">
                 <button type="button" class="btn btn-block btn-primary" style=" margin-top: 25px;" onclick="AddproductInlist()"><i class="fa fa-plus"></i> เพิ่ม</button>
             </div>
@@ -145,12 +145,12 @@ $this->widget('booster.widgets.TbSelect2', array(
 
 <script type="text/javascript">
     //loadimagesProduct();
-    $(document).ready(function () {
-        $("#producttype").change(function () {
+    $(document).ready(function() {
+        $("#producttype").change(function() {
             var type_id = $("#producttype").val();
             var url = "<?php echo Yii::app()->createUrl('producttype/getsubproductorder') ?>";
             var data = {type_id: type_id};
-            $.post(url, data, function (datas) {
+            $.post(url, data, function(datas) {
                 $("#boxsubproducttype").html(datas);
             });
         });
@@ -160,7 +160,7 @@ $this->widget('booster.widgets.TbSelect2', array(
         var type_id = "";
         var url = "<?php echo Yii::app()->createUrl('producttype/getsubproductorder') ?>";
         var data = {type_id: type_id};
-        $.post(url, data, function (datas) {
+        $.post(url, data, function(datas) {
             $('#producttype').select2("val", "");
             $("#boxsubproducttype").html(datas);
         });
@@ -173,8 +173,8 @@ $this->widget('booster.widgets.TbSelect2', array(
         var url = "<?php echo Yii::app()->createUrl('orders/loaddata') ?>";
         var order_id = "<?php echo $order_id ?>";
         var branch = "<?php echo $branch ?>";
-        var data = {order_id: order_id,branch: branch};
-        $.post(url, data, function (datas) {
+        var data = {order_id: order_id, branch: branch};
+        $.post(url, data, function(datas) {
             $("#orderlist").html(datas);
         });
     }
@@ -190,8 +190,8 @@ $this->widget('booster.widgets.TbSelect2', array(
         var product = $("#product").val();
         var order_id = "<?php echo $order_id ?>";
         var number = $("#number").val();
-        //var distcount = $("#distcountpersent").val();
-        var distcount = 0;
+        var distcount = $("#distcountpersent").val();
+        //var distcount = 0;
         //var private = $("input:radio[name=private]:checked").val();
         if (product == '' || number == '' || product == null) {
             sweetAlert("แจ้งเตือน...", "กรอกข้อมูลไม่ครบ!", "warning");
@@ -205,7 +205,7 @@ $this->widget('booster.widgets.TbSelect2', array(
             distcount: distcount
         };
 
-        $.post(url, data, function (success) {
+        $.post(url, data, function(success) {
             loaddata();
             combotype();
         });
@@ -222,9 +222,9 @@ $this->widget('booster.widgets.TbSelect2', array(
 
         var urlcheck = "<?php echo Yii::app()->createUrl('orders/checklistorder') ?>";
         var daracheck = {order_id: order_id};
-        $.post(urlcheck, daracheck, function (datas) {
+        $.post(urlcheck, daracheck, function(datas) {
             if (datas > 0) {
-                $.post(url, data, function (success) {
+                $.post(url, data, function(success) {
                     var url = "<?php echo Yii::app()->createUrl('orders/view', array('order_id' => $order_id)) ?>";
                     window.location = url;
                 });
