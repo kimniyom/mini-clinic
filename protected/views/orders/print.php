@@ -45,20 +45,16 @@
 
     </head>
     <body>
-
         <?php
-        /* @var $this OrdersController */
-        /* @var $model Orders */
-
         $companySell = Companycenter::model()->find("id = '1'");
         $Thaibath = new Thaibaht();
         ?>
-        <div style=" position: fixed; left: 20px; top: 20px;">
+        <div style=" position: fixed; left: 20px; top: 20px; z-index: 100;">
             <img src="<?php echo Yii::app()->baseUrl; ?>/uploads/logo/<?php echo $logo ?> " width="100" />
         </div>
-
+        <?php echo $logo ?>
         <div style="border-radius: 0px; padding: 10px; background: #FFFFFF; border: #999999 solid 1px; position: relative;" id="printorder">
-
+            <img src="<?php echo Yii::app()->baseUrl; ?>/uploads/logo/<?php echo $logo ?> " width="100" />
             <div style=" text-align: center; margin-bottom: 10px; font-size: 18px;">
                 <h4 style=" margin-bottom: 0px; font-size: 24px; color: #000; font-weight: bold;"><?php echo $BranchModel['branchname']; ?></h4><br/>
                 <?php echo $BranchModel['address']; ?><br/>
@@ -84,7 +80,7 @@
                         <table style=" border: #999999 solid 2px; float: right; width: 100%;">
                             <tr>
                                 <td style="border-bottom: #999999 solid 2px;">รหัสสั่งซื้อ :</td>
-                                <td style=" text-align: center; border-bottom: #999999 solid 2px;" >   
+                                <td style=" text-align: center; border-bottom: #999999 solid 2px;" >
                             <barcode code="<?php echo $order_id; ?>" type="c39" size="0.5" height="1.0" />
                             <br/><?php echo $order_id; ?>
                             </td>
@@ -99,7 +95,7 @@
             </div>
             <hr/>
             <div>
-                <label>ชื่อผู้ติดต่อ</label> <?php echo $BranchModel['menagers'] ?> 
+                <label>ชื่อผู้ติดต่อ</label> <?php echo $BranchModel['menagers'] ?>
                 <label>โทรศัพท์</label> <?php echo $BranchModel['telmenager'] ?>
             </div>
 
@@ -168,14 +164,14 @@
                     <tr>
                         <td style="border-bottom: #999999 solid 2px;background: #f4f4f4;" colspan="3">ภาษี 7%</td>
                         <td style=" text-align: right;border-left:#999999 solid 2px; border-bottom: #999999 solid 2px;background: #f4f4f4;">
-                            <?php
-                            /*
-                            $tax = ($priceresult * 7) / 100;
-                            $taxresult = number_format($tax, 2);
-                            echo $taxresult;
-                             * 
-                             */
-                            ?>
+                    <?php
+                    /*
+                      $tax = ($priceresult * 7) / 100;
+                      $taxresult = number_format($tax, 2);
+                      echo $taxresult;
+                     *
+                     */
+                    ?>
                         </td>
                     </tr>
                     -->

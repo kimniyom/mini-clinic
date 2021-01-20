@@ -3,15 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/mini-clinic/protected/models/CenterStockproduct.php</file>
-            <file>file:/C:/xampp/htdocs/mini-clinic/protected/views/companycenter/_form.php</file>
-            <file>file:/C:/xampp/htdocs/mini-clinic/protected/models/Companycenter.php</file>
-            <file>file:/C:/xampp/htdocs/mini-clinic/protected/views/layouts/template_backend.php</file>
-            <file>file:/C:/xampp/htdocs/mini-clinic/protected/views/doctor/certificate.php</file>
-            <file>file:/C:/xampp/htdocs/mini-clinic/protected/views/companycenter/update.php</file>
-            <file>file:/C:/xampp/htdocs/mini-clinic/protected/views/doctor/patientview.php</file>
-            <file>file:/C:/xampp/htdocs/mini-clinic/protected/views/centerstockcompany/_form.php</file>
-            <file>file:/C:/xampp/htdocs/mini-clinic/protected/controllers/DoctorController.php</file>
+            <file>file:/C:/xampp/htdocs/mini-clinic/protected/controllers/OrdersController.php</file>
+            <file>file:/C:/xampp/htdocs/mini-clinic/protected/views/orders/create.php</file>
+            <file>file:/C:/xampp/htdocs/mini-clinic/protected/views/orders/update.php</file>
+            <file>file:/C:/xampp/htdocs/mini-clinic/protected/models/Orders.php</file>
+            <file>file:/C:/xampp/htdocs/mini-clinic/protected/views/orders/listdata.php</file>
         </group>
     </open-files>
 </project-private>

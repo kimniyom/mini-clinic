@@ -32,7 +32,7 @@ class OrdersController extends Controller {
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
                 'actions' => array('create', 'update', 'loaddata', 'save', 'search',
                     'deleteorder', 'confirmorder', 'cutitems', 'print', 'bill', 'updatestatus',
-                    'checklistorder', 'adddistcount', 'editnumber'),
+                    'checklistorder', 'adddistcount', 'editnumber', 'detailproduct'),
                 'users' => array('@'),
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -122,8 +122,14 @@ class OrdersController extends Controller {
 
     public function actionChecklistorder() {
         $order_id = Yii::app()->request->getPost('order_id');
+        $supplier = Yii::app()->request->getPost('supplier');
         $sql = "SELECT COUNT(*) AS total FROM listorder WHERE order_id = '$order_id'";
         $rs = Yii::app()->db->createCommand($sql)->queryRow();
+        if ($rs['total'] > 0) {
+            $column = array("supplier" => $supplier);
+            Yii::app()->db->createCommand()
+                    ->update("orders", $column, "order_id = '$order_id'");
+        }
         echo $rs['total'];
     }
 
@@ -213,10 +219,12 @@ class OrdersController extends Controller {
     public function actionLoaddata() {
         $orderId = Yii::app()->request->getPost('order_id');
         $branch = Yii::app()->request->getPost('branch');
+        $vat = Yii::app()->request->getPost('vat');
         $order = Orders::model()->find("order_id = '$orderId'");
         $OrderModel = new Orders();
         $data['orders'] = $order;
         $data['order'] = $OrderModel->Getlistorder($orderId, $branch);
+        $data['vat'] = $vat;
         //print_r($data['order']);
         $this->renderPartial('listdata', $data);
     }
@@ -333,8 +341,10 @@ class OrdersController extends Controller {
         $data['order_id'] = $order_id;
         $data['orderlist'] = $OrderModel->Getlistorder($order_id, $branchId);
 
-
-
+        /* Config php7
+          require_once ('lib/mpdf7/vendor/autoload.php');
+          $mPDF1 = new \Mpdf\Mpdf();
+         */
         # mPDF
         $mPDF1 = Yii::app()->ePdf->mpdf();
 
@@ -416,6 +426,15 @@ class OrdersController extends Controller {
         $columns = array("number" => $number, "pricetotal" => $pricetotal);
         Yii::app()->db->createCommand()
                 ->update("listorder", $columns, "id='$id'");
+    }
+
+    public function actionDetailproduct() {
+        $product_id = Yii::app()->request->getPost('product_id');
+        $sql = "SELECT u.unit
+                    FROM clinic_stockproduct c INNER JOIN unit u ON c.unit = u.id
+                    WHERE c.product_id = '$product_id' ";
+        $rs = Yii::app()->db->createCommand($sql)->queryRow();
+        echo $rs['unit'];
     }
 
 }

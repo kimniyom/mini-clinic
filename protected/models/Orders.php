@@ -128,7 +128,7 @@ class Orders extends CActiveRecord {
     function Getlistorder($order_id = null, $branch = null) {
 
         $sql = "SELECT l.id,l.product_id,l.number,
-            l.distcountpercent,l.distcountprice,
+            l.distcountpercent,l.distcountprice,pricetotal,
             p.product_price,p.costs,c.unit,p.product_name,p.product_nameclinic,u.unit AS unitname
                 FROM listorder l INNER JOIN clinic_stockproduct c ON l.product_id = c.product_id
                 INNER JOIN center_stockproduct p ON c.product_id = p.product_id

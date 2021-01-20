@@ -6,53 +6,53 @@
 <?php
 $orderModel = new Orders();
 $Config = new Configweb_model();
-?>    
+?>
 <div class="well well-sm" style=" margin-bottom: 5px;">
-<table class="table table-striped" id="tb-orderssearch" style=" width: 100%;">
-    <thead>
-        <tr>
-            <th style="text-align: center; display: none;">#</th>
-            <th>ใบสั่งสินค้า</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php
-        $i = 0;
-        foreach ($order as $rs):$i++;
-            ?>
+    <table class="table table-striped" id="tb-orderssearch" style=" width: 100%;">
+        <thead>
             <tr>
-                <td style=" text-align: center; display: none;"><?php echo $i ?></td>
-                <td>
-                    <label id="label">เลขที่สั่งซื้อ:</label> <?php echo $rs['order_id'] ?>
-                    <label id="label">วันที่สั่งซื้อ:</label> <?php echo $Config->thaidate($rs['create_date']) ?><br/>
-                    <label id="label">จำนวน:</label> <?php echo number_format($rs['total']) ?> <label id="label">ชิ้น</label><br/>
-                    <label id="label">ผู้สั่งซื้อ:</label> <?php echo $rs['name'] . " " . $rs['lname'] ?>
-                    <label id="label">สาขา:</label> <?php echo $rs['branchname'] ?><br/>
-                    <label id="label">สถานะ:</label> <?php echo $orderModel->SetstatusOrder($rs['status']) ?>
-                    <hr style="margin-top: 0px;"/>
-                    <div class="row" style=" margin: 2px 0px 0px 0px">
-                        <div class="col-lg-2 col-md-2 col-sm-4">
-                            <a href="<?php echo Yii::app()->createUrl('orders/view', array('order_id' => $rs['order_id'])) ?>" style=" text-decoration: none;">
-                                <button type="botton" class="btn btn-default btn-block">รายละเอียด</button></a>
-                        </div>
-                        <?php if ($rs['status'] == '0') { ?>
-                            <?php if (Yii::app()->session['branch'] != "99") { ?>
+                <th style="text-align: center; display: none;">#</th>
+                <th>ใบสั่งสินค้า</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            $i = 0;
+            foreach ($order as $rs):$i++;
+                ?>
+                <tr>
+                    <td style=" text-align: center; display: none;"><?php echo $i ?></td>
+                    <td>
+                        <label id="label">เลขที่สั่งซื้อ:</label> <?php echo $rs['order_id'] ?>
+                        <label id="label">วันที่สั่งซื้อ:</label> <?php echo $Config->thaidate($rs['create_date']) ?><br/>
+                        <label id="label">จำนวน:</label> <?php echo number_format($rs['total']) ?> <label id="label">ชิ้น</label><br/>
+                        <label id="label">ผู้สั่งซื้อ:</label> <?php echo $rs['name'] . " " . $rs['lname'] ?>
+                        <label id="label">สาขา:</label> <?php echo $rs['branchname'] ?><br/>
+                        <label id="label">สถานะ:</label> <?php echo $orderModel->SetstatusOrder($rs['status']) ?>
+                        <hr style="margin-top: 0px;"/>
+                        <div class="row" style=" margin: 2px 0px 0px 0px">
+                            <div class="col-lg-2 col-md-2 col-sm-4">
+                                <a href="<?php echo Yii::app()->createUrl('orders/view', array('order_id' => $rs['order_id'])) ?>" style=" text-decoration: none;">
+                                    <button type="botton" class="btn btn-default btn-block">รายละเอียด</button></a>
+                            </div>
+                            <?php if ($rs['status'] == '0') { ?>
+                                <?php if (Yii::app()->session['branch'] != "99") { ?>
+                                    <div class="col-lg-2 col-md-2 col-sm-4">
+                                        <a href="<?php echo Yii::app()->createUrl('orders/update', array('order_id' => $rs['order_id'])) ?>">
+                                            <button type="botton" class="btn btn-warning btn-block"><i class="fa fa-pencil"></i> แก้ไข</button></a>
+                                    </div>
+                                <?php } ?>
                                 <div class="col-lg-2 col-md-2 col-sm-4">
-                                    <a href="<?php echo Yii::app()->createUrl('orders/update', array('order_id' => $rs['order_id'])) ?>">
-                                        <button type="botton" class="btn btn-warning btn-block"><i class="fa fa-pencil"></i> แก้ไข</button></a>
+                                    <a href="javascript:Deleteorder('<?php echo $rs['order_id'] ?>')">
+                                        <button type="botton" class="btn btn-danger btn-block"><i class="fa fa-remove"></i> ยกเลิก</button></a>
                                 </div>
                             <?php } ?>
-                            <div class="col-lg-2 col-md-2 col-sm-4">
-                                <a href="javascript:Deleteorder('<?php echo $rs['order_id'] ?>')">
-                                    <button type="botton" class="btn btn-danger btn-block"><i class="fa fa-remove"></i> ยกเลิก</button></a>
-                            </div>
-                        <?php } ?>
-                    </div>
-                </td>
-            </tr>
-        <?php endforeach; ?>
-    </tbody>
-</table>
+                        </div>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
 </div>
 <script type="text/javascript">
     Setscreen();
@@ -61,7 +61,7 @@ $Config = new Configweb_model();
         var w = window.innerWidth;
         var screenfull;
         if (w > 786) {
-            screenfull = (boxsell - 200);
+            screenfull = (boxsell - 245);
         } else {
             screenfull = false;
         }
@@ -75,12 +75,12 @@ $Config = new Configweb_model();
             "bFilter": true, // แสดง search box
             "sScrollY": screenfull, // กำหนดความสูงของ ตาราง
             "sScrollX": true
-            /*
-            dom: 'Bfrtip',
-            buttons: [
-                'copy', 'excel', 'print'
-            ]
-            */
+                    /*
+                     dom: 'Bfrtip',
+                     buttons: [
+                     'copy', 'excel', 'print'
+                     ]
+                     */
         });
     }
 

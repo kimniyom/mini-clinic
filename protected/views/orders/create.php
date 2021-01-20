@@ -2,11 +2,35 @@
     #companysell tr td{
         border-bottom: #cccccc solid 1px;
     }
+    .form-control{
+        background: #111111;
+    }
+    .row{
+        margin-top: 10px;
+    }
+
+    .select2-container {
+        background-color: #111111 !important;
+        border-radius: 5px;
+    }
+    .select2-drop{
+        background-color: #111111 !important;
+        border-color: #333333;
+        color:#666666;
+    }
+    .select2-search input {
+        background-color: #222222 !important;
+        border:none;
+    }
+    .select2-choice { background-color: #111111 !important; border-color:#222222 !important; height: 40px !important;}
+    .select2-search { background-color: #111111 !important; margin-top: 10px;}
+    .select2-arrow {
+        border-left: 0px solid transparent !important;
+        /* 2 */
+    }
+
 </style>
 <?php
-/* @var $this OrdersController */
-/* @var $model Orders */
-
 $this->breadcrumbs = array(
     'ใบสั่งสินค้า (สาขา' . $branchModel->branchname . ")" => array('index', "branch" => $branch),
     'สร้างใบสั่ง (สาขา' . $branchModel->branchname . ")",
@@ -19,10 +43,8 @@ $BranchModel = Branch::model()->find("id = '$branch'");
     <div class="panel-body" style=" border-radius: 0px; position: relative;" id="boxorders">
         <div style=" text-align: center;">
             <!--
-            <h4 style=" margin-bottom: 0px;"><?php //echo $BranchModel['branchname'];   ?></h4><br/>
+            <h4 style=" margin-bottom: 0px;"><?php //echo $BranchModel['branchname'];                                                      ?></h4><br/>
             -->
-            <?php echo $BranchModel['address']; ?><br/>
-            <?php echo $BranchModel['contact']; ?><br/>
             <h4 style=" margin: 0px;">ใบสั่งซื้อสินค้า</h4>
         </div>
         <div class="row">
@@ -30,16 +52,44 @@ $BranchModel = Branch::model()->find("id = '$branch'");
                 <!--
                 <table id="companysell">
                     <tr>
-                        <td>ผู้ขาย : <?php //echo $companySell['companyname']   ?></td>
+                        <td>ผู้ขาย : <?php //echo $companySell['companyname']                                                      ?></td>
                     </tr>
                     <tr>
-                        <td>ที่อยู่ : <?php //echo $companySell['address']   ?></td>
+                        <td>ที่อยู่ : <?php //echo $companySell['address']                                                      ?></td>
                     </tr>
                     <tr>
-                        <td>ติดต่อ : คุณ <?php //echo $companySell['memager']   ?> โทร. <?php //echo $companySell['tel']   ?></td>
+                        <td>ติดต่อ : คุณ <?php //echo $companySell['memager']                                                      ?> โทร. <?php //echo $companySell['tel']                                                      ?></td>
                     </tr>
                 </table>
                 -->
+                <label>ซัพพลายเออร์(Supplier)</label>
+                <?php
+                $this->widget('booster.widgets.TbSelect2', array(
+                    //'model' => $model,
+                    'asDropDownList' => true,
+                    //'attribute' => 'itemid',
+                    'name' => 'supplier',
+                    'id' => 'supplier',
+                    'data' => CHtml::listData(CenterStockcompany::model()->findAll(), 'id', 'company_name'),
+                    //'value' => $model,
+                    'options' => array(
+                        'allowClear' => true,
+                        //$model,
+                        //'oid',
+                        //'tags' => array('clever', 'is', 'better', 'clevertech'),
+                        'placeholder' => '== Supplier ==',
+                        'width' => '100%',
+                    //'tokenSeparators' => array(',', ' ')
+                    ),
+                ));
+                ?>
+                <br/> <br/>
+                <label>ภาษีมูลค่าเพิ่ม</label>
+                <select id="vat" class="form-control" onchange="loaddata()">
+                    <option value="0">ไม่มีภาษี</option>
+                    <option value="1">แยกภาษี 7%</option>
+                    <option value="2">รวมภาษี 7%</option>
+                </select>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6">
                 <div style=" padding: 10px; position: relative; height: 100px;" class="box-codenumber">
@@ -58,78 +108,54 @@ $BranchModel = Branch::model()->find("id = '$branch'");
         </div>
     </div>
     <hr/>
-    <div>
-        <label>ชื่อผู้ติดต่อ</label> <?php echo $BranchModel['menagers'] ?>
-        <label>โทรศัพท์</label> <?php echo $BranchModel['telmenager'] ?>
-    </div>
     <div class="well">
+        <label>สินค้า</label>
+        <p style="font-size:12px;">รายการสินค้าที่ระบุในใบสั่งซื้อ</p>
+        <hr/>
         <div class="row">
-            <div class="col-md-6 col-lg-3">
-                <label for="">หมวดสินค้า*</label><br/>
+            <div class="col-md-4 col-lg-3">
+                <label for="">สินค้า*</label><br/>
                 <?php
                 $this->widget('booster.widgets.TbSelect2', array(
                     //'model' => $model,
                     'asDropDownList' => true,
                     //'attribute' => 'itemid',
-                    'name' => 'producttype',
-                    'id' => 'producttype',
-                    'data' => CHtml::listData(ProductType::model()->findAll("upper is null"), 'id', 'type_name'),
+                    'name' => 'product',
+                    'id' => 'product',
+                    'data' => CHtml::listData(ClinicStockproduct::model()->findAll(), 'product_id', 'product_name'),
                     //'value' => $model,
                     'options' => array(
                         'allowClear' => true,
                         //$model,
                         //'oid',
                         //'tags' => array('clever', 'is', 'better', 'clevertech'),
-                        'placeholder' => '== หมวดสินค้า ==',
+                        'placeholder' => '== รายการสินค้า ==',
                         'width' => '100%',
                     //'tokenSeparators' => array(',', ' ')
                     ),
                 ));
                 ?>
             </div>
-            <div class="col-lg-3 col-md-6">
-                <label for="">ประเภทสินค้า*</label>
-                <div id="boxsubproducttype" style=" width: 100%;">
-                    <select id="subproducttype" class="form-control">
-                        <option value=""></option>
-                    </select>
-                </div>
-            </div>
 
-            <div class="col-lg-4 col-md-6">
-                <label for="">สินค้า*</label><br/>
-                <div id="boxproduct" style=" width: 100%;">
-                    <select id="product" class="form-control">
-                        <option value=""></option>
-                    </select>
-                </div>
+            <div class="col-lg-2 col-md-4">
+                <label for="">จำนวน*<span id="unit"></span></label><br/>
+                <input type="text" class="form-control" id="number"/>
             </div>
-
-            <!--
-            <div class="col-lg-6">
-                <label for="">รหัสสินค้า*</label>
-                <input type="text" id="product_id" name="product_id" class="form-control" style="width:40%;" readonly="readonly"/>
-            </div>
-            -->
-        </div>
-        <div class="row">
-            <div class="col-lg-2 col-md-6">
-                <label for="">จำนวน*</label><br/>
-                <input type="text" class="form-control" id="number" value="1"/>
-            </div>
-
-            <div class="col-md-3 col-lg-3">
+            <div class="col-md-2 col-lg-2" style=" display: none;">
                 <label for="">ส่วนลด%</label>
                 <input type="text" class="form-control" id="distcountpersent" value="0"/>
             </div>
-
-            <div class="col-lg-1 col-md-2">
+            <div class="col-md-2 col-lg-2">
+                <label for="">ส่วนลด(บาท)</label>
+                <input type="text" class="form-control" id="distcountprice" value="0"/>
+            </div>
+            <div class="col-lg-2 col-md-2">
                 <button type="button" class="btn btn-block btn-primary" style=" margin-top: 25px;" onclick="AddproductInlist()"><i class="fa fa-plus"></i> เพิ่ม</button>
             </div>
         </div>
+        <hr/>
+        <div id="orderlist" class="table table-responsive"></div>
     </div>
-    <div id="orderlist" class="table table-responsive"></div>
-
 </div>
 <div class=" panel-footer" style=" padding: 5px;">
     <div class="row" style=" margin: 0px;">
@@ -145,13 +171,14 @@ $BranchModel = Branch::model()->find("id = '$branch'");
 
 <script type="text/javascript">
     //loadimagesProduct();
+    loaddata();
     $(document).ready(function() {
-        $("#producttype").change(function() {
-            var type_id = $("#producttype").val();
-            var url = "<?php echo Yii::app()->createUrl('producttype/getsubproductorder') ?>";
-            var data = {type_id: type_id};
+        $("#product").change(function() {
+            var product_id = $("#product").val();
+            var data = {product_id: product_id};
+            var url = "<?php echo Yii::app()->createUrl('orders/detailproduct') ?>";
             $.post(url, data, function(datas) {
-                $("#boxsubproducttype").html(datas);
+                $("#unit").html("(" + datas + ")");
             });
         });
     });
@@ -170,10 +197,11 @@ $BranchModel = Branch::model()->find("id = '$branch'");
     }
 
     function loaddata() {
+        var vat = $("#vat").val();
         var url = "<?php echo Yii::app()->createUrl('orders/loaddata') ?>";
         var order_id = "<?php echo $order_id ?>";
         var branch = "<?php echo $branch ?>";
-        var data = {order_id: order_id, branch: branch};
+        var data = {order_id: order_id, branch: branch, vat: vat};
         $.post(url, data, function(datas) {
             $("#orderlist").html(datas);
         });
@@ -190,9 +218,14 @@ $BranchModel = Branch::model()->find("id = '$branch'");
         var product = $("#product").val();
         var order_id = "<?php echo $order_id ?>";
         var number = $("#number").val();
-        var distcount = $("#distcountpersent").val();
+        var distcountprice = $("#distcountprice").val();
+        var supplier = $("#supplier").val();
         //var distcount = 0;
         //var private = $("input:radio[name=private]:checked").val();
+        if (supplier == "") {
+            sweetAlert("แจ้งเตือน...", "กรุณาเลือกคู่ค้าที่จะสั่งซื้อ!", "warning");
+            return false;
+        }
         if (product == '' || number == '' || product == null) {
             sweetAlert("แจ้งเตือน...", "กรอกข้อมูลไม่ครบ!", "warning");
             return false;
@@ -202,12 +235,15 @@ $BranchModel = Branch::model()->find("id = '$branch'");
             product_id: product,
             order_id: order_id,
             number: number,
-            distcount: distcount
+            distcountprice: distcountprice
         };
 
         $.post(url, data, function(success) {
             loaddata();
-            combotype();
+            $("#distcountprice").val("");
+            $('#product').select2("val", "");
+            $("#number").val("");
+            //combotype();
         });
     }
 
@@ -215,9 +251,17 @@ $BranchModel = Branch::model()->find("id = '$branch'");
         var url = "<?php echo Yii::app()->createUrl('orders/save') ?>";
         var order_id = "<?php echo $order_id ?>";
         var branch = "<?php echo $branch ?>";
+        var supplier = $("#supplier").val();
+
+        if (supplier == "") {
+            sweetAlert("แจ้งเตือน...", "กรุณาเลือกคู่ค้าที่จะสั่งซื้อ!", "warning");
+            return false;
+        }
+
         var data = {
             order_id: order_id,
-            branch: branch
+            branch: branch,
+            supplier: supplier
         };
 
         var urlcheck = "<?php echo Yii::app()->createUrl('orders/checklistorder') ?>";

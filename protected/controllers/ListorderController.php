@@ -30,7 +30,7 @@ class ListorderController extends Controller {
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
-                'actions' => array('create', 'update', 'save','loaddata','deleteproduct'),
+                'actions' => array('create', 'update', 'save', 'loaddata', 'deleteproduct'),
                 'users' => array('@'),
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -103,8 +103,7 @@ class ListorderController extends Controller {
      */
     public function actionDeleteproduct() {
         $id = Yii::app()->request->getPost('id');
-        Yii::app()->db->createCommand()->delete("listorder","id = '$id' ");
-        
+        Yii::app()->db->createCommand()->delete("listorder", "id = '$id' ");
     }
 
     /**
@@ -159,26 +158,26 @@ class ListorderController extends Controller {
     public function actionSave() {
         $product_id = Yii::app()->request->getPost('product_id');
         $number = Yii::app()->request->getPost('number');
-        $distcount = Yii::app()->request->getPost('distcount');
+        $distcount = Yii::app()->request->getPost('distcountprice');
         $costs = CenterStockproduct::model()->find("product_id = '$product_id' ")['costs'];
         $sum = ($costs * $number);
-        if($distcount != '' || $distcount != null){
-            $distcountprice = ($sum * $distcount)/100;
+        if ($distcount != '' || $distcount != null) {
+            $distcountprice = $distcount;
         } else {
             $distcountprice = 0;
         }
-        
+
         //echo $distcountprice;
-        
+
         $columns = array(
             "order_id" => Yii::app()->request->getPost('order_id'),
             "product_id" => $product_id,
             "number" => $number,
-            "pricetotal" => $sum,
-            "distcountprice" => $distcountprice,
-            "distcountpercent" => $distcount
+            "pricetotal" => ($sum - $distcountprice),
+            "distcountprice" => $distcountprice
+                //"distcountpercent" => $distcount
         );
         Yii::app()->db->createCommand()->insert("listorder", $columns);
     }
-    
+
 }

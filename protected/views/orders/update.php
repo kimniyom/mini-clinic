@@ -2,6 +2,33 @@
     #companysell tr td{
         border-bottom: #cccccc solid 1px;
     }
+
+    .form-control{
+        background: #111111;
+    }
+    .row{
+        margin-top: 10px;
+    }
+
+    .select2-container {
+        background-color: #111111 !important;
+    }
+    .select2-drop{
+        background-color: #111111 !important;
+        border-color: #333333;
+        color:#666666;
+    }
+    .select2-search input {
+        background-color: #222222 !important;
+        border:none;
+    }
+    .select2-choice { background-color: #111111 !important; border-color:#222222 !important; height: 40px !important;}
+    .select2-search { background-color: #111111 !important; margin-top: 10px;}
+    .select2-arrow {
+        border-left: 0px solid transparent !important;
+        /* 2 */
+    }
+
 </style>
 <?php
 /* @var $this OrdersController */
