@@ -135,6 +135,8 @@ $Thaibath = new Thaibaht();
             <td style=" text-align: right;"><?php echo number_format(sprintf('%.2f', $priceCovert), 2); ?></td>
             <td></td>
         </tr>
+
+        <input type="text" name="priceresult" id="priceresult" value="<?php echo $priceresult ?>">
     </tfoot>
 </table>
 

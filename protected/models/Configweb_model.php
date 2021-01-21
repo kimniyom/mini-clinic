@@ -288,7 +288,7 @@ class Configweb_model {
 
     function LinkNode() {
         //return "http://172.17.3.74:3000";
-        return "http://172.17.3.19:5000";
+        return "http://122.154.239.66:5055";
         //return "http://www.tako.moph.go.th:8080";
     }
 

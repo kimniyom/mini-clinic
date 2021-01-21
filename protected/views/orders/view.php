@@ -22,7 +22,7 @@ $this->breadcrumbs = array(
     $order['order_id'],
 );
 $order_id = $order['order_id'];
-$companySell = Companycenter::model()->find("id = '1'");
+//$companySell = Companycenter::model()->find("id = '1'");
 $Thaibath = new Thaibaht();
 ?>
 
@@ -56,7 +56,8 @@ $Thaibath = new Thaibaht();
     <div class="col-lg-9 col-md-12" >
         <div class="well" style=" border-radius: 0px; position: relative;  margin-bottom: 0px;" id="boxorders">
             <div style=" text-align: center; margin-bottom: 10px;">
-                <h4 style=" margin-bottom: 0px;"><?php echo $BranchModel['branchname']; ?></h4><br/>
+                <h4 style=" margin-bottom: 0px;">
+                    <?php echo $BranchModel['branchname']; ?></h4><br/>
                 <?php echo $BranchModel['address']; ?><br/>
                 <?php echo $BranchModel['contact']; ?><br/>
                 <h4 style=" margin: 0px;">ใบสั่งซื้อสินค้า</h4>
@@ -65,13 +66,14 @@ $Thaibath = new Thaibaht();
                 <div class="col-lg-8 col-md-8">
                     <table id="companysell" style=" width: 100%; border: #cccccc solid 2px;">
                         <tr>
-                            <td>ผู้ขาย : <?php echo $companySell['companyname'] ?></td>
+                            <td>ผู้ขาย : <?php echo $supplier['company_name'] ?></td>
                         </tr>
                         <tr>
-                            <td>ที่อยู่ : <?php echo $companySell['address'] ?></td>
+                            <td>ที่อยู่ : <?php echo $supplier['address'] ?></td>
                         </tr>
                         <tr>
-                            <td>ติดต่อ : คุณ <?php echo $companySell['memager'] ?> โทร. <?php echo $companySell['tel'] ?></td>
+                            <td>เลขประจำตัวผู้เสียภาษี : คุณ <?php echo($supplier['taxnumber']) ? $supplier['taxnumber'] : ""; ?> 
+                            โทร. <?php echo $supplier['tel'] ?></td>
                         </tr>
                     </table>
                 </div>

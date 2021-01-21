@@ -252,7 +252,8 @@ $BranchModel = Branch::model()->find("id = '$branch'");
         var order_id = "<?php echo $order_id ?>";
         var branch = "<?php echo $branch ?>";
         var supplier = $("#supplier").val();
-
+        var vattype = $("#vat").val();
+        var priceresult = $("#priceresult").val();
         if (supplier == "") {
             sweetAlert("แจ้งเตือน...", "กรุณาเลือกคู่ค้าที่จะสั่งซื้อ!", "warning");
             return false;
@@ -261,7 +262,9 @@ $BranchModel = Branch::model()->find("id = '$branch'");
         var data = {
             order_id: order_id,
             branch: branch,
-            supplier: supplier
+            supplier: supplier,
+            vattype: vattype,
+            priceresult: priceresult
         };
 
         var urlcheck = "<?php echo Yii::app()->createUrl('orders/checklistorder') ?>";
@@ -273,7 +276,8 @@ $BranchModel = Branch::model()->find("id = '$branch'");
                     window.location = url;
                 });
             } else {
-                alert("ไม่มีรายการสินค้าในใบสั่งซื้อ");
+                //alert("ไม่มีรายการสินค้าในใบสั่งซื้อ");
+                sweetAlert("แจ้งเตือน...", "ไม่มีรายการสินค้าในใบสั่งซื้อ!", "warning");
                 return false;
             }
         });

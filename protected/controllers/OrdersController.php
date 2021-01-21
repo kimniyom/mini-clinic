@@ -49,7 +49,7 @@ class OrdersController extends Controller {
      * Displays a particular model.
      * @param integer $id the ID of the model to be displayed
      */
-    public function actionView($order_id = null) {
+    public function actionViewbackup($order_id = null) {
         Yii::app()->db->createCommand()->delete("temp_item");
         $ModelMix = new CenterStockmix();
         $order = Orders::model()->find("order_id = '$order_id'");
@@ -92,6 +92,28 @@ class OrdersController extends Controller {
         }
     }
 
+    public function actionView($order_id = null) {
+        Yii::app()->db->createCommand()->delete("temp_item");
+        //$ModelMix = new CenterStockmix();
+        $order = Orders::model()->find("order_id = '$order_id'");
+        $branchId = $order['branch'];
+        $data['BranchModel'] = Branch::model()->find("id = '$branchId'");
+        $OrderModel = new Orders();
+        $data['order'] = $order;
+        $data['orderlist'] = $OrderModel->Getlistorder($order_id, $branchId);
+        $data['supplier'] = CenterStockcompany::model()->find("id=:id",array(':id' => $order['supplier']));
+        $data['vat'] = $order['vattype'];
+        if (Yii::app()->session['status'] == '1' || Yii::app()->session['status'] == '2' || Yii::app()->session['status'] == '6' || Yii::app()->session['status'] == '8') {
+            //$ModelMix = new CenterStockmix();
+            $OrderModel = new Orders();
+            $productInorder = $OrderModel->GetlistorderSum($order_id);
+            $data['product'] = $productInorder;
+            $this->render('viewcenter', $data);
+        } else {
+            $this->render('view', $data);
+        }
+    }
+
     /**
      * Creates a new model.
      * If creation is successful, the browser will be redirected to the 'view' page.
@@ -99,7 +121,7 @@ class OrdersController extends Controller {
     public function actionCreate($branch) {
 
         $model = new Orders;
-        $orderId = $model->autoId("orders", "order_id", "10");
+        $orderId = "PO-".$model->autoId("orders", "order_id", "7");
         $branchModel = Branch::model()->find($branch);
         Yii::app()->db->createCommand()->delete("listorder", "order_id = '$orderId' ");
 
@@ -234,18 +256,23 @@ class OrdersController extends Controller {
         //$menager = Branch::model()->find("id = '$branch' ")['menagers'];
         $author = Yii::app()->user->id;
         $order_id = Yii::app()->request->getPost('order_id');
-        $price = $this->actionCaculatororder($order_id);
+        $supplier = Yii::app()->request->getPost('supplier');
+        $vattype = Yii::app()->request->getPost('vattype');
+        $priceresult = Yii::app()->request->getPost('priceresult');
+        //$price = $this->actionCaculatororder($order_id);
 
 
-        $vat = ($price * 7) / 100; //ภาษี
-        $priceresult = ($price + $vat); //ราคาสุทธิ์
+        //$vat = ($price * 7) / 100; //ภาษี
+        //$priceresult = ($price + $vat); //ราคาสุทธิ์
 
         $columns = array(
             "order_id" => $order_id,
             "branch" => $branch,
             "author" => $author,
-            "price" => $price,
-            "vat" => $vat,
+            //"price" => $price,
+            //"vat" => $vat,
+            "supplier" => $supplier,
+            "vattype" => $vattype,
             "priceresult" => $priceresult,
             "create_date" => date("Y-m-d"),
             "d_update" => date("Y-m-d H:i:s")
@@ -417,13 +444,14 @@ class OrdersController extends Controller {
         $id = Yii::app()->request->getPost('id');
         $number = Yii::app()->request->getPost('newsnumber');
         $product_id = Yii::app()->request->getPost('product_id');
+        $distcount = Yii::app()->request->getPost('distcount');
         $product = CenterStockproduct::model()->find("product_id=:product_id", array(":product_id" => $product_id));
         $costs = $product['costs'];
         $product_price = $product['product_price'];
 
         $pricetotal = ($costs * $number);
-
-        $columns = array("number" => $number, "pricetotal" => $pricetotal);
+        $priceresult = ($pricetotal - $distcount);
+        $columns = array("number" => $number, "pricetotal" => $priceresult);
         Yii::app()->db->createCommand()
                 ->update("listorder", $columns, "id='$id'");
     }
