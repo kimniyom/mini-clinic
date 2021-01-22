@@ -211,8 +211,9 @@ $ItemModel = new CenterStockitem();
                 <td><?php echo $rs['product_nameclinic'] ?></td>
                 <td style=" text-align: center;">
                     <?php echo number_format($rs['number']) ?>
-                    <?php if($order['status'] == "0") ?>
+                    <?php if($order['status'] == "0"){ ?>
                     <i class="fa fa-pencil text-warning" style=" cursor: pointer;" onclick="popupeditnumber('<?php echo $rs['id'] ?>', '<?php echo $rs['number'] ?>', '<?php echo $rs['product_id'] ?>','<?php echo $rs['distcountprice'] ?>')"></i>
+                <?php } ?>
                 </td>
                 <td style=" text-align: center;"><?php echo $rs['unitname'] ?></td>
                 <td style=" text-align: right;"><?php echo number_format($sumrow, 2) ?></td>
@@ -224,7 +225,7 @@ $ItemModel = new CenterStockitem();
     </tbody>
     <tfoot>
         <tr>
-            <td colspan="6" rowspan="5">
+            <td colspan="6" rowspan="5" valign="top">
                 หมายเหตุ
             </td>
         </tr>
@@ -268,7 +269,7 @@ $ItemModel = new CenterStockitem();
         </tr>
 
         <tr>
-            <td colspan="6" style=" text-align: center;background: #111111;">
+            <td colspan="6" style=" text-align: center;background: #111111; padding: 10px 5px;">
                 <?php
                 //$pricetotal = number_format(($priceresult + $tax), 2);
                 if ($vat == 2) {

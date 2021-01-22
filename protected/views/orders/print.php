@@ -50,11 +50,10 @@
         $Thaibath = new Thaibaht();
         ?>
         <div style=" position: fixed; left: 20px; top: 20px; z-index: 100;">
-            <img src="<?php echo Yii::app()->baseUrl; ?>/uploads/logo/<?php echo $logo ?> " width="100" />
+            <img src="<?php echo Yii::app()->baseUrl; ?>/uploads/logo/<?php echo $logo ?> " style="width: 100px;" />
         </div>
-        <?php echo $logo ?>
         <div style="border-radius: 0px; padding: 10px; background: #FFFFFF; border: #999999 solid 1px; position: relative;" id="printorder">
-            <img src="<?php echo Yii::app()->baseUrl; ?>/uploads/logo/<?php echo $logo ?> " width="100" />
+           
             <div style=" text-align: center; margin-bottom: 10px; font-size: 18px;">
                 <h4 style=" margin-bottom: 0px; font-size: 24px; color: #000; font-weight: bold;"><?php echo $BranchModel['branchname']; ?></h4><br/>
                 <?php echo $BranchModel['address']; ?><br/>

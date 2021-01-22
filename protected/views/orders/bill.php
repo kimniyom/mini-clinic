@@ -54,7 +54,7 @@
         $Thaibath = new Thaibaht();
         ?>
         <div style=" position: fixed; left: 20px; top: 20px;">
-            <img src="<?php echo Yii::app()->baseUrl; ?>/uploads/logo/<?php echo $companySell['logo'] ?> " width="100" />
+            <img src="<?php echo Yii::app()->baseUrl; ?>/uploads/logo/<?php echo $companySell['logo'] ?> " style="width: 100px;" />
         </div>
 
         <div style="border-radius: 0px; padding: 10px; background: #FFFFFF; border: #999999 solid 1px; position: relative;" id="printorder">
