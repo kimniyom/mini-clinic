@@ -358,7 +358,7 @@ class OrdersController extends Controller {
         endforeach;
     }
 
-    public function actionPrint($order_id = null) {
+    public function actionPrint_Backup($order_id = null) {
         $order = Orders::model()->find("order_id = '$order_id'");
         $branchId = $order['branch'];
         $data['BranchModel'] = Branch::model()->find("id = '$branchId'");
@@ -368,6 +368,34 @@ class OrdersController extends Controller {
         $data['order_id'] = $order_id;
         $data['orderlist'] = $OrderModel->Getlistorder($order_id, $branchId);
 
+        /* Config php7
+          require_once ('lib/mpdf7/vendor/autoload.php');
+          $mPDF1 = new \Mpdf\Mpdf();
+         */
+        # mPDF
+        $mPDF1 = Yii::app()->ePdf->mpdf();
+
+        # You can easily override default constructor's params
+        $mPDF1 = Yii::app()->ePdf->mpdf('order-' . $order_id, 'A4');
+
+        # render (full page)
+        //$mPDF1->WriteHTML($this->render('print', $data, true));
+        $mPDF1->WriteHTML($this->renderPartial('print', $data, true));
+        # Outputs ready PDF
+        $mPDF1->Output();
+    }
+
+    public function actionPrint($order_id = null) {
+        $order = Orders::model()->find("order_id = '$order_id'");
+        $branchId = $order['branch'];
+        $data['BranchModel'] = Branch::model()->find("id = '$branchId'");
+        $data['logo'] = Logo::model()->find("branch='$branchId'")['logo'];
+        $OrderModel = new Orders();
+        $data['order'] = $order;
+        $data['order_id'] = $order_id;
+        $data['orderlist'] = $OrderModel->Getlistorder($order_id, $branchId);
+        $data['supplier'] = CenterStockcompany::model()->find("id=:id",array(':id' => $order['supplier']));
+        $data['vat'] = $order['vattype'];
         /* Config php7
           require_once ('lib/mpdf7/vendor/autoload.php');
           $mPDF1 = new \Mpdf\Mpdf();
