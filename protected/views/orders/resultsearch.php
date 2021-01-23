@@ -12,7 +12,7 @@ $Config = new Configweb_model();
         <thead>
             <tr>
                 <th style="text-align: center; display: none;">#</th>
-                <th>ใบสั่งสินค้า</th>
+                <th>ใบสั่งซื้อสินค้า</th>
             </tr>
         </thead>
         <tbody>
@@ -38,12 +38,12 @@ $Config = new Configweb_model();
                             <?php if ($rs['status'] == '0') { ?>
                                 <?php if (Yii::app()->session['branch'] != "99") { ?>
                                     <div class="col-lg-2 col-md-2 col-sm-4">
-                                        <a href="<?php echo Yii::app()->createUrl('orders/update', array('order_id' => $rs['order_id'])) ?>">
+                                        <a href="<?php echo Yii::app()->createUrl('orders/update', array('order_id' => $rs['order_id'])) ?>" style=" text-decoration: none;">
                                             <button type="botton" class="btn btn-warning btn-block"><i class="fa fa-pencil"></i> แก้ไข</button></a>
                                     </div>
                                 <?php } ?>
                                 <div class="col-lg-2 col-md-2 col-sm-4">
-                                    <a href="javascript:Deleteorder('<?php echo $rs['order_id'] ?>')">
+                                    <a href="javascript:Deleteorder('<?php echo $rs['order_id'] ?>')" style=" text-decoration: none;">
                                         <button type="botton" class="btn btn-danger btn-block"><i class="fa fa-remove"></i> ยกเลิก</button></a>
                                 </div>
                             <?php } ?>

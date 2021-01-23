@@ -609,7 +609,7 @@
                 if (w <= 786) {
                     $("#nav-bar").addClass('navbar-fixed-top');
                     $("#nav-head").show();
-                    $("#text-head-nav").text("หมอรเมศ");
+                    $("#text-head-nav").text("คลินิก");
                     $("#box-logo").show();
                     $("#logo-clinic").hide();
                     $(".chart-box").hide();

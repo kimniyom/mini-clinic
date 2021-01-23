@@ -118,19 +118,19 @@
 
     function view() {
         var id = $("#_id").val();
-        var url = "<?php echo Yii::app()->createUrl('employee/view') ?>" + "&id=" + id;
+        var url = "<?php echo Yii::app()->createUrl('employee/view') ?>" + "?id=" + id;
         window.location = url;
     }
 
     function job() {
         var id = $("#_id").val();
-        var url = "<?php echo Yii::app()->createUrl('job/index') ?>" + "&employee=" + id;
+        var url = "<?php echo Yii::app()->createUrl('job/index') ?>" + "?employee=" + id;
         window.location = url;
     }
     
     function Jobdeduct() {
         var id = $("#_id").val();
-        var url = "<?php echo Yii::app()->createUrl('jobdeduct/index') ?>" + "&employee=" + id;
+        var url = "<?php echo Yii::app()->createUrl('jobdeduct/index') ?>" + "?employee=" + id;
         window.location = url;
     }
 </script>

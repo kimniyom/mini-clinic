@@ -268,12 +268,12 @@ $BranchModel = new Branch();
             //{ name: 'about', items: [ 'About' ] }
         ],
         //uiColor: '#eeeeee',
-        //filebrowserBrowseUrl: "<?php //echo Yii::app()->baseUrl;                                                                              ?>/assets/ckeditor/ckfinder/ckfinder.html",
-        //filebrowserImageBrowseUrl: "<?php //echo Yii::app()->baseUrl;                                                                              ?>/assets/ckeditor/ckfinder/ckfinder.html?Type=Images",
-        //filebrowserFlashBrowseUrl: "<?php //echo Yii::app()->baseUrl;                                                                              ?>/assets/ckeditor/ckfinder/ckfinder.html?Type=Flash",
-        //filebrowserUploadUrl: "<?php //echo Yii::app()->baseUrl;                                                                              ?>/assets/ckeditor/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files",
-        //filebrowserImageUploadUrl: "<?php //echo Yii::app()->baseUrl;                                                                              ?>/assets/ckeditor/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images",
-        //filebrowserFlashUploadUrl: "<?php //echo Yii::app()->baseUrl;                                                                              ?>/assets/ckeditor/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash"
+        //filebrowserBrowseUrl: "<?php //echo Yii::app()->baseUrl;                                                                               ?>/assets/ckeditor/ckfinder/ckfinder.html",
+        //filebrowserImageBrowseUrl: "<?php //echo Yii::app()->baseUrl;                                                                               ?>/assets/ckeditor/ckfinder/ckfinder.html?Type=Images",
+        //filebrowserFlashBrowseUrl: "<?php //echo Yii::app()->baseUrl;                                                                               ?>/assets/ckeditor/ckfinder/ckfinder.html?Type=Flash",
+        //filebrowserUploadUrl: "<?php //echo Yii::app()->baseUrl;                                                                               ?>/assets/ckeditor/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files",
+        //filebrowserImageUploadUrl: "<?php //echo Yii::app()->baseUrl;                                                                               ?>/assets/ckeditor/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images",
+        //filebrowserFlashUploadUrl: "<?php //echo Yii::app()->baseUrl;                                                                               ?>/assets/ckeditor/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash"
     });</script>
 
 <script type="text/javascript">
@@ -343,7 +343,7 @@ $BranchModel = new Branch();
         };
 
         $.post(url, data, function(success) {
-            window.location = "<?php echo Yii::app()->createUrl('centerstockproduct/detail&product_id=') ?>" + product_id;
+            window.location = "<?php echo Yii::app()->createUrl('centerstockproduct/detail?product_id=') ?>" + product_id;
         });
     }
 

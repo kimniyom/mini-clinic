@@ -8,7 +8,7 @@
         <title>
             <?php
             $web = new Configweb_model();
-            echo "order-" . $order_id;
+            echo $order_id;
             ?>
         </title>
 

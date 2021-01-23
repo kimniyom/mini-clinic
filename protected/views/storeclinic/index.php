@@ -36,19 +36,18 @@ $branchs = Branch::model()->findAll("active = '1' $WHERE");
                     รายการสินค้า
                 </button></a>
         </div>
-
         <div class="col-lg-2 col-md-2 col-xs-6" style=" margin-bottom: 10px;">
             <a href="<?php echo Yii::app()->createUrl('orders/index', array("branch" => $rs['id'])) ?>">
                 <button type="button" class="btn btn-default btn-block" style=" font-size: 20px;">
-                    <img src="<?= Yii::app()->baseUrl; ?>/images/text-richtext-icon.png"><br/>
+                    <img src="<?= Yii::app()->baseUrl; ?>/images/text-richtext-icon.png" style=" width: 64px;"><br/>
                     ใบสั่งสินค้า
                 </button></a>
         </div>
         <!--
         <div class="col-lg-2 col-md-2 col-xs-6" style=" margin-bottom: 10px;">
-            <a href="<?php //echo Yii::app()->createUrl('returnproduct/index', array("branch" => $rs['id'])) ?>">
+            <a href="<?php //echo Yii::app()->createUrl('returnproduct/index', array("branch" => $rs['id']))    ?>">
                 <button type="button" class="btn btn-default btn-block">
-                    <img src="<?php //Yii::app()->baseUrl; ?>/images/return-product-icon.png"><br/>
+                    <img src="<?php //Yii::app()->baseUrl;    ?>/images/return-product-icon.png"><br/>
                     คืนสินค้า
                 </button></a>
         </div>

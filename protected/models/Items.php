@@ -142,50 +142,59 @@ class Items extends CActiveRecord {
 
         return $result;
     }
-    
+
     /*
-    public function GetProductSell() {
-        $branch = Yii::app()->session['branch'];
-        if ($branch == '99') {
-            $where = " 1=1";
-        } else {
-            $where = " i.branch = '$branch' ";
-        }
-        $sql = "SELECT p.product_id,p.product_nameclinic AS product_name
-                FROM clinic_stockproduct i INNER JOIN center_stockproduct p ON i.product_id = p.product_id WHERE $where";
-        $result = Yii::app()->db->createCommand($sql)->queryAll();
+      public function GetProductSell() {
+      $branch = Yii::app()->session['branch'];
+      if ($branch == '99') {
+      $where = " 1=1";
+      } else {
+      $where = " i.branch = '$branch' ";
+      }
+      $sql = "SELECT p.product_id,p.product_nameclinic AS product_name
+      FROM clinic_stockproduct i INNER JOIN center_stockproduct p ON i.product_id = p.product_id WHERE $where";
+      $result = Yii::app()->db->createCommand($sql)->queryAll();
 
-        return $result;
-    }
-    */
+      return $result;
+      }
+     */
+    /*
+      public function GetProductSell() {
+      $month = date("m");
+      if(strlen($month) < 2){
+      $months = "0".$month;
+      } else {
+      $months = $month;
+      }
+      $sql = "SELECT p.product_id,p.product_nameclinic AS product_name,p.product_nameclinic AS detail,p.product_price,'1' as type
+      FROM center_stockproduct p
+
+      UNION
+
+      SELECT d.diagcode,d.diagname,d.diagname AS detail,d.price,'2' as type
+      FROM diag d
+
+      UNION
+
+      SELECT p.id,d.diagname,CONCAT(d.diagname,'(',p.detail,')') as detail,p.price,'3' as type
+      FROM promotionprocedure p INNER JOIN diag d ON p.diag = d.diagcode
+      WHERE p.`month` = '' OR p.`month` IS NULL OR p.`month` = null
+
+      UNION
+
+      SELECT p.id,d.diagname,CONCAT(d.diagname,'(',p.detail,')') as detail,p.price,'3' as type
+      FROM promotionprocedure p INNER JOIN diag d ON p.diag = d.diagcode
+      WHERE p.`month` = '$months' ";
+      $result = Yii::app()->db->createCommand($sql)->queryAll();
+
+      return $result;
+      }
+     */
+
     public function GetProductSell() {
-        $month = date("m");
-        if(strlen($month) < 2){
-            $months = "0".$month;
-        } else {
-            $months = $month;
-        }
         $sql = "SELECT p.product_id,p.product_nameclinic AS product_name,p.product_nameclinic AS detail,p.product_price,'1' as type
-                FROM center_stockproduct p 
-
-                UNION
-
-                SELECT d.diagcode,d.diagname,d.diagname AS detail,d.price,'2' as type
-                FROM diag d 
-
-                UNION 
-
-                SELECT p.id,d.diagname,CONCAT(d.diagname,'(',p.detail,')') as detail,p.price,'3' as type
-                FROM promotionprocedure p INNER JOIN diag d ON p.diag = d.diagcode
-                WHERE p.`month` = '' OR p.`month` IS NULL OR p.`month` = null
-
-                UNION
-
-                SELECT p.id,d.diagname,CONCAT(d.diagname,'(',p.detail,')') as detail,p.price,'3' as type
-                FROM promotionprocedure p INNER JOIN diag d ON p.diag = d.diagcode
-                WHERE p.`month` = '$months' ";
+                    FROM center_stockproduct p ";
         $result = Yii::app()->db->createCommand($sql)->queryAll();
-
         return $result;
     }
 

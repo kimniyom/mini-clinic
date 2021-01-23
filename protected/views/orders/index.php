@@ -81,7 +81,7 @@ $this->breadcrumbs = array(
 
                 </div>
                 <div class="row" style=" margin-top: 10px;">
-                    <div class="col-md-6 col-lg-6">
+                    <div class="col-md-12 col-lg-12">
                         <label>เริ่มต้นวันที่</label>
                         <div>
                             <?php
@@ -102,8 +102,9 @@ $this->breadcrumbs = array(
                             ?>
                         </div>
                     </div>
-
-                    <div class="col-md-6 col-lg-6">
+                </div>
+                <div class="row" style=" margin-top: 10px;">
+                    <div class="col-md-12 col-lg-12">
                         <label>สิ้นสุดวันที่</label>
                         <div>
                             <?php
@@ -124,6 +125,8 @@ $this->breadcrumbs = array(
                             ?>
                         </div>
                     </div>
+                </div>
+                    <div class="row">
                     <div class="col-md-12 col-lg-12">
                         <button type="button" class="btn btn-success btn-block" style="margin-top: 25px;" onclick="searchOrders()">ตกลง <i class="fa fa-search"></i></button>
                     </div>

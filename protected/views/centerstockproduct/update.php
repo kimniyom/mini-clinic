@@ -396,7 +396,7 @@ $BranchModel = new Branch();
         };
 
         $.post(url, data, function(success) {
-            window.location = "<?php echo Yii::app()->createUrl('centerstockproduct/detail&product_id=') ?>" + product_id;
+            window.location = "<?php echo Yii::app()->createUrl('centerstockproduct/detail?product_id=') ?>" + product_id;
         });
     }
 

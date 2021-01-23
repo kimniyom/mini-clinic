@@ -65,9 +65,15 @@ class SellController extends Controller {
         $sqlEmployee = "select id,name,lname from employee where branch = '$branch' AND position in('7','11','12','14')";
         $data['employee'] = Yii::app()->db->createCommand($sqlEmployee)->queryAll();
         //$data['employee'] = Employee::model()->findAll("branch=:branch",array(":branch" => $branch));
-
+        $data['productlist'] = $this->getProduct();
         $this->layout = 'template_sell';
         $this->render('index', $data);
+    }
+
+    function getProduct() {
+        $sql = "SELECT p.product_id,CONCAT(p.product_name,'( ราคา '  ,p.product_price,' บาท)') as detail
+                    FROM clinic_stockproduct  c INNER JOIN center_stockproduct p ON c.product_id = p.product_id";
+        return Yii::app()->db->createCommand($sql)->queryAll();
     }
 
     public function actionPayment() {
@@ -232,9 +238,8 @@ class SellController extends Controller {
         //$sell_id = Yii::app()->request->getPost('sell_id');
         //$data['order'] = $Model->Getlistorder($sell_id);
         $data['detail'] = $Model->Detailorder($sell_id);
-        $branch = $data['detail']['branch'];
+        //$branch = $data['detail']['branch'];
         $data['order'] = $Model->Getordersell($sell_id, $branch);
-
         $data['logsell'] = Logsell::model()->find("sell_id = '$sell_id' ");
         //update 20200215
         //$this->renderPartial('bill', $data);
@@ -514,32 +519,46 @@ class SellController extends Controller {
         $this->renderPartial('comboproduct', $data);
     }
 
-    public function actionDetailproduct() {
-        //$product_id = $_GET['product_id'];
-        $productFull = Yii::app()->request->getPost('product_id');
-        if ($productFull) {
-            $pieces = explode('||', $productFull);
-            $product_id = $pieces[0];
-            $productdetail = $pieces[1];
-            $producttype = $pieces[2];
-            $productprice = $pieces[3];
-            $productname = $pieces[4];
-            //$product = new Backend_product();
-            $Model = new CenterStockproduct();
-            //$Items = new Items();
-            //$data['images'] = $product->get_images_product($product_id);
-            //$data['product'] = $Model->_get_detail_product($product_id);
-            //$product = $Model->_get_detail_product($product_id);
-            //$this->renderPartial("detailproduct", $data);
-        } else {
-            $product_id = "";
-            $productdetail = "";
-            $producttype = "";
-            $productprice = "";
-            $productname = "";
-        }
+    /*
+      public function actionDetailproduct() {
+      $productFull = Yii::app()->request->getPost('product_id');
+      if ($productFull) {
+      $pieces = explode('||', $productFull);
+      $product_id = $pieces[0];
+      $productdetail = $pieces[1];
+      $producttype = $pieces[2];
+      $productprice = $pieces[3];
+      $productname = $pieces[4];
+      } else {
+      $product_id = "";
+      $productdetail = "";
+      $producttype = "";
+      $productprice = "";
+      $productname = "";
+      }
 
-        $json = array('product_id' => $product_id, 'productdetail' => $productdetail, 'producttype' => $producttype, 'productname' => $productname);
+      $json = array('product_id' => $product_id, 'productdetail' => $productdetail, 'producttype' => $producttype, 'productname' => $productname);
+      echo json_encode($json);
+      }
+     */
+
+    public function actionDetailproduct() {
+        $product_id = Yii::app()->request->getPost('product_id');
+        $sql = "SELECT p.product_id,p.product_nameclinic AS product_name,p.product_nameclinic AS detail,p.product_price,'1' as type,p.size
+                    FROM center_stockproduct p
+                    WHERE p.product_id = '$product_id' ";
+        $rs = Yii::app()->db->createCommand($sql)->queryRow();
+
+        $sqlStock = "select IFNULL(sum(total),0) as total from clinic_storeproduct where product_id = '$product_id'";
+        $rsStock = Yii::app()->db->createCommand($sqlStock)->queryRow();
+        $json = array(
+            'product_id' => $rs['product_id'],
+            'productdetail' => $rs['detail'],
+            'producttype' => $rs['type'],
+            'productname' => $rs['product_name'],
+            'size' => $rs['size'],
+            'stock' => number_format($rsStock['total'])
+        );
         echo json_encode($json);
     }
 

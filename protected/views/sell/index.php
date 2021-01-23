@@ -74,8 +74,9 @@
         box-shadow: 0 0 0 3px #999;
     }
 
+
     input[type="text"]{
-        background:#eeeeee;
+        background:#000000;
     }
 
     #reporttoday table thead tr th{
@@ -85,16 +86,40 @@
     #orderlist table thead tr th{
         color:pink;
     }
+
+    .form-control{
+        background: #000000;
+    }
+    .select2-container {
+        background-color: #000000 !important;
+        border-radius: 5px;
+    }
+    .select2-drop{
+        background-color: #000000 !important;
+        border-color: #333333;
+        color:#666666;
+    }
+    .select2-search input {
+        background-color: #333333 !important;
+        border:none;
+    }
+    .select2-choice { background-color: #000000 !important; border-color:#222222 !important; height: 40px !important;}
+    .select2-search { background-color: #000000 !important; margin-top: 10px;}
+    .select2-arrow {
+        border-left: 0px solid transparent !important;
+        /* 2 */
+    }
+
 </style>
 <?php
 $UserModel = new Masuser();
 $BranchModel = new Branch();
 $Config = new Configweb_model();
 $Profile = $UserModel->GetProfile();
-$items = new Items();
+//$items = new Items();
 $branchactive = Yii::app()->session['branch'];
 $brancList = $BranchModel->ComboBranchDisabled($branchactive);
-$itemlist = $items->GetItemSell();
+//$itemlist = $items->GetItemSell();
 $PatientModel = new Patient();
 //$PatientList = $PatientModel->GetPatientAll();
 
@@ -119,7 +144,7 @@ $sell_id = "IVN" . $Config->RandstrgenNumber(5) . trim(time());
                     <?php endforeach; ?>
                 </select>
                 <!--
-                <input type="text" class="form-control" id="user" readonly="readonly" value="<?php //echo $Profile['name'] . " " . $Profile['lname']                              ?>"/>
+                <input type="text" class="form-control" id="user" readonly="readonly" value="<?php //echo $Profile['name'] . " " . $Profile['lname']                                                                                                                                                    ?>"/>
                 -->
             </div>
             <div class="well well-sm" style="margin-bottom:0px;">
@@ -173,44 +198,68 @@ $sell_id = "IVN" . $Config->RandstrgenNumber(5) . trim(time());
                 <div class="row" style="margin:0px;">
                     <div class="col-md-12 col-lg-12" style="padding:0px;">
                         ชื่อสินค้า
+                        <?php
+                        $this->widget(
+                                'booster.widgets.TbSelect2', array(
+                            'name' => 'itemcode',
+                            'id' => 'itemcode',
+                            'data' => CHtml::listData($productlist, 'product_id', 'detail'),
+                            'options' => array(
+                                'placeholder' => 'ค้นหาสินค้า',
+                                'width' => '100%',
+                                'allowClear' => true,
+                            )
+                                )
+                        );
+                        ?>
+                        <!--
                         <div id="_item"></div>
+                        -->
                     </div>
                 </div>
                 <div class="row" style="margin:0px;">
-                    <div class="col-md-12 col-lg-12" style="padding-right:0px; padding:0px;">
+                    <div class="col-md-12 col-lg-12" style="padding-right:0px; padding:0px; padding-top: 5px;">
                         รายละเอียดสินค้า
                         <input type="hidden" id="typeproduct"/>
                         <input type="hidden" id="productname"/>
-                        <input type="hidden" id="itemcode"/>
-                        <div id="detailproduct" class="well well-sm" style="margin:0px; height:50px; background:#333333; color:yellow; overflow: auto; font-size:12px;"></div>
+                        <div style="position: relative;">
+                            <div id="detailproduct" class="well well-sm" style="margin:0px; height:50px; background:#000000; color:yellow; overflow: auto; font-size:12px; overflow: hidden;">
+
+                            </div>
+                            <div style=" position: absolute; width: 100px; height: 100%; right: 0px; top: 0px;  background: #222222; z-index: 100; text-align: center;">
+                                สต๊อก<br/>
+                                <div id="stock" style="font-size:20px; color: #ff3300;">-</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="row" style="margin:0px;">
-                    <div class="col-md-3 col-lg-3" style="padding-left:0px;">
+                    <div class="col-md-3 col-lg-3" style="padding-left:0px; padding-top: 5px;">
                         จำนวน
-                        <input type="text" class="form-control input-sm" id="number" value="1" onkeypress="return chkNumber()" style=" text-align: center;"/>
+                        <input type="text" class="form-control input-sm" id="number"   onKeyUp="if (this.value * 1 != this.value)
+                                    this.value = '';" style=" text-align: center;"/>
                     </div>
-                    <div class="col-md-3 col-lg-3" style="padding-left:0px;">
+                    <div class="col-md-3 col-lg-3" style="padding-left:0px; padding-top: 5px;">
                         ราคา
-                        <input type="text" class="form-control input-sm" id="pricevalue" onkeypress="return chkNumber()" style=" text-align: center;"/>
+                        <input type="text" class="form-control input-sm" id="pricevalue"  onKeyUp="if (this.value * 1 != this.value)
+                                    this.value = '';" style=" text-align: center;"/>
                     </div>
-                    <div class="col-md-3 col-lg-3" style="padding:0px;">
-                        <button type="button" class="btn btn-sm btn-info btn-block" id="btnaddproduct" onclick="sell()" style="margin-top: 20px;"><i class="fa fa-plus"></i> เพิ่มสินค้า</button>
+                    <div class="col-md-3 col-lg-3" style="padding:0px; padding-top: px;">
+                        <button type="button" class="btn btn-sm btn-info btn-block" id="btnaddproduct" onclick="sell()" style="margin-top: 25px;"><i class="fa fa-plus"></i> เพิ่มสินค้า</button>
                     </div>
                 </div>
-                <div class="row" style="margin:0px;">
+                <div class="row" style="margin:0px; margin-top: 5px;">
                     <div class="col-md-12 col-lg-12" style="padding:0px;">
                         <div class="panel panel-default" style="margin-bottom: 0px;">
                             <div class="panel-heading" id="heading-panels"><i class="fa fa-bars"></i> รายการขาย</div>
-
                             <div id="orderlist" style="background:#000000;"><h3 style=" text-align: center;">ยังไม่มีรายการขาย</h3></div>
                             <div class="panel-footer">
                                 รวม
-                                <div class="pull-right" id="showtotal" style=" color: #ff3300; font-weight: bold; padding-right: 10px;">0.-</div>
+                                <div class="pull-right" id="showtotal" style=" color: #ff3300; font-weight: bold; padding-right: 10px; border-radius: 0px;">0.-</div>
                             </div>
                         </div>
-                        รายละเอียด อื่น ๆ
-                        <textarea class="form-control" id="comment" rows="3"></textarea>
+                        <div style=" margin-top: 5px;">รายละเอียด อื่น ๆ</div>
+                        <textarea class="form-control" id="comment" rows="2"></textarea>
                     </div>
                 </div>
 
@@ -252,7 +301,7 @@ $sell_id = "IVN" . $Config->RandstrgenNumber(5) . trim(time());
                 <input type="hidden" id="_totalfinal" value="0">
                 <!--<h1 id="totalfinal" style=" color: #ffcc00;">0</h1>-->
 
-                <label>การชำระเงิน</label>
+                <div style=" margin-top: 5px;">การชำระเงิน</div>
                 <div class="row" style="margin:0px;">
                     <div class="col-md-3 col-lg-3" style=" padding: 0px;">
                         <div class="checkboxtpayment">
@@ -260,12 +309,14 @@ $sell_id = "IVN" . $Config->RandstrgenNumber(5) . trim(time());
                             <label for="radio1">เงินสด</label>
                         </div>
                     </div>
-                    <div class="col-md-3 col-lg-3" style=" padding: 0px;">
+                    <div class="col-md-4 col-lg-4" style=" padding: 0px;">
                         <div class="checkboxtpayment">
                             <input type="radio" name="payments" id="radio2" class="radio" value="2" onclick="setpayment('2')" style=" display: none;"/>
                             <label for="radio2">โอน</label>
                         </div>
                     </div>
+                    <!-- จ่ายแบบโอน -->
+                    <div id="box-payment" style=" margin-top: 5px;"></div>
                     <div class="col-md-3 col-lg-3" style=" padding: 0px; display: none;">
                         <div class="checkboxtpayment">
                             <input type="radio" name="payments" id="radio3" class="radio" value="3" onclick="setpayment('3')" style=" display: none;"/>
@@ -279,12 +330,9 @@ $sell_id = "IVN" . $Config->RandstrgenNumber(5) . trim(time());
                         </div>
                     </div>
                 </div>
-
-                <!-- จ่ายแบบโอน -->
-                <div id="box-payment"></div>
             </div>
 
-            <div class="well well-sm" style=" text-align: left; background: #333333; margin-bottom: 0px;">
+            <div class="well well-sm" style=" text-align: left; background: #333333; margin-bottom: 0px; border-radius: 0px;">
                 <!--<div id="text-payment">รับเงิน</div>-->
                 <input type="hidden" class="form-control" id="income" onkeypress="return chkNumber()" style=" text-align: center; font-weight: bold; font-size: 24px;" onkeyup="Income(this.value)" placeholder="ตัวเลขเท่านั้น..." value="0"/>
 
@@ -367,7 +415,7 @@ POPUP EDIT NUMBER
 </div><!-- /.modal -->
 
 <script type="text/javascript">
-    loaditems();
+    //loaditems();
     Setscreen();
     loadorder();
     historyselltoday();
@@ -378,7 +426,7 @@ POPUP EDIT NUMBER
         /*
          $("#card").change(function () {
          var card = $("#card").val();
-         var url = "<?php //echo Yii::app()->createUrl('sell/patient')                                               ?>";
+         var url = "<?php //echo Yii::app()->createUrl('sell/patient')                                                                                                                                                                     ?>";
          var data = {card: card};
          $.post(url, data, function (datas) {
          $("#patient").html(datas);
@@ -386,7 +434,6 @@ POPUP EDIT NUMBER
          });
          */
     });
-
     function Setscreen() {
         var width = window.innerWidth;
         if (width >= 768) {
@@ -395,16 +442,15 @@ POPUP EDIT NUMBER
             var contentboxsell = $("#content-boxsell").height();
             var screenfull = ((contentboxsell - boxsell) - 123);
             var patientbox = height - 415;
-            var orderlist = height - 500;//340
-            var boxrightsell = height - 160;//61
+            var orderlist = height - 570; //340
+            var boxrightsell = height - 160; //61
             var boxcentersell = height - 120;
             var boxreporttoday = height - 145;
             $("#patient").css({'height': patientbox, 'overflow': 'auto'});
-            //$("#orderlist").css({'height': orderlist, 'overflow': 'auto'});
+            $("#orderlist").css({'height': orderlist, 'overflow': 'auto'});
             $("#boxrightsell").css({'height': boxrightsell, 'overflow': 'auto'});
             $("#boxcentersell").css({'height': boxcentersell, 'overflow': 'auto'});
             $("#reporttoday").css({'height': boxreporttoday, 'overflow': 'auto'});
-
         } else {
             $("#mainsell").html("<center><h4>ขนาดหน้าจอไม่รองรับการแสดงผล ...!</h4></center>");
         }
@@ -439,87 +485,47 @@ POPUP EDIT NUMBER
             datesell: datesell
         };
         if (itemcode == "") {
-            alert("กรุณาเลือกสินค้า ...");
+            //alert("กรุณาเลือกสินค้า ...");
+            swal("แจ้งเตือน!", "กรุณาเลือกสินค้า ...!", "warning");
             return false;
         }
 
         if (employee == "") {
-            alert("ยังไม่ได้เลือกพนักงานขาย ...");
+            //alert("ยังไม่ได้เลือกพนักงานขาย ...");
+            swal("แจ้งเตือน!", "ยังไม่ได้เลือกพนักงานขาย ...!", "warning");
+            return false;
+        }
+
+        if (number == "" || number <= 0) {
+            //alert("กรุณาใส่จำนวน ...");
+            swal("แจ้งเตือน!", "กรุณาใส่จำนวนให้ถูกต้อง ...!", "warning");
             return false;
         }
 
         if (price == "") {
-            alert("ยังไม่ได้ใส่ราคา ...");
-            return false;
-        }
-
-        //เช็ค 1 = product,2 = ขายหัตถการ
-        if (typeproduct != "1") {
-            $.post(url, data, function(datas) {
-                Notify(itemcode);
-                //$("#orderlist").html(datas);
-                loaditems();
-                loadorder();
-                $("#distcoutvalue").val(0);
-                $("#pricevalue").val('');
-                CalculatorDistcount();
-                Getdetailproduct("");
-
-            });
-        } else {
-            var UrlCheckStock = "<?php echo Yii::app()->createUrl('sell/checkstock') ?>";
-            var datacheck = {product_id: itemcode, branch: branch};
-            $.post(UrlCheckStock, datacheck, function(stock) {
-                if (parseInt(number) <= parseInt(stock)) {
-                    $.post(url, data, function(datas) {
-                        Notify(itemcode);
-                        //$("#orderlist").html(datas);
-                        loaditems();
-                        loadorder();
-                        $("#distcoutvalue").val(0);
-                        CalculatorDistcount();
-                        Getdetailproduct("");
-                        $("#pricevalue").val("");
-                        //$("#card").attr("disabled", true);
-                    });
-                } else {
-                    alert("ยอดคงเหลือในสต๊อกไม่พอกับจำนวนขาย คงเหลือทั้งหมดจำนวน " + stock);
-                    return false;
-                }
-            });
-        }
-
-    }
-
-    function sellpromotion(promotion_id, promotion, numbers) {
-        var url = "<?php echo Yii::app()->createUrl('sell/sell') ?>";
-        var itemcode = $("#itemcode").val();
-        var sellcode = $("#sellcode").val();
-        var branch = $("#branch").val();
-        var pid = $("#pid").val();
-        var number = parseInt(numbers);
-        var data = {itemcode: itemcode, sellcode: sellcode, pid: pid, branch: branch, number: number, promotion: promotion, promotion_id: promotion_id};
-        if (itemcode == "") {
-            alert("กรุณาเลือกสินค้า ...");
+            //alert("ยังไม่ได้ใส่ราคา ...");
+            swal("แจ้งเตือน!", "ยังไม่ได้ใส่ราคา ...!", "warning");
             return false;
         }
 
         var UrlCheckStock = "<?php echo Yii::app()->createUrl('sell/checkstock') ?>";
         var datacheck = {product_id: itemcode, branch: branch};
         $.post(UrlCheckStock, datacheck, function(stock) {
-            if (parseInt(stock) >= number) {
+            if (parseInt(number) <= parseInt(stock)) {
                 $.post(url, data, function(datas) {
                     Notify(itemcode);
-                    $("#orderlist").html(datas);
-                    loaditems();
+                    //$("#orderlist").html(datas);
+                    //loaditems();
                     loadorder();
                     $("#distcoutvalue").val(0);
                     CalculatorDistcount();
-                    Getdetailproduct("");
+                    ResetTxt();
+                    $("#pricevalue").val("");
                     //$("#card").attr("disabled", true);
                 });
             } else {
-                alert("ยอดคงเหลือในสต๊อกไม่พอกับจำนวนขาย คงเหลือทั้งหมดจำนวน " + stock);
+                //alert("ยอดคงเหลือในสต๊อกไม่พอกับจำนวนขาย คงเหลือทั้งหมดจำนวน " + stock);
+                swal("แจ้งเตือน!", "ยอดคงเหลือในสต๊อกไม่พอกับจำนวนขาย ...!", "warning");
                 return false;
             }
         });
@@ -546,7 +552,8 @@ POPUP EDIT NUMBER
         if (payment == 2) {
             var account = $("#account").val();
             if (account == "") {
-                alert("กรุณาเลือกบัญชี...");
+                //alert("กรุณาเลือกบัญชี...");
+                swal("แจ้งเตือน!", "กรุณาเลือกบัญชี ...!", "warning");
                 return false;
             } else {
                 accounts = account;
@@ -586,7 +593,6 @@ POPUP EDIT NUMBER
             $("#number").attr("disabled", true);
             $("#branch").attr("disabled", true);
             $("#income").attr("disabled", true);
-
             //$("#orderlist").html(datas);
             //loaditems();
             //loadorder();
@@ -595,8 +601,7 @@ POPUP EDIT NUMBER
 
     function PrintBill(sellcode) {
         var branch = $("#branch").val();
-        var url = "<?php echo Yii::app()->createUrl('sell/bill') ?>" + "&sell_id=" + sellcode + "&branch=" + branch;
-
+        var url = "<?php echo Yii::app()->createUrl('sell/bill') ?>" + "?sell_id=" + sellcode + "&branch=" + branch;
         //Update 20200215
         //PopupBill(url, sellcode);
         window.location = url;
@@ -630,9 +635,9 @@ POPUP EDIT NUMBER
         var total = parseInt(totals);
         var distcoutvalue = parseInt($("#distcoutvalue").val());
         var distcount;
-
         if (totals == "" || totals == "0") {
             alert("ยังไม่มีรายการ ...!");
+
             $("#distcoutvalue").val(0);
             return false;
         }
@@ -660,23 +665,19 @@ POPUP EDIT NUMBER
         var branch = $("#branch").val();
         var data = {sell_id: sellcode, branch: branch};
         var distcount = $("#distcount").val();
-
         $.post(url, data, function(response) {
             var datas = jQuery.parseJSON(response);
-
             $("#_total").val(datas.total);
             //$("#total").text(formatThousands(datas.total) + ".-");
             $("#showtotal").text(formatThousands(datas.total) + ".-");
             $("#_totalfinal").val(datas.total - distcount);
             $("#totalfinal").text(formatThousands(datas.total - distcount) + ".-");
-
         });
     }
 
     function Income(value) {
         var totalfinal = parseInt($("#_totalfinal").val());
         var income = parseInt(value);
-
         if (income < totalfinal || isNaN(income)) {
             $("#change").val(0);
         } else {
@@ -751,14 +752,11 @@ POPUP EDIT NUMBER
         var h = 600;
         var dualScreenLeft = window.screenLeft != undefined ? window.screenLeft : screen.left;
         var dualScreenTop = window.screenTop != undefined ? window.screenTop : screen.top;
-
         var width = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width;
         var height = window.innerHeight ? window.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height;
-
         var left = ((width / 2) - (w / 2)) + dualScreenLeft;
         var top = ((height / 2) - (h / 2)) + dualScreenTop;
         var newWindow = window.open(url, title, 'scrollbars=yes, width=' + w + ', height=' + h + ', top=' + top + ', left=' + left);
-
         // Puts focus on the newWindow
         if (window.focus) {
             newWindow.focus();
@@ -798,7 +796,7 @@ POPUP EDIT NUMBER
             //alert(datas);
             $("#itemcode").val(datas.product_id);
             $("#typeproduct").val(datas.producttype);
-            $("#detailproduct").text(datas.productdetail);
+            $("#detailproduct").html(datas.productdetail + '<bt/>วิธีใช้ : ' + datas.size);
             $("#productname").val(datas.productname);
         }, 'json');
     }
@@ -888,7 +886,6 @@ POPUP EDIT NUMBER
                 $("#box-payment").show();
                 $("#box-payment").html(datas);
             });
-
         }
     }
 
@@ -908,12 +905,36 @@ POPUP EDIT NUMBER
         });
     }
 
+    function ResetTxt() {
+        $("#itemcode").select2("val", "");
+        $("#typeproduct").val("");
+        $("#detailproduct").text("");
+        $("#productname").val("");
+        $("#number").val("");
+        $("#stock").html("-");
+    }
+
     document.addEventListener("keydown", function(event) {
         if (event.which == '13') {
             searchpatient();
         }
     });
-</script>
+    $(document).ready(function() {
+        $("#itemcode").change(function() {
+            var url = "<?php echo Yii::app()->createUrl('sell/detailproduct') ?>";
+            var product_id = $("#itemcode").val();
+            var data = {product_id: product_id};
+            $.post(url, data, function(datas) {
+                //alert(datas);
+                $("#itemcode").val(datas.product_id);
+                $("#typeproduct").val(datas.producttype);
+                $("#detailproduct").html(datas.productdetail + '<br/>วิธีใช้ : ' + datas.size);
+                $("#productname").val(datas.productname);
+                $("#stock").html(datas.stock);
+            }, 'json');
+        });
+    });
 
+</script>
 
 

@@ -186,17 +186,17 @@
         $taxresult = 0;
         foreach ($orderlist as $rs):
             $i++;
-            $sumrow = ($rs['costs'] * $rs['number']);
-            $sumAll = ($sumAll + $sumrow);
-            $sumproduct = ($sumproduct + $rs['pricetotal']);
-            $sumdistcount = ($sumdistcount + $rs['distcountprice']);
+            $sumrow = ((int)$rs['costs'] * (int)$rs['number']);
+            $sumAll = ((int)$sumAll + (int)$sumrow);
+            $sumproduct = ((int)$sumproduct + (int)$rs['pricetotal']);
+            $sumdistcount = ((int)$sumdistcount + (int)$rs['distcountprice']);
 
             //vat
             if ($vat == 1) {
-                $tax = ($sumproduct * 7) / 100;
+                $tax = ((int)$sumproduct * 7) / 100;
                 $taxresult = number_format($tax, 2);
             } else if ($vat == 2) {
-                $tax = ($sumproduct * 7) / 107;
+                $tax = ((int)$sumproduct * 7) / 107;
                 $taxresult = number_format($tax, 2);
             } else {
                 $tax = 0;
@@ -264,7 +264,7 @@
             <td style=" text-align: right;">
                 <?php
                 if ($vat == 2) {
-                    echo number_format($sumproduct - $taxresult, 2);
+                    echo number_format((int)$sumproduct - (int)$taxresult, 2);
                 } else {
                     echo number_format($sumproduct, 2);
                 }
@@ -289,7 +289,7 @@
                 if ($vat == 2) {
                     $totalResult = $sumproduct;
                 } else {
-                    $totalResult = ($sumproduct + $taxresult);
+                    $totalResult = ((int)$sumproduct + (int)$taxresult);
                 }
                 $priceresult = $totalResult;
                 $pricetotal = number_format(($priceresult), 2);
