@@ -8,7 +8,7 @@
         <title>
             <?php
             $web = new Configweb_model();
-            echo "order-" . $order_id;
+            echo $order_id;
             ?>
         </title>
 
@@ -94,17 +94,18 @@
         $companySell = Companycenter::model()->find("id = '1'");
         $Thaibath = new Thaibaht();
         ?>
-        <div style=" position: fixed; left: 20px; top: 20px; z-index: 100;">
-            <img src="<?php echo Yii::app()->baseUrl; ?>/uploads/logo/<?php echo $logo ?> " style="width: 100px;" />
+        <div style=" position: fixed; left: 0px; top: 0px; z-index: 100;">
+            <img src="<?php echo Yii::app()->baseUrl; ?>/uploads/logo/<?php echo $companySell['logo'] ?> " style="width: 100px;" />
         </div>
         <div style="border-radius: 0px; padding: 0px; background: #FFFFFF; border: #000000 solid 0px; position: relative;" id="printorder">
-           
-            <div style=" text-align: center; margin-bottom: 10px; font-size: 18px;">
-                <h4 style=" margin-bottom: 0px; font-size: 24px; color: #000; font-weight: bold;"><?php echo $BranchModel['branchname']; ?></h4><br/>
-                <?php echo $BranchModel['address']; ?><br/>
-                <?php echo $BranchModel['contact']; ?><br/>
-                <h4 style=" margin: 0px; font-size: 24px; color: #000; font-weight: bold;">ใบสั่งซื้อสินค้า</h4>
+            <div style=" text-align: left; margin-bottom: 10px; font-size: 18px; padding-left: 120px; padding-top: 5px;">
+                <h4 style=" margin-bottom: 0px; font-size: 24px; color: #000; font-weight: bold;">
+                    <?php echo $companySell['companyname'] ?>
+                </h4>
+                <?php echo $companySell['address']; ?><br/>
+                โทร. <?php echo $companySell['tel']; ?><br/>
             </div>
+            <h4 style=" margin: 0px; font-size: 24px; color: #000; font-weight: bold; margin-top: 20px; text-align: center; margin-bottom: 20px;">ใบสั่งซื้อสินค้า</h4>
             <div class="row">
                 <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                     <div style="background: #eeeeee; border-radius: 10px; border: #111111 solid 1px; padding: 5px;">

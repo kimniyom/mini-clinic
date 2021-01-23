@@ -38,6 +38,9 @@ class CenterstockproductController extends Controller {
 
 		Yii::app()->db->createCommand()
 			->insert('center_stockproduct', $data);
+
+		$sql = "CALL import_product_to_clinic()";
+		Yii::app()->db->createCommand($sql)->query();
 		//echo $this->redirect(array('backend/product/detail_product&product_id=' . $_POST['product_id']));
 	}
 
@@ -69,6 +72,10 @@ class CenterstockproductController extends Controller {
 
 		Yii::app()->db->createCommand()
 			->update('center_stockproduct', $data, "product_id = '$product_id'");
+
+			
+		Yii::app()->db->createCommand()
+			->update('clinic_stockproduct', $data, "product_id = '$product_id'");
 	}
 
 	public function actionDetail($product_id = null) {

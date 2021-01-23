@@ -389,7 +389,7 @@ class OrdersController extends Controller {
         $order = Orders::model()->find("order_id = '$order_id'");
         $branchId = $order['branch'];
         $data['BranchModel'] = Branch::model()->find("id = '$branchId'");
-        $data['logo'] = Logo::model()->find("branch='$branchId'")['logo'];
+        //$data['logo'] = Logo::model()->find("branch='$branchId'")['logo'];
         $OrderModel = new Orders();
         $data['order'] = $order;
         $data['order_id'] = $order_id;
@@ -404,7 +404,7 @@ class OrdersController extends Controller {
         $mPDF1 = Yii::app()->ePdf->mpdf();
 
         # You can easily override default constructor's params
-        $mPDF1 = Yii::app()->ePdf->mpdf('order-' . $order_id, 'A4');
+        $mPDF1 = Yii::app()->ePdf->mpdf($order_id, 'A4');
 
         # render (full page)
         //$mPDF1->WriteHTML($this->render('print', $data, true));

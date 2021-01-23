@@ -392,7 +392,7 @@ $(function() {
         series: [{
             name: 'จำนวน',
             colorByPoint: true,
-            data: [ < ? php echo $countserviceh ? > , < ? php echo $countvisit ? > ]
+            data: [<?php echo $countserviceh ?> , <?php echo $countvisit ?>]
         }]
     });
 });
