@@ -9,21 +9,48 @@
         margin-bottom: 10px;
     }
 
+    input[type='text']{
+        border-color: #333333;
+    }
+
+    .form-control{
+        background: #111111;
+    }
+    .select2-container {
+        background-color: #111111 !important;
+        border-radius: 5px;
+    }
+    .select2-drop{
+        background-color: #111111 !important;
+        border-color: #333333;
+        color:#666666;
+    }
+    .select2-search input {
+        background-color: #111111 !important;
+        border:none;
+    }
+    .select2-choice { background-color: #111111 !important; border-color:#222222 !important; height: 40px !important;}
+    .select2-search { background-color: #111111 !important; margin-top: 10px;}
+    .select2-arrow {
+        border-left: 0px solid transparent !important;
+        /* 2 */
+    }
+
 </style>
 
 <div class="form">
     <div class="panel panel-default" style=" margin-bottom: 0px;">
         <div class="panel-heading"><?php echo $head ?></div>
         <?php
-$form = $this->beginWidget('CActiveForm', array(
-	'id' => 'patient-form',
-	// Please note: When you enable ajax validation, make sure the corresponding
-	// controller action is handling ajax validation correctly.
-	// There is a call to performAjaxValidation() commented in generated controller code.
-	// See class documentation of CActiveForm for details on this.
-	'enableAjaxValidation' => false,
-));
-?>
+        $form = $this->beginWidget('CActiveForm', array(
+            'id' => 'patient-form',
+            // Please note: When you enable ajax validation, make sure the corresponding
+            // controller action is handling ajax validation correctly.
+            // There is a call to performAjaxValidation() commented in generated controller code.
+            // See class documentation of CActiveForm for details on this.
+            'enableAjaxValidation' => false,
+        ));
+        ?>
 
         <div class="panel-body" id="form-patient-body">
             <p class="note">Fields with <span class="required">*</span> are required.</p>
@@ -40,41 +67,41 @@ $form = $this->beginWidget('CActiveForm', array(
                     <?php
 //echo CHtml::dropDownList('oid', $model, CHtml::listData(Pername::model()->findAll(""), 'oid', 'pername'), array('class' => 'form-control')
 //echo $form->dropDownList($model, 'oid', CHtml::listData(Pername::model()->findAll(""), 'oid', 'pername'), array('class' => 'form-control'));
-?>
+                    ?>
 
                     <?php
-$form->widget('booster.widgets.TbSelect2', array(
-	'model' => $model,
-	'asDropDownList' => true,
-	'attribute' => 'oid',
-	//'name' => 'oid',
-	'data' => CHtml::listData(Pername::model()->findAll(""), 'oid', 'pername'),
-	//'value' => $model,
-	'options' => array(
-		//$model,
-		//'oid',
-		//'tags' => array('clever', 'is', 'better', 'clevertech'),
-		'placeholder' => 'คำนำหน้าชื่อ',
-		//'width' => '40%',
-		//'tokenSeparators' => array(',', ' ')
-	),
-));
-/*
-$this->widget(
-'booster.widgets.TbSelect2', array(
-'asDropDownList' => true,
-'name' => 'clevertech1',
-'options' => array(
-//'tags' => array('clever', 'is', 'better', 'clevertech'),
-'placeholder' => 'type clever, or is, or just type!',
-'width' => '40%',
-'tokenSeparators' => array(',', ' ')
-)
-)
-);
- *
- */
-?>
+                    $form->widget('booster.widgets.TbSelect2', array(
+                        'model' => $model,
+                        'asDropDownList' => true,
+                        'attribute' => 'oid',
+                        //'name' => 'oid',
+                        'data' => CHtml::listData(Pername::model()->findAll(""), 'oid', 'pername'),
+                        //'value' => $model,
+                        'options' => array(
+                            //$model,
+                            //'oid',
+                            //'tags' => array('clever', 'is', 'better', 'clevertech'),
+                            'placeholder' => 'คำนำหน้าชื่อ',
+                        //'width' => '40%',
+                        //'tokenSeparators' => array(',', ' ')
+                        ),
+                    ));
+                    /*
+                      $this->widget(
+                      'booster.widgets.TbSelect2', array(
+                      'asDropDownList' => true,
+                      'name' => 'clevertech1',
+                      'options' => array(
+                      //'tags' => array('clever', 'is', 'better', 'clevertech'),
+                      'placeholder' => 'type clever, or is, or just type!',
+                      'width' => '40%',
+                      'tokenSeparators' => array(',', ' ')
+                      )
+                      )
+                      );
+                     *
+                     */
+                    ?>
 
                     <?php echo $form->error($model, 'oid'); ?>
                 </div>
@@ -108,17 +135,17 @@ $this->widget(
                     <?php //echo $form->textField($model, 'card', array('size' => 60, 'maxlength' => 13, 'class' => 'form-control')); ?>
 
                     <?php
-$form->widget("ext.maskedInput.MaskedInput", array(
-	"model" => $model,
-	"attribute" => "card",
-	//"id" => 'card',
-	//"name" => 'card',
-	"mask" => '9-9999-99999-99-9',
-	"clientOptions" => array("autoUnmask" => true), /* autoUnmask defaults to false */
-	"defaults" => array("removeMaskOnSubmit" => false),
-	/* once defaults are set will be applied to all the masked fields  removeMaskOnSubmit defaults to true */
-));
-?>
+                    $form->widget("ext.maskedInput.MaskedInput", array(
+                        "model" => $model,
+                        "attribute" => "card",
+                        //"id" => 'card',
+                        //"name" => 'card',
+                        "mask" => '9-9999-99999-99-9',
+                        "clientOptions" => array("autoUnmask" => true), /* autoUnmask defaults to false */
+                        "defaults" => array("removeMaskOnSubmit" => false),
+                            /* once defaults are set will be applied to all the masked fields  removeMaskOnSubmit defaults to true */
+                    ));
+                    ?>
                     <?php echo $form->error($model, 'card'); ?>
 
                 </div>
@@ -131,10 +158,10 @@ $form->widget("ext.maskedInput.MaskedInput", array(
                 </div>
                 <div class="col-lg-3">
                     <?php
-$DATASEX = array("M" => "ชาย", "F" => "หญิง");
-echo $form->dropDownList($model, 'sex', $DATASEX, array('empty' => '== เลือกเพศ ==', 'class' => 'form-control')
-);
-?>
+                    $DATASEX = array("M" => "ชาย", "F" => "หญิง");
+                    echo $form->dropDownList($model, 'sex', $DATASEX, array('empty' => '== เลือกเพศ ==', 'class' => 'form-control')
+                    );
+                    ?>
                     <?php echo $form->error($model, 'sex'); ?>
                 </div>
             </div>
@@ -145,19 +172,19 @@ echo $form->dropDownList($model, 'sex', $DATASEX, array('empty' => '== เลื
                 </div>
                 <div class="col-lg-4">
                     <?php
-$form->widget(
-	'booster.widgets.TbDatePicker', array(
-		'model' => $model,
-		'attribute' => 'birth',
-		'options' => array(
-			'language' => 'th',
-			'type' => 'date',
-			'format' => 'yyyy-mm-dd',
-			'autoclose' => true,
-		),
-	)
-);
-?>
+                    $form->widget(
+                            'booster.widgets.TbDatePicker', array(
+                        'model' => $model,
+                        'attribute' => 'birth',
+                        'options' => array(
+                            'language' => 'th',
+                            'type' => 'date',
+                            'format' => 'yyyy-mm-dd',
+                            'autoclose' => true,
+                        ),
+                            )
+                    );
+                    ?>
 
                     <?php echo $form->error($model, 'birth'); ?>
                 </div>
@@ -170,23 +197,23 @@ $form->widget(
                 </div>
                 <div class="col-lg-8">
                     <?php
-$form->widget('booster.widgets.TbSelect2', array(
-	'model' => $model,
-	'asDropDownList' => true,
-	'attribute' => 'occupation',
-	//'name' => 'oid',
-	'data' => CHtml::listData(Occupation::model()->findAll(""), 'id', 'occupationname'),
-	//'value' => $model,
-	'options' => array(
-		//$model,
-		//'oid',
-		//'tags' => array('clever', 'is', 'better', 'clevertech'),
-		'placeholder' => 'อาชีพ',
-		'width' => '100%',
-		//'tokenSeparators' => array(',', ' ')
-	),
-));
-?>
+                    $form->widget('booster.widgets.TbSelect2', array(
+                        'model' => $model,
+                        'asDropDownList' => true,
+                        'attribute' => 'occupation',
+                        //'name' => 'oid',
+                        'data' => CHtml::listData(Occupation::model()->findAll(""), 'id', 'occupationname'),
+                        //'value' => $model,
+                        'options' => array(
+                            //$model,
+                            //'oid',
+                            //'tags' => array('clever', 'is', 'better', 'clevertech'),
+                            'placeholder' => 'อาชีพ',
+                            'width' => '100%',
+                        //'tokenSeparators' => array(',', ' ')
+                        ),
+                    ));
+                    ?>
 
                     <?php echo $form->error($model, 'occupation'); ?>
                 </div>
@@ -230,29 +257,29 @@ $form->widget('booster.widgets.TbSelect2', array(
                 </div>
                 <div class="col-lg-6">
                     <?php
-if (Yii::app()->session['branch'] == '99') {
-	$where = " id != '99'";
-} else {
-	$branch_id = Yii::app()->session['branch'];
-	$where = "id = '$branch_id'";
-}
-$form->widget('booster.widgets.TbSelect2', array(
-	'model' => $model,
-	'asDropDownList' => true,
-	'attribute' => 'branch',
-	//'name' => 'oid',
-	'data' => CHtml::listData(Branch::model()->findAll($where), 'id', 'branchname'),
-	//'value' => $model,
-	'options' => array(
-		//$model,
-		//'oid',
-		//'tags' => array('clever', 'is', 'better', 'clevertech'),
-		'placeholder' => 'สถานบริการที่เข้ารับ',
-		'width' => '100%',
-		//'tokenSeparators' => array(',', ' ')
-	),
-));
-?>
+                    if (Yii::app()->session['branch'] == '99') {
+                        $where = " id != '99'";
+                    } else {
+                        $branch_id = Yii::app()->session['branch'];
+                        $where = "id = '$branch_id'";
+                    }
+                    $form->widget('booster.widgets.TbSelect2', array(
+                        'model' => $model,
+                        'asDropDownList' => true,
+                        'attribute' => 'branch',
+                        //'name' => 'oid',
+                        'data' => CHtml::listData(Branch::model()->findAll($where), 'id', 'branchname'),
+                        //'value' => $model,
+                        'options' => array(
+                            //$model,
+                            //'oid',
+                            //'tags' => array('clever', 'is', 'better', 'clevertech'),
+                            'placeholder' => 'สถานบริการที่เข้ารับ',
+                            'width' => '100%',
+                        //'tokenSeparators' => array(',', ' ')
+                        ),
+                    ));
+                    ?>
                     <?php echo $form->error($model, 'branch'); ?>
                 </div>
             </div>
@@ -263,23 +290,23 @@ $form->widget('booster.widgets.TbSelect2', array(
                 </div>
                 <div class="col-lg-6">
                     <?php
-$form->widget('booster.widgets.TbSelect2', array(
-	'model' => $model,
-	'asDropDownList' => true,
-	'attribute' => 'type',
-	//'name' => 'oid',
-	'data' => CHtml::listData(Gradcustomer::model()->findAll(""), 'id', 'grad'),
-	//'value' => $model,
-	'options' => array(
-		//$model,
-		//'oid',
-		//'tags' => array('clever', 'is', 'better', 'clevertech'),
-		'placeholder' => 'ประเภทลูกค้า',
-		'width' => '100%',
-		//'tokenSeparators' => array(',', ' ')
-	),
-));
-?>
+                    $form->widget('booster.widgets.TbSelect2', array(
+                        'model' => $model,
+                        'asDropDownList' => true,
+                        'attribute' => 'type',
+                        //'name' => 'oid',
+                        'data' => CHtml::listData(Gradcustomer::model()->findAll(""), 'id', 'grad'),
+                        //'value' => $model,
+                        'options' => array(
+                            //$model,
+                            //'oid',
+                            //'tags' => array('clever', 'is', 'better', 'clevertech'),
+                            'placeholder' => 'ประเภทลูกค้า',
+                            'width' => '100%',
+                        //'tokenSeparators' => array(',', ' ')
+                        ),
+                    ));
+                    ?>
                     <?php echo $form->error($model, 'type'); ?>
                 </div>
             </div>
@@ -290,20 +317,20 @@ $form->widget('booster.widgets.TbSelect2', array(
                 </div>
                 <div class="col-lg-5">
                     <?php
-$form->widget(
-	'booster.widgets.TbDatePicker', array(
-		'model' => $model,
-		'attribute' => 'create_date',
-		'options' => array(
-			'background' => '#FFFFFF',
-			'language' => 'th',
-			'type' => 'date',
-			'format' => 'yyyy-mm-dd',
-			'autoclose' => true,
-		),
-	)
-);
-?>
+                    $form->widget(
+                            'booster.widgets.TbDatePicker', array(
+                        'model' => $model,
+                        'attribute' => 'create_date',
+                        'options' => array(
+                            'background' => '#FFFFFF',
+                            'language' => 'th',
+                            'type' => 'date',
+                            'format' => 'yyyy-mm-dd',
+                            'autoclose' => true,
+                        ),
+                            )
+                    );
+                    ?>
                     <?php echo $form->error($model, 'create_date'); ?>
                 </div>
             </div>
@@ -319,18 +346,18 @@ $form->widget(
             </div>
         </div>
 
-        <?php $this->endWidget();?>
+        <?php $this->endWidget(); ?>
     </div>
 </div><!-- form -->
 
 <script type="text/javascript">
     setscreen();
-    function setscreen(){
+    function setscreen() {
         var w = window.innerWidth;
         var h = window.innerHeight;
         var screen = (h - 200);
-        if(w >= 768){
-            $("#form-patient-body").css({'height':screen,'overflow': 'auto'});
+        if (w >= 768) {
+            $("#form-patient-body").css({'height': screen, 'overflow': 'auto'});
         }
     }
 </script>

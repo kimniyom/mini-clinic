@@ -34,7 +34,7 @@ class DoctorController extends Controller {
                     'saveservicedetail', 'getdetailservice', 'deletedetailservice', 'saveetc',
                     'getdetailserviceetc', 'deleteetcservice', 'patientviewhistory', 'getdetailserviceview',
                     'getdetailserviceetcview', 'doctorconfirm', 'updateservicedetail', 'getdetaildrugjson',
-                    'patientviewhistorymobile', 'printcetificate', 'printrefer'),
+                    'patientviewhistorymobile', 'printcetificate', 'printrefer', 'views'),
                 'users' => array('@'),
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -559,7 +559,7 @@ class DoctorController extends Controller {
     public function actionPrintrefer($service_id = "") {
         $sql = "select * from form_txt where id = '1'";
         $data['form'] = Yii::app()->db->createCommand($sql)->queryRow();
-
+        $data['company'] = Companycenter::model()->find("id=:id", array(":id" => 1));
         $data['datas'] = $this->getRefer($service_id);
         $this->renderPartial('refer', $data);
     }
@@ -568,6 +568,47 @@ class DoctorController extends Controller {
         $sql = "select * from refer where service_id = '$serviceid'";
         $rs = Yii::app()->db->createCommand($sql)->queryRow();
         return $rs;
+    }
+
+    public function actionViews($id, $service_id = null, $flag) {
+        $this->layout = "template_history";
+        //$data['contact'] = PatientContact::model()->find("patient_id = '$id'");
+        $data['model'] = Patient::model()->find("id=:id", array("id" => $id));
+        $checkbodyModel = new Checkbody();
+        $data['checkbody'] = $checkbodyModel->Checkbody($service_id);
+        $data['Modelservice'] = Service::model()->find("id=:id", array(":id" => $service_id));
+        //OpenService
+        $data['patient_id'] = $id;
+        $data['serviceSEQ'] = ($service_id);
+        $data['service_id'] = $service_id;
+
+        //หา service ครั้งล่าสุด
+        $serviceDrugLastService = "SELECT max(id) as lastservice FROM service WHERE patient_id = '$id' AND id != '$service_id'";
+        $rsLastService = Yii::app()->db->createCommand($serviceDrugLastService)->queryRow();
+        if (!empty($rsLastService['lastservice'])) {
+            $data['lastService'] = $rsLastService['lastservice'];
+        } else {
+            $data['lastService'] = 0;
+        }
+        //ประวัติครั้งล่าสุด
+        $data['lastserviceDetail'] = $this->getLastService($rsLastService['lastservice']);
+        $data['drugAll'] = $this->getDrugPatient($id);
+        $data['patient'] = $data['model'];
+        $data['flag'] = $flag;
+        $Modelservice = new Service();
+        $data['procedure'] = $Modelservice->Procedure($service_id);
+        $data['datalistservice'] = $Modelservice->Listservice($service_id);
+        $data['service'] = Service::model()->find("id = '$service_id'");
+        $data['certifiate'] = $this->getCertificate($service_id);
+        $data['refer'] = $this->getRefer($service_id);
+        //ผู้บันทึกข้อมูล
+        $Author = Employee::model()->find("id=:id", array(":id" => $data['Modelservice']['doctor']));
+        if ($data['Modelservice']['flag_service'] == "0") {
+            $data['authors'] = "บันทึกการตรวจโดย " . $Author['name'] . " " . $Author['name'];
+        } else {
+            $data['authors'] = "พนักงานบันทึกแทนหมอ " . $Author['name'] . " " . $Author['name'];
+        }
+        $this->render('views', $data);
     }
 
 }

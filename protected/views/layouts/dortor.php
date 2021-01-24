@@ -114,7 +114,7 @@
         <script src="<?php echo Yii::app()->baseUrl; ?>/lib/php-webcamera/scripts/webcam.js" type="text/javascript"></script>
 
 
-        <link rel="stylesheet" type="text/css" href="<?= Yii::app()->baseUrl; ?>/themes/dortor/assets/jquery-easyui/themes/default/easyui.css"/>
+        <link rel="stylesheet" type="text/css" href="<?= Yii::app()->baseUrl; ?>/themes/dortor/assets/jquery-easyui/themes/defaultcustom/easyui.css"/>
         <link rel="stylesheet" type="text/css" href="<?= Yii::app()->baseUrl; ?>/themes/dortor/assets/jquery-easyui/themes/icon.css"/>
         <script type="text/javascript" charset="utf-8"src="<?= Yii::app()->baseUrl; ?>/themes/dortor/assets/jquery-easyui/jquery.easyui.min.js"></script>
 

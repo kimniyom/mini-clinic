@@ -35,7 +35,7 @@ $product_name = $product['product_name'];
 $this->breadcrumbs = array(
     //'คลังสินค้า' => Yii::app()->createUrl('store/index'),
     'รายการสินค้า' => array('index'),
-    $product_name => array('centerstockproduct/detail&product_id=' . $product['product_id']),
+    $product_name => array('centerstockproduct/detail?product_id=' . $product['product_id']),
     $title,
 );
 

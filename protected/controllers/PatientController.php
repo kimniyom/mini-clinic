@@ -171,8 +171,8 @@ class PatientController extends Controller {
      */
     public function actionIndex() {
         $config = new Configweb_model();
-        echo $pid = $config->autoId("patient", "pid", "10");
-        exit();
+        //echo $pid = $config->autoId("patient", "pid", "10");
+        //exit();
         $branch = Yii::app()->session['branch'];
         $data['branchModel'] = Branch::model()->find('id=:id', array(':id' => $branch));
         $data['branch'] = $branch;

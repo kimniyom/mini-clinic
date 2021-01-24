@@ -1,7 +1,7 @@
 <?php
 $this->breadcrumbs = array(
-	//"คลังสินค้า" => array('store/index'),
-	"รายการสินค้า",
+    //"คลังสินค้า" => array('store/index'),
+    "รายการสินค้า",
 );
 
 $web = new Configweb_model();
@@ -23,25 +23,25 @@ $web = new Configweb_model();
             <div class="col-lg-3">
                 <label>หมวด</label>
                 <?php
-$this->widget('booster.widgets.TbSelect2', array(
-	//'model' => $model,
-	'asDropDownList' => true,
-	//'attribute' => 'itemid',
-	'name' => 'producttype',
-	'id' => 'producttype',
-	'data' => CHtml::listData(ProductType::model()->findAll("upper IS NULL or upper = '' or upper = '0'"), 'id', 'type_name'),
-	//'value' => $model,
-	'options' => array(
-		//$model,
-		'allowClear' => true,
-		//'oid',
-		//'tags' => array('clever', 'is', 'better', 'clevertech'),
-		'placeholder' => 'ทั้งหมด',
-		'width' => '100%',
-		//'tokenSeparators' => array(',', ' ')
-	),
-));
-?>
+                $this->widget('booster.widgets.TbSelect2', array(
+                    //'model' => $model,
+                    'asDropDownList' => true,
+                    //'attribute' => 'itemid',
+                    'name' => 'producttype',
+                    'id' => 'producttype',
+                    'data' => CHtml::listData(ProductType::model()->findAll("upper IS NULL or upper = '' or upper = '0'"), 'id', 'type_name'),
+                    //'value' => $model,
+                    'options' => array(
+                        //$model,
+                        'allowClear' => true,
+                        //'oid',
+                        //'tags' => array('clever', 'is', 'better', 'clevertech'),
+                        'placeholder' => 'ทั้งหมด',
+                        'width' => '100%',
+                    //'tokenSeparators' => array(',', ' ')
+                    ),
+                ));
+                ?>
             </div>
             <div class="col-lg-3">
                 <div id="boxsubproducttype">
@@ -61,13 +61,13 @@ $this->widget('booster.widgets.TbSelect2', array(
     </div>
 </div>
 <script type="text/javascript">
-    $(document).ready(function () {
+    $(document).ready(function() {
         getdata();
-        $("#producttype").change(function () {
+        $("#producttype").change(function() {
             var type_id = $("#producttype").val();
             var url = "<?php echo Yii::app()->createUrl('producttype/getsubproduct') ?>";
             var data = {type_id: type_id};
-            $.post(url, data, function (datas) {
+            $.post(url, data, function(datas) {
                 $("#boxsubproducttype").html(datas);
             });
         });
@@ -80,7 +80,7 @@ $this->widget('booster.widgets.TbSelect2', array(
         var subproducttype = $("#subproducttype").val();
         var url = "<?php echo Yii::app()->createUrl('centerstockproduct/getdata') ?>";
         var data = {type_id: type_id, subproducttype: subproducttype};
-        $.post(url, data, function (datas) {
+        $.post(url, data, function(datas) {
             $("#loading").html('');
             $("#showdata").html(datas);
         });

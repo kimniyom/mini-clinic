@@ -434,7 +434,7 @@ $Author = $MasuserModel->GetDetailUser($model->emp_id);
     function Setscreen() {
         var screen = $(window).height();
         //var contentboxsell = $("#content-boxsell").height();
-        var screenfull = (screen - 140);
+        var screenfull = (screen - 145);
         $("#p-left").css({'height': screenfull, 'overflow': 'auto', 'padding-bottom': '25px'});
         $("#p-right").css({'height': screenfull, 'overflow': 'auto', 'padding-bottom': '25px'});
         //$("#patientbox").css({'height': screenfull, 'background': '#00bca5', 'color': '#FFFFFF'});

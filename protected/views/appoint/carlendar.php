@@ -23,9 +23,8 @@ $this->breadcrumbs = array(
         <div class="col-md-4 col-lg-4">
             <p class="text-danger">*นัดลูกค้าคลิกที่ว่างในช่องวันที่</p>
             <p class="text-danger">*นัดลูกค้าได้เฉพาะสาขาที่ลูกค้าขึ้นทะเบียนไว้</p>
-            <button type="button" class="btn btn-danger">ทรีทเม็นท์</button>
-            <button type="button" class="btn btn-primary">นัดพบแพทย์</button>
-            <button type="button" class="btn btn-success">นัดหัตถการ</button>
+            <button type="button" class="btn btn-primary">นัดรักษาต่อ</button>
+            <button type="button" class="btn btn-success">นัดดูอาการ</button>
             <hr/>
             <div class="well well-sm" style="margin-bottom:0px;">
                 ค้นหาลูกค้า
@@ -34,10 +33,12 @@ $this->breadcrumbs = array(
                     <div class="col-sm-6 col-md-12 col-lg-12">
                         <input type="text" id="name" placeholder="ชื่อ" class="form-control input-sm"/>
                     </div>
+                </div>
+                <div class="row" style=" margin-top: 10px;">
                     <div class="col-sm-6 col-md-12 col-lg-12">
                         <div class="row">
                             <div class="col-md-9 col-lg-9">
-                                <input type="text" id="lname" placeholder="สกุล" class="form-control input-sm"/>
+                                <input type="text" id="lname" placeholder="หรือสกุล" class="form-control input-sm"/>
                             </div>
                             <div class="col-md-3 col-lg-3">
                                 <button type="button" class="btn btn-default btn-block btn-sm" onclick="searchpatient()"><i class="fa fa-search"></i></button>
@@ -46,7 +47,7 @@ $this->breadcrumbs = array(
                     </div>
                 </div>
             </div>
-            <div class="well">
+            <div class="well" style=" margin-top: 10px;">
                 <div id="patient"></div>
             </div>
         </div>
@@ -115,7 +116,7 @@ $this->breadcrumbs = array(
                     <div class="col-lg-12">
                         ประเภทนัด *
                         <?php
-                        $Type = array("1" => "นัดหัตถการ", "2" => "นัดพบแพทย์", "3" => "ทรีทเม็นท์");
+                        $Type = array("2" => "นัดรักษาต่อ", "3" => "นัดดูอาการ");
                         $this->widget(
                                 'booster.widgets.TbSelect2', array(
                             'name' => 'type',

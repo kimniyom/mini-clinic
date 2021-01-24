@@ -885,596 +885,598 @@ if ($model['sex'] == "M") {
 
 <script type="text/javascript" charset="utf-8" src="<?= Yii::app()->baseUrl; ?>/js/patientview.js"></script>
 <script type="text/javascript">
-                    reloadseqemployee();
-                    setScreen();
-                    loaddetaildrug();
-                    popuphome(1);
-                    sumAll();
-                    getAppoint();
-                    var socket = io.connect('<?php echo $config->LinkNode() ?>');
+                        reloadseqemployee();
+                        setScreen();
+                        loaddetaildrug();
+                        popuphome(1);
+                        sumAll();
+                        getAppoint();
+                        var socket = io.connect('<?php echo $config->LinkNode() ?>');
 
-                    function reloadclient() {
-                        nodeloadtable();
-                    }
+                        function reloadclient() {
+                            nodeloadtable();
+                        }
 
-                    function reloadseqemployee() {
-                        var url = "<?php echo Yii::app()->createUrl('queue/getdata') ?>";
-                        var id = "seqemployeeramet";
-                        var data = {
-                            a: 1
-                        };
-                        $.post(url, data, function(datas) {
-                            socket.emit(id, datas);
-                            //ReautoloadseqDoctor();
-                            //loadservicesuccess();
-                        });
-                    }
-
-                    function nodeloadtable() {
-                        var url = "<?php echo Yii::app()->createUrl('queue/getdata') ?>";
-                        var id = "seqemployeeramet";
-                        var data = {
-                            a: 1
-                        };
-                        $.post(url, data, function(datas) {
-                            socket.emit(id, datas);
-                            ReautoloadseqDoctor();
-                            loadservicesuccess();
-                        });
-                    }
-
-                    function ReautoloadseqDoctor() {
-                        var url = "<?php echo Yii::app()->createUrl('queue/seqdoctor') ?>";
-                        var id = "seqemployeedoctorramet";
-                        var data = {
-                            a: 1
-                        };
-                        $.post(url, data, function(datas) {
-                            //$("#resultservice").html(datas);
-                            socket.emit(id, datas, function(success) {
-                                if (success == true) {
-                                    loadservicesuccess();
-                                }
+                        function reloadseqemployee() {
+                            var url = "<?php echo Yii::app()->createUrl('queue/getdata') ?>";
+                            var id = "seqemployeeramet";
+                            var data = {
+                                a: 1
+                            };
+                            $.post(url, data, function(datas) {
+                                socket.emit(id, datas);
+                                //ReautoloadseqDoctor();
+                                //loadservicesuccess();
                             });
+                        }
 
-                            //window.close();
-                        });
-                    }
-
-
-                    //สั่งหน้าจอ seqemployee ทำงาน ในส่งน function loadservicesuccess
-                    function loadservicesuccess() {
-                        var url = "<?php echo Yii::app()->createUrl('queue/getservicesuccess') ?>";
-                        var data = {
-                            a: 1
-                        };
-                        var id = "seqsuccessramet";
-                        $.post(url, data, function(datas) {
-                            //alert('success');
-                            //$("#servicesuccess").html(datas);
-                            socket.emit(id, datas, function(success) {
-                                if (success == true) {
-                                    closewindow();
-                                }
-                                //console.log(success);
-                                //$("#btn-confirm").hide();
-                                //$("#btn-close").show();
+                        function nodeloadtable() {
+                            var url = "<?php echo Yii::app()->createUrl('queue/getdata') ?>";
+                            var id = "seqemployeeramet";
+                            var data = {
+                                a: 1
+                            };
+                            $.post(url, data, function(datas) {
+                                socket.emit(id, datas);
+                                ReautoloadseqDoctor();
+                                loadservicesuccess();
                             });
+                        }
 
-                            //closewindow();
+                        function ReautoloadseqDoctor() {
+                            var url = "<?php echo Yii::app()->createUrl('queue/seqdoctor') ?>";
+                            var id = "seqemployeedoctorramet";
+                            var data = {
+                                a: 1
+                            };
+                            $.post(url, data, function(datas) {
+                                //$("#resultservice").html(datas);
+                                socket.emit(id, datas, function(success) {
+                                    if (success == true) {
+                                        loadservicesuccess();
+                                    }
+                                });
+
+                                //window.close();
+                            });
+                        }
+
+
+                        //สั่งหน้าจอ seqemployee ทำงาน ในส่งน function loadservicesuccess
+                        function loadservicesuccess() {
+                            var url = "<?php echo Yii::app()->createUrl('queue/getservicesuccess') ?>";
+                            var data = {
+                                a: 1
+                            };
+                            var id = "seqsuccessramet";
+                            $.post(url, data, function(datas) {
+                                //alert('success');
+                                //$("#servicesuccess").html(datas);
+                                socket.emit(id, datas, function(success) {
+                                    if (success == true) {
+                                        closewindow();
+                                    }
+                                    //console.log(success);
+                                    //$("#btn-confirm").hide();
+                                    //$("#btn-close").show();
+                                });
+
+                                //closewindow();
+                            });
+                        }
+
+                        function closewindow() {
+                            window.close();
+                        }
+
+                        function setScreen() {
+                            var h = window.innerHeight;
+                            $("#popupaddservice").css({
+                                'min-height': h - 40,
+                                'width': '95%',
+                                'padding': '10px',
+                                'top': '20px'
+                            });
+                            $("#popupadddrug").css({
+                                'min-height': h - 60,
+                                'height': h - 20,
+                                'width': '95%',
+                                'padding': '10px',
+                                'top': '10px'
+                            });
+                        }
+
+                        function openpopupservice() {
+                            $("#typeEnter").val(2);
+                            var url = "<?php echo Yii::app()->createUrl('service/checkdetail') ?>";
+                            var serviceId = "<?php echo $service_id ?>";
+                            var data = {
+                                service_id: serviceId
+                            };
+                            $.post(url, data, function(datas) {
+
+                                if (datas.detail) {
+                                    $('#service_detail').textbox({
+                                        value: datas.detail
+                                    });
+                                    $('#service_comment').textbox({
+                                        value: datas.comment
+                                    });
+                                    $('#service_diag').textbox({
+                                        value: datas.diag
+                                    });
+                                    $('#service_procedure').textbox({
+                                        value: datas.procedure
+                                    });
+                                    $("#service_price").numberbox({
+                                        value: datas.price
+                                    });
+                                    $("#btn-save").hide();
+                                    $("#btn-update").show();
+                                    $('#popupaddservice').dialog('open');
+                                } else {
+                                    resetserviceDetail();
+                                    $("#btn-update").hide();
+                                    $("#btn-save").show();
+                                    $('#popupaddservice').dialog('open');
+
+                                    $('#service_detail').textbox('clear').textbox('textbox').focus();
+                                }
+                            }, 'json');
+                            //$('#popupaddservice').dialog('open');
+                        }
+
+                        function checkDetailService() {
+                            var url = "<?php echo Yii::app()->createUrl('service/checkdetail') ?>";
+                            var serviceId = "<?php echo $service_id ?>";
+                            var data = {
+                                service_id: serviceId
+                            };
+                            $.post(url, data, function(datas) {
+                                if (datas.detail) {
+                                    $('#service_detail').textbox({
+                                        value: datas.detail
+                                    });
+                                    $('#service_comment').textbox({
+                                        value: datas.comment
+                                    });
+                                    $('#service_diag').textbox({
+                                        value: datas.diag
+                                    });
+                                    $('#service_procedure').textbox({
+                                        value: datas.procedure
+                                    });
+                                    $("#service_price").numberbox({
+                                        value: datas.price
+                                    });
+
+                                    //เก็บลงในใบส่งตัว
+                                    $("#_history").val(datas.detail);
+                                    $("#_diag").val(datas.diag);
+                                }
+                            }, 'json');
+                        }
+
+
+                        $('#popupaddservice').window({
+                            collapsible: false,
+                            minimizable: false,
+                            maximizable: false,
+                            resizeable: false
                         });
-                    }
 
-                    function closewindow() {
-                        window.close();
-                    }
-
-                    function setScreen() {
-                        var h = window.innerHeight;
-                        $("#popupaddservice").css({
-                            'min-height': h - 40,
-                            'width': '95%',
-                            'padding': '10px',
-                            'top': '20px'
+                        $("#popupadddrug").window({
+                            collapsible: false,
+                            minimizable: false,
+                            maximizable: false,
+                            resizeable: false
                         });
-                        $("#popupadddrug").css({
-                            'min-height': h - 60,
-                            'height': h - 20,
-                            'width': '95%',
-                            'padding': '10px',
-                            'top': '10px'
-                        });
-                    }
 
-                    function openpopupservice() {
-                        $("#typeEnter").val(2);
-                        var url = "<?php echo Yii::app()->createUrl('service/checkdetail') ?>";
-                        var serviceId = "<?php echo $service_id ?>";
-                        var data = {
-                            service_id: serviceId
-                        };
-                        $.post(url, data, function(datas) {
-
-                            if (datas.detail) {
-                                $('#service_detail').textbox({
-                                    value: datas.detail
-                                });
-                                $('#service_comment').textbox({
-                                    value: datas.comment
-                                });
-                                $('#service_diag').textbox({
-                                    value: datas.diag
-                                });
-                                $('#service_procedure').textbox({
-                                    value: datas.procedure
-                                });
-                                $("#service_price").numberbox({
-                                    value: datas.price
-                                });
-                                $("#btn-save").hide();
-                                $("#btn-update").show();
-                                $('#popupaddservice').dialog('open');
-                            } else {
-                                resetserviceDetail();
-                                $("#btn-update").hide();
-                                $("#btn-save").show();
-                                $('#popupaddservice').dialog('open');
-
-                                $('#service_detail').textbox('clear').textbox('textbox').focus();
+                        function popuphome() {
+                            var popup = "<?php echo $service['popup'] ?>";
+                            if (popup != 1) {
+                                $('#popuphomepage').modal();
                             }
-                        }, 'json');
-                        //$('#popupaddservice').dialog('open');
-                    }
-
-                    function checkDetailService() {
-                        var url = "<?php echo Yii::app()->createUrl('service/checkdetail') ?>";
-                        var serviceId = "<?php echo $service_id ?>";
-                        var data = {
-                            service_id: serviceId
-                        };
-                        $.post(url, data, function(datas) {
-                            if (datas.detail) {
-                                $('#service_detail').textbox({
-                                    value: datas.detail
-                                });
-                                $('#service_comment').textbox({
-                                    value: datas.comment
-                                });
-                                $('#service_diag').textbox({
-                                    value: datas.diag
-                                });
-                                $('#service_procedure').textbox({
-                                    value: datas.procedure
-                                });
-                                $("#service_price").numberbox({
-                                    value: datas.price
-                                });
-
-                                //เก็บลงในใบส่งตัว
-                                $("#_history").val(datas.detail);
-                                $("#_diag").val(datas.diag);
-                            }
-                        }, 'json');
-                    }
-
-
-                    $('#popupaddservice').window({
-                        collapsible: false,
-                        minimizable: false,
-                        maximizable: false,
-                        resizeable: false
-                    });
-
-                    $("#popupadddrug").window({
-                        collapsible: false,
-                        minimizable: false,
-                        maximizable: false,
-                        resizeable: false
-                    });
-
-                    function popuphome() {
-                        var popup = "<?php echo $service['popup'] ?>";
-                        if (popup != 1) {
-                            $('#popuphomepage').modal();
-                        }
-                        checkDetailService();//เช็คข้อมูลการรักษา
-                    }
-
-                    function savePopup() {
-                        var url = "<?php echo Yii::app()->createUrl('service/savepopup') ?>";
-                        var serviceId = "<?php echo $service_id ?>";
-                        var data = {
-                            service_id: serviceId
-                        };
-                        $.post(url, data, function(datas) {
-                            window.location.reload();
-                        });
-                    }
-
-                    function remedDrug(serviceId) {
-                        var url = "<?php echo Yii::app()->createUrl('patientdrug/remed') ?>";
-                        var serviceIdNew = "<?php echo $service_id ?>";
-                        var data = {
-                            service_id: serviceId,
-                            service_id_new: serviceIdNew
-                        };
-                        $.post(url, data, function(datas) {
-                            //alert(datas)
-                            //sweetAlert("Warning...", datas, "warning");
-                            if (datas != 0) {
-                                swal({
-                                    title: datas,
-                                    type: "warning",
-                                    showCancelButton: false,
-                                    confirmButtonText: "OK",
-                                    closeOnConfirm: false
-                                });
-                            }
-                            loaddetaildrug();
-                            //window.location.reload();
-                        }, 'json');
-                        $("#popupServiceRemet").modal("hide");
-                        var t = $('#druginsert').combogrid('textbox').focus();
-                        t.focus();
-                    }
-
-                    function ConfirmOrderDrug() {
-                        var sumprictdrug = $("#sumprictdrug").val();
-                        var countDrug = $("#countdrug").val();
-                        var service_procedure = $("#service_procedure").val();
-                        //if(countDrug <= 0){
-                        //sweetAlert("Warning...", "ยังไม่มีรายการยา!", "warning");
-                        //return false;
-                        //}
-                        if (sumprictdrug == "") {
-                            //alert("กรุณากรอกราคายา...");
-                            sweetAlert("Warning...", "กรุณากรอกราคายา / ค่ารักษา!", "warning");
-                            return false;
+                            checkDetailService();//เช็คข้อมูลการรักษา
                         }
 
-                        var url = "<?php echo Yii::app()->createUrl('service/confirmpricedrug') ?>";
-                        var serviceId = "<?php echo $service_id ?>";
-                        var data = {
-                            service_id: serviceId,
-                            pricedrug: sumprictdrug,
-                            service_procedure: service_procedure
-                        };
-                        $.post(url, data, function(datas) {
-                            //loaddetaildrug();
-                            $('#popupadddrug').window('close');
-                            sumAll();
-                        });
-                    }
-
-                    function sumAll() {
-                        var serviceId = "<?php echo $service_id ?>";
-                        var data = {
-                            service_id: serviceId,
-                        };
-                        var url = "<?php echo Yii::app()->createUrl('service/sumservice') ?>";
-                        $.post(url, data, function(datas) {
-                            $("#sumTxt").text(datas);
-                        });
-                    }
-
-                    function popupAppoint() {
-                        var servicedetail = $("#service_detail").val();
-                        if (servicedetail == "") {
-                            //alert("ยังไม่ได้บันทึกประวัติการรักษา");
-                            sweetAlert("Opp...", "ยังไม่ได้บันทึกประวัติการรักษา!", "warning");
-                            return false;
-                        } else {
-                            $("#popupappoint").modal();
-                        }
-                    }
-
-                    function saveAppoint() {
-                        //var day = $("#appoint-day").val();
-                        //var month = $("#appoint-month").val();
-                        //var year = $("#appoint-year").val();
-                        //var appoint = (year + "-" + month + "-" + day);
-                        var appoint = $("#appoint").val();
-                        var appoint_detail = $("#appoint_detail").val();
-                        var appoint_hours = $("#appoint_hours").val();
-                        var appoint_minute = $("#appoint_minute").val();
-                        var serviceId = "<?php echo $service_id ?>";
-                        var url = "<?php echo Yii::app()->createUrl('service/saveappoint') ?>";
-                        var data = {
-                            service_id: serviceId,
-                            appoint: appoint,
-                            appoint_detail: appoint_detail,
-                            appoint_hours: appoint_hours,
-                            appoint_minute: appoint_minute
-                        };
-                        if (appoint == "") {
-                            sweetAlert("Oops...", "ยังไม่ได้เลือกวันนัด!", "warning");
-                            return false;
+                        function savePopup() {
+                            var url = "<?php echo Yii::app()->createUrl('service/savepopup') ?>";
+                            var serviceId = "<?php echo $service_id ?>";
+                            var data = {
+                                service_id: serviceId
+                            };
+                            $.post(url, data, function(datas) {
+                                window.location.reload();
+                            });
                         }
 
-                        $.post(url, data, function(datas) {
-                            if (datas == 1) {
-                                //alert("ลงวันนัดสำเร็จ");
-                                sweetAlert("Success...", "ลงวันนัดสำเร็จ!", "success");
-                                //$("#dateappoint").text(appoint);
-                                getAppoint();
-                                $("#popupappoint").modal("hide");
-                            } else {
-                                //alert("เกิดข้อผิดพลาด...");
-                                sweetAlert("Oops...", "เกิดข้อผิดพลาด!", "error");
+                        function remedDrug(serviceId) {
+                            var url = "<?php echo Yii::app()->createUrl('patientdrug/remed') ?>";
+                            var serviceIdNew = "<?php echo $service_id ?>";
+                            var data = {
+                                service_id: serviceId,
+                                service_id_new: serviceIdNew
+                            };
+                            $.post(url, data, function(datas) {
+                                //alert(datas)
+                                //sweetAlert("Warning...", datas, "warning");
+                                if (datas != 0) {
+                                    swal({
+                                        title: datas,
+                                        type: "warning",
+                                        showCancelButton: false,
+                                        confirmButtonText: "OK",
+                                        closeOnConfirm: false
+                                    });
+                                }
+                                loaddetaildrug();
+                                //window.location.reload();
+                            }, 'json');
+                            $("#popupServiceRemet").modal("hide");
+                            var t = $('#druginsert').combogrid('textbox').focus();
+                            t.focus();
+                        }
+
+                        function ConfirmOrderDrug() {
+                            var sumprictdrug = $("#sumprictdrug").val();
+                            var countDrug = $("#countdrug").val();
+                            var service_procedure = $("#service_procedure").val();
+                            //if(countDrug <= 0){
+                            //sweetAlert("Warning...", "ยังไม่มีรายการยา!", "warning");
+                            //return false;
+                            //}
+                            if (sumprictdrug == "") {
+                                //alert("กรุณากรอกราคายา...");
+                                sweetAlert("Warning...", "กรุณากรอกราคายา / ค่ารักษา!", "warning");
                                 return false;
                             }
-                        });
-                    }
 
-                    function getAppoint() {
-                        var serviceId = "<?php echo $service_id ?>";
-                        var data = {service_id: serviceId};
-                        var url = "<?php echo Yii::app()->createUrl('service/getappoint') ?>";
-                        $.post(url, data, function(res) {
-                            //console.log(res);
-                            $("#dateappoint").text(res);
-                        });
-                    }
-
-                    $(document).ready(function() {
-                        $("#appoint").val('<?php echo $service['appoint'] ?>');
-                        $("#appoint,#_datestart,#_dateend").datepicker({
-                            'locale': 'th',
-                            'autoclose': true,
-                            'format': 'yyyy-mm-dd',
-                            'todayHighlight': true,
-                            'startDate': new Date()
-                        });
-
-                        //$('#sumprictdrug').textbox('textbox').css({'font-size': '24px','color': 'red'});
-                        $('#druginsert').textbox('textbox').css({'font-size': '24px', 'color': 'blue'});
-                        var w = window.innerWidth;
-                        if (w < 768) {
-                            $("#drug-right").css({'padding': '0px'});
+                            var url = "<?php echo Yii::app()->createUrl('service/confirmpricedrug') ?>";
+                            var serviceId = "<?php echo $service_id ?>";
+                            var data = {
+                                service_id: serviceId,
+                                pricedrug: sumprictdrug,
+                                service_procedure: service_procedure
+                            };
+                            $.post(url, data, function(datas) {
+                                //loaddetaildrug();
+                                $('#popupadddrug').window('close');
+                                sumAll();
+                            });
                         }
 
-                        //$("#drug_number").textbox('textbox').css({'font-size': '24px','color': 'red'});
-                    });
+                        function sumAll() {
+                            var serviceId = "<?php echo $service_id ?>";
+                            var data = {
+                                service_id: serviceId,
+                            };
+                            var url = "<?php echo Yii::app()->createUrl('service/sumservice') ?>";
+                            $.post(url, data, function(datas) {
+                                $("#sumTxt").text(datas);
+                            });
+                        }
 
-                    /*
-                     $(document).keypress(function(event){
-                     var keycode = (event.keyCode ? event.keyCode : event.which);
-                     if(keycode == '13'){
-                     var typeEnter = $("#typeEnter").val();
-                     if(typeEnter == 1){
-                     saveDrug();
-                     }
+                        function popupAppoint() {
+                            var servicedetail = $("#service_detail").val();
+                            if (servicedetail == "") {
+                                //alert("ยังไม่ได้บันทึกประวัติการรักษา");
+                                sweetAlert("Opp...", "ยังไม่ได้บันทึกประวัติการรักษา!", "warning");
+                                return false;
+                            } else {
+                                $("#popupappoint").modal();
+                            }
+                        }
 
-                     if(typeEnter == 2){
-                     saveserviceDetail();
-                     }
-                     }
+                        function saveAppoint() {
+                            //var day = $("#appoint-day").val();
+                            //var month = $("#appoint-month").val();
+                            //var year = $("#appoint-year").val();
+                            //var appoint = (year + "-" + month + "-" + day);
+                            var appoint = $("#appoint").val();
+                            var appoint_detail = $("#appoint_detail").val();
+                            var appoint_hours = $("#appoint_hours").val();
+                            var appoint_minute = $("#appoint_minute").val();
+                            var serviceId = "<?php echo $service_id ?>";
+                            var patient_id = $("#patient_id").val();
+                            var url = "<?php echo Yii::app()->createUrl('service/saveappoint') ?>";
+                            var data = {
+                                service_id: serviceId,
+                                appoint: appoint,
+                                patient_id: patient_id,
+                                appoint_detail: appoint_detail,
+                                appoint_hours: appoint_hours,
+                                appoint_minute: appoint_minute
+                            };
+                            if (appoint == "") {
+                                sweetAlert("Oops...", "ยังไม่ได้เลือกวันนัด!", "warning");
+                                return false;
+                            }
+
+                            $.post(url, data, function(datas) {
+                                if (datas == 1) {
+                                    //alert("ลงวันนัดสำเร็จ");
+                                    sweetAlert("Success...", "ลงวันนัดสำเร็จ!", "success");
+                                    //$("#dateappoint").text(appoint);
+                                    getAppoint();
+                                    $("#popupappoint").modal("hide");
+                                } else {
+                                    //alert("เกิดข้อผิดพลาด...");
+                                    sweetAlert("Oops...", "เกิดข้อผิดพลาด!", "error");
+                                    return false;
+                                }
+                            });
+                        }
+
+                        function getAppoint() {
+                            var serviceId = "<?php echo $service_id ?>";
+                            var data = {service_id: serviceId};
+                            var url = "<?php echo Yii::app()->createUrl('service/getappoint') ?>";
+                            $.post(url, data, function(res) {
+                                //console.log(res);
+                                $("#dateappoint").text(res);
+                            });
+                        }
+
+                        $(document).ready(function() {
+                            $("#appoint").val('<?php echo $service['appoint'] ?>');
+                            $("#appoint,#_datestart,#_dateend").datepicker({
+                                'locale': 'th',
+                                'autoclose': true,
+                                'format': 'yyyy-mm-dd',
+                                'todayHighlight': true,
+                                'startDate': new Date()
+                            });
+
+                            //$('#sumprictdrug').textbox('textbox').css({'font-size': '24px','color': 'red'});
+                            $('#druginsert').textbox('textbox').css({'font-size': '24px', 'color': 'blue'});
+                            var w = window.innerWidth;
+                            if (w < 768) {
+                                $("#drug-right").css({'padding': '0px'});
+                            }
+
+                            //$("#drug_number").textbox('textbox').css({'font-size': '24px','color': 'red'});
+                        });
+
+                        /*
+                         $(document).keypress(function(event){
+                         var keycode = (event.keyCode ? event.keyCode : event.which);
+                         if(keycode == '13'){
+                         var typeEnter = $("#typeEnter").val();
+                         if(typeEnter == 1){
+                         saveDrug();
+                         }
+
+                         if(typeEnter == 2){
+                         saveserviceDetail();
+                         }
+                         }
 
 
-                     });
-                     */
+                         });
+                         */
 
-                    function saveDrug() {
-                        calculatorDrug();
-                        var url = "index.php?r=patientdrug/saveservicedrug";
-                        var druginsert = $('#druginsert').val();
-                        var drug_number = parseInt($('#drug_number').val());
-                        var pricedrug = $('#pricedrug').val();
-                        var pricedrugtotal = $("#pricedrugtotal").val();
-                        var patient_id = $("#patient_id").val();
-                        var service_id = $("#service_id").val();
-                        var stock = parseInt($("#stock").val());
-                        var drugvalue = $("#drugvalue").val();
-                        var drug_method = $("#drug_method").val();
-                        if (stock == "" || stock == "0") {
-                            alert("ไม่มีสินค้า");
-                            resetserviceDrug();
+                        function saveDrug() {
+                            calculatorDrug();
+                            var url = "?r=patientdrug/saveservicedrug";
+                            var druginsert = $('#druginsert').val();
+                            var drug_number = parseInt($('#drug_number').val());
+                            var pricedrug = $('#pricedrug').val();
+                            var pricedrugtotal = $("#pricedrugtotal").val();
+                            var patient_id = $("#patient_id").val();
+                            var service_id = $("#service_id").val();
+                            var stock = parseInt($("#stock").val());
+                            var drugvalue = $("#drugvalue").val();
+                            var drug_method = $("#drug_method").val();
+                            if (stock == "" || stock == "0") {
+                                alert("ไม่มีสินค้า");
+                                resetserviceDrug();
+                                var t = $('#druginsert').combogrid('textbox').focus();
+                                t.focus();
+                                return false;
+                            }
+
+                            if (drug_number > stock) {
+                                alert("สินค้ามีจำนวนไม่พอ");
+                                return false;
+                            }
+                            var data = {
+                                drug: drugvalue,
+                                number: drug_number,
+                                price: pricedrug,
+                                total: pricedrugtotal,
+                                service_id: service_id,
+                                patient_id: patient_id,
+                                drug_method: drug_method
+                            };
+                            //alert(druginsert + " | " + drug_number + " | " + pricedrug + "|" + pricedrugtotal);
+                            if (drugvalue == "") {
+                                var t = $('#druginsert').combogrid('textbox').focus();
+                                t.focus();
+                                sweetAlert("Oops...", "กรอกข้อมูล * ไม่ครบ!", "error");
+                                return false;
+                            }
+                            if (isNaN(drug_number)) {
+                                alert("กรุณาใส่จำนวน...");
+                                $('#drug_number').numberbox('clear').numberbox('textbox').focus();
+                                return false;
+                            }
+
+                            $.post(url, data, function(datas) {
+
+                                resetserviceDrug();
+                                //$("#popupadddrug").window('close');
+                                loaddetaildrug();
+                                var t = $('#druginsert').combogrid('textbox').focus();
+                                t.focus();
+                                //Success();
+                            });
+
+                        }
+
+                        function popupSavedrug() {
+                            $("#typeEnter").val(1);
+                            $('#popupadddrug').window('open');
                             var t = $('#druginsert').combogrid('textbox').focus();
                             t.focus();
-                            return false;
                         }
-
-                        if (drug_number > stock) {
-                            alert("สินค้ามีจำนวนไม่พอ");
-                            return false;
-                        }
-                        var data = {
-                            drug: drugvalue,
-                            number: drug_number,
-                            price: pricedrug,
-                            total: pricedrugtotal,
-                            service_id: service_id,
-                            patient_id: patient_id,
-                            drug_method: drug_method
-                        };
-                        //alert(druginsert + " | " + drug_number + " | " + pricedrug + "|" + pricedrugtotal);
-                        if (drugvalue == "") {
-                            var t = $('#druginsert').combogrid('textbox').focus();
-                            t.focus();
-                            sweetAlert("Oops...", "กรอกข้อมูล * ไม่ครบ!", "error");
-                            return false;
-                        }
-                        if (isNaN(drug_number)) {
-                            alert("กรุณาใส่จำนวน...");
-                            $('#drug_number').numberbox('clear').numberbox('textbox').focus();
-                            return false;
-                        }
-
-                        $.post(url, data, function(datas) {
-
-                            resetserviceDrug();
-                            //$("#popupadddrug").window('close');
-                            loaddetaildrug();
-                            var t = $('#druginsert').combogrid('textbox').focus();
-                            t.focus();
-                            //Success();
-                        });
-
-                    }
-
-                    function popupSavedrug() {
-                        $("#typeEnter").val(1);
-                        $('#popupadddrug').window('open');
-                        var t = $('#druginsert').combogrid('textbox').focus();
-                        t.focus();
-                    }
 
 
 //KEY
-                    document.addEventListener("keydown", function(event) {
-                        console.log(event.which);
-                        if (event.which == '13') {
-                            var typeEnter = $("#typeEnter").val();
-                            if (typeEnter == 1) {
-                                saveDrug();
+                        document.addEventListener("keydown", function(event) {
+                            console.log(event.which);
+                            if (event.which == '13') {
+                                var typeEnter = $("#typeEnter").val();
+                                if (typeEnter == 1) {
+                                    saveDrug();
+                                }
+
+                                if (typeEnter == 2) {
+                                    saveserviceDetail();
+                                }
                             }
 
-                            if (typeEnter == 2) {
-                                saveserviceDetail();
+                            if (event.which == '113') { //f2
+
+                                var typeEnter = $("#typeEnter").val();
+                                if (typeEnter == 1) {
+                                    getService();
+                                    //remedDrug('<?php //echo $lastService                                                              ?>');
+                                    //var t = $('#druginsert').combogrid('textbox').focus();
+                                    //t.focus();
+                                }
                             }
-                        }
 
-                        if (event.which == '113') { //f2
-
-                            var typeEnter = $("#typeEnter").val();
-                            if (typeEnter == 1) {
-                                getService();
-                                //remedDrug('<?php //echo $lastService                                                          ?>');
-                                //var t = $('#druginsert').combogrid('textbox').focus();
-                                //t.focus();
+                            if (event.which == '17') { //Ctrl
+                                var typeEnter = $("#typeEnter").val();
+                                if (typeEnter == 1) {
+                                    $("#sumprictdrug").focus();
+                                }
                             }
-                        }
-
-                        if (event.which == '17') { //Ctrl
-                            var typeEnter = $("#typeEnter").val();
-                            if (typeEnter == 1) {
-                                $("#sumprictdrug").focus();
-                            }
-                        }
-                    });
-
-                    function popupcertificate() {
-                        var card = "<?php echo $model['card'] ?>";
-                        var age = "<?php echo $Age ?>";
-                        if (card == "" || age == "") {
-                            alert("ข้อมูลผู้ป่วยไม่สมบูรณ์กรุณาอัพเดทข้อมูล...");
-                            return false;
-                        } else {
-                            $("#popupcertificate").modal();
-                        }
-                    }
-
-                    function saveCertificate(flag) {
-                        var url = "<?php echo Yii::app()->createUrl('service/savecertificate') ?>";
-                        var service_id = "<?php echo $service_id ?>";
-                        var patient_name = $("#_patientname").val();
-                        var card = $("#_id_card").val();
-                        var age = $("#_age").val();
-                        var comment = $("#_comment").val();
-                        var day = $("#_day").val();
-                        var datestart = $("#_datestart").val();
-                        var dateend = $("#_dateend").val();
-
-                        var id;
-                        if (flag == 1) {
-                            id = "<?php echo $certificate['id'] ?>";
-                        } else {
-                            id = "";
-                        }
-
-                        var data = {
-                            id: id,
-                            service_id: service_id,
-                            patient_name: patient_name,
-                            id_card: card,
-                            age: age,
-                            comment: comment,
-                            day: day,
-                            datestart: datestart,
-                            dateend: dateend,
-                            flag: flag
-                        };
-                        if (comment == "") {
-                            alert("กรุณากรอก * ให้ครบ");
-                            return false;
-                        } else {
-                            $.post(url, data, function(datas) {
-                                alert("บันทึกใบรับรองแพทย์สำเร็จ...");
-                                window.location.reload();
-                            });
-                        }
-                    }
-
-                    function popupRefer() {
-                        $("#popuprefer").modal();
-                    }
-
-                    function saveRefer(flag) {
-                        var url = "<?php echo Yii::app()->createUrl('service/saverefer') ?>";
-                        var service_id = "<?php echo $service_id ?>";
-                        var patient_name = $("#_refer_patientname").val();
-                        var age = $("#_refer_age").val();
-                        var sendto = $("#_sendto").val();
-                        var address = $("#_address").val();
-                        var phone = $("#_refer_phone").val();
-                        var sex = $("#_refer_sex").val();
-                        var history = $("#_history").val();
-                        var lab = $("#_lab").val();
-                        var diag = $("#_diag").val();
-                        var treat = $("#_treat").val();
-                        var etc = $("#_etc").val();
-                        var cause = $("#_cause").val();
-                        var id;
-                        if (flag == 1) {
-                            id = "<?php echo $refer['id'] ?>";
-                        } else {
-                            id = "";
-                        }
-
-                        var data = {
-                            id: id,
-                            service_id: service_id,
-                            patient_name: patient_name,
-                            age: age,
-                            tel: phone,
-                            sex: sex,
-                            address: address,
-                            sendto: sendto,
-                            history: history,
-                            lab: lab,
-                            diag: diag,
-                            treat: treat,
-                            etc: etc,
-                            cause: cause,
-                            flag: flag
-                        };
-                        if (sendto == "" || history == "" || diag == "" || treat == "") {
-                            alert("กรุณากรอก * ให้ครบ");
-                            return false;
-                        } else {
-                            $.post(url, data, function(datas) {
-                                alert("บันทึกใบส่งตัวสำเร็จ...");
-                                window.location.reload();
-                            });
-                        }
-                    }
-
-                    //Function ดึงวันที่ให้บริการย้อนหลังเพื่อ Remat ยา
-                    function getService() {
-                        $("#popupServiceRemet").modal();
-                        var url = "<?php echo Yii::app()->createUrl('service/getserviceremat') ?>";
-                        var patientId = "<?php echo $model['id'] ?>";
-                        var serviceId = "<?php echo $service_id ?>";
-                        var data = {patientId: patientId, serviceId: serviceId};
-                        $.post(url, data, function(res) {
-
-                            $("#bodySeviceRemet").html(res);
-                            //console.log(res);
                         });
-                    }
 
-                    //เรียกชื่อ
-                    function SendSeq(name) {
-                        socket.emit('seqramet', name, function(success) {});
-                    }
+                        function popupcertificate() {
+                            var card = "<?php echo $model['card'] ?>";
+                            var age = "<?php echo $Age ?>";
+                            if (card == "" || age == "") {
+                                alert("ข้อมูลผู้ป่วยไม่สมบูรณ์กรุณาอัพเดทข้อมูล...");
+                                return false;
+                            } else {
+                                $("#popupcertificate").modal();
+                            }
+                        }
+
+                        function saveCertificate(flag) {
+                            var url = "<?php echo Yii::app()->createUrl('service/savecertificate') ?>";
+                            var service_id = "<?php echo $service_id ?>";
+                            var patient_name = $("#_patientname").val();
+                            var card = $("#_id_card").val();
+                            var age = $("#_age").val();
+                            var comment = $("#_comment").val();
+                            var day = $("#_day").val();
+                            var datestart = $("#_datestart").val();
+                            var dateend = $("#_dateend").val();
+
+                            var id;
+                            if (flag == 1) {
+                                id = "<?php echo $certificate['id'] ?>";
+                            } else {
+                                id = "";
+                            }
+
+                            var data = {
+                                id: id,
+                                service_id: service_id,
+                                patient_name: patient_name,
+                                id_card: card,
+                                age: age,
+                                comment: comment,
+                                day: day,
+                                datestart: datestart,
+                                dateend: dateend,
+                                flag: flag
+                            };
+                            if (comment == "") {
+                                alert("กรุณากรอก * ให้ครบ");
+                                return false;
+                            } else {
+                                $.post(url, data, function(datas) {
+                                    alert("บันทึกใบรับรองแพทย์สำเร็จ...");
+                                    window.location.reload();
+                                });
+                            }
+                        }
+
+                        function popupRefer() {
+                            $("#popuprefer").modal();
+                        }
+
+                        function saveRefer(flag) {
+                            var url = "<?php echo Yii::app()->createUrl('service/saverefer') ?>";
+                            var service_id = "<?php echo $service_id ?>";
+                            var patient_name = $("#_refer_patientname").val();
+                            var age = $("#_refer_age").val();
+                            var sendto = $("#_sendto").val();
+                            var address = $("#_address").val();
+                            var phone = $("#_refer_phone").val();
+                            var sex = $("#_refer_sex").val();
+                            var history = $("#_history").val();
+                            var lab = $("#_lab").val();
+                            var diag = $("#_diag").val();
+                            var treat = $("#_treat").val();
+                            var etc = $("#_etc").val();
+                            var cause = $("#_cause").val();
+                            var id;
+                            if (flag == 1) {
+                                id = "<?php echo $refer['id'] ?>";
+                            } else {
+                                id = "";
+                            }
+
+                            var data = {
+                                id: id,
+                                service_id: service_id,
+                                patient_name: patient_name,
+                                age: age,
+                                tel: phone,
+                                sex: sex,
+                                address: address,
+                                sendto: sendto,
+                                history: history,
+                                lab: lab,
+                                diag: diag,
+                                treat: treat,
+                                etc: etc,
+                                cause: cause,
+                                flag: flag
+                            };
+                            if (sendto == "" || history == "" || diag == "" || treat == "") {
+                                alert("กรุณากรอก * ให้ครบ");
+                                return false;
+                            } else {
+                                $.post(url, data, function(datas) {
+                                    alert("บันทึกใบส่งตัวสำเร็จ...");
+                                    window.location.reload();
+                                });
+                            }
+                        }
+
+                        //Function ดึงวันที่ให้บริการย้อนหลังเพื่อ Remat ยา
+                        function getService() {
+                            $("#popupServiceRemet").modal();
+                            var url = "<?php echo Yii::app()->createUrl('service/getserviceremat') ?>";
+                            var patientId = "<?php echo $model['id'] ?>";
+                            var serviceId = "<?php echo $service_id ?>";
+                            var data = {patientId: patientId, serviceId: serviceId};
+                            $.post(url, data, function(res) {
+
+                                $("#bodySeviceRemet").html(res);
+                                //console.log(res);
+                            });
+                        }
+
+                        //เรียกชื่อ
+                        function SendSeq(name) {
+                            socket.emit('seqramet', name, function(success) {});
+                        }
 </script>

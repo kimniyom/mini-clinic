@@ -1,14 +1,14 @@
 <style type="text/css">
     table, td, th {
-      border: 1px solid black;
+        border: 1px solid black;
 
     }
 
     #tablelistorder tr th{
         background-color: #000000;
         white-space: nowrap;
-         border-collapse: collapse;
-         letter-spacing: 1pt;
+        border-collapse: collapse;
+        letter-spacing: 1pt;
     }
 
     #tablelistorder tr td{
@@ -73,7 +73,7 @@ $ItemModel = new CenterStockitem();
                     </button>
                 </a>
             </div>
-            <div class="col-md-3 col-lg-3 col-sm-6" style=" margin-bottom: 5px;">
+            <div class="col-md-3 col-lg-3 col-sm-6" style=" margin-bottom: 5px; display: none;">
                 <a href="<?php echo Yii::app()->createUrl('orders/bill', array("order_id" => $order_id)) ?>" target="_blank">
                     <button type="button" class="btn btn-default btn-block">
                         <i class="fa fa-print"></i> พิมพ์ใบส่งของ
@@ -83,10 +83,10 @@ $ItemModel = new CenterStockitem();
             <div class="col-md-3 col-lg-3 col-sm-6" style=" margin-bottom: 5px;">
                 <div class="dropdown">
                     <?php if ($order['status'] == '0') { ?>
-                    <button class="btn btn-danger btn-block" type="button" id="btnstatus" onclick="Confirmorder('<?php echo $order_id ?>')">
-                        ยืนยันการสั่งซื้อ
-                    </button>
-                <?php } ?>
+                        <button class="btn btn-danger btn-block" type="button" id="btnstatus" onclick="Confirmorder('<?php echo $order_id ?>')">
+                            ยืนยันการสั่งซื้อ
+                        </button>
+                    <?php } ?>
                 </div>
             </div>
         </div>
@@ -120,7 +120,7 @@ $ItemModel = new CenterStockitem();
                                 </tr>
                                 <tr>
                                     <td>
-                                        เลขประจำตัวผู้เสียภาษี : <?php echo($supplier['taxnumber']) ? $supplier['taxnumber'] : "-"; ?> 
+                                        เลขประจำตัวผู้เสียภาษี : <?php echo($supplier['taxnumber']) ? $supplier['taxnumber'] : "-"; ?>
                                     </td>
                                 </tr>
                                 <tr>
@@ -134,22 +134,22 @@ $ItemModel = new CenterStockitem();
                             <table id="box-ordercode">
                                 <tr>
                                     <td style=" text-align: center;" colspan="2" class="barcodes">
-                                        รหัสสั่งซื้อเลขที่ 
+                                        รหัสสั่งซื้อเลขที่
                                         <div style="text-align: center; margin-left: 10px;" id="<?php echo $order['order_id'] ?>"></div>
                                         <?php
                                         echo $order['order_id'];
                                         /*
-                                        $optionsArray = array(
-                                            'elementId' => $order['order_id'], 
-                                            'value' => $order['order_id'],
-                                            'type' => 'code39', 
-                                            'settings' => array(
-                                                'barWidth' => "1",
-                                                'barHeight' => "20",
-                                            ),
-                                        );
-                                        $this->widget('ext.Yii-Barcode-Generator.Barcode', $optionsArray);
-                                        */
+                                          $optionsArray = array(
+                                          'elementId' => $order['order_id'],
+                                          'value' => $order['order_id'],
+                                          'type' => 'code39',
+                                          'settings' => array(
+                                          'barWidth' => "1",
+                                          'barHeight' => "20",
+                                          ),
+                                          );
+                                          $this->widget('ext.Yii-Barcode-Generator.Barcode', $optionsArray);
+                                         */
                                         ?>
                                     </td>
                                 </tr>
@@ -162,8 +162,8 @@ $ItemModel = new CenterStockitem();
                     </div>
                 </div>
                 <hr/>
-            <label>สินค้า</label>
-            <p style="font-size:12px;">รายการสินค้าที่ระบุในใบสั่งซื้อ</p>
+                <label>สินค้า</label>
+                <p style="font-size:12px;">รายการสินค้าที่ระบุในใบสั่งซื้อ</p>
                 <div class="table-responsive">
                     <table style=" width: 100%;" class="" id="tablelistorder">
                         <thead>
@@ -179,123 +179,123 @@ $ItemModel = new CenterStockitem();
                             </tr>
                         </thead>
                         <tbody>
-        <?php
-        $sumproduct = 0;
-        $sumdistcount = 0;
-        $sumrow = 0;
-        $sumAll = 0;
-        $i = 0;
-        $taxresult = 0;
-        foreach ($orderlist as $rs):
-            $i++;
-            $sumrow = ($rs['costs'] * $rs['number']);
-            $sumAll = ($sumAll + $sumrow);
-            $sumproduct = ($sumproduct + $rs['pricetotal']);
-            $sumdistcount = ($sumdistcount + $rs['distcountprice']);
+                            <?php
+                            $sumproduct = 0;
+                            $sumdistcount = 0;
+                            $sumrow = 0;
+                            $sumAll = 0;
+                            $i = 0;
+                            $taxresult = 0;
+                            foreach ($orderlist as $rs):
+                                $i++;
+                                $sumrow = ((int) $rs['costs'] * (int) $rs['number']);
+                                $sumAll = ((int) $sumAll + (int) $sumrow);
+                                $sumproduct = ((int) $sumproduct + (int) $rs['pricetotal']);
+                                $sumdistcount = ((int) $sumdistcount + (int) $rs['distcountprice']);
 
-            //vat
-            if ($vat == 1) {
-                $tax = ($sumproduct * 7) / 100;
-                $taxresult = number_format($tax, 2);
-            } else if ($vat == 2) {
-                $tax = ($sumproduct * 7) / 107;
-                $taxresult = number_format($tax, 2);
-            } else {
-                $tax = 0;
-                $taxresult = 0;
-            }
-            ?>
-            <tr>
-                <td style="text-align: center;"><?php echo $i ?></td>
-                <td><?php echo $rs['product_id'] ?></td>
-                <td><?php echo $rs['product_nameclinic'] ?></td>
-                <td style=" text-align: center;">
-                    <?php echo number_format($rs['number']) ?>
-                    <?php if($order['status'] == "0"){ ?>
-                    <i class="fa fa-pencil text-warning" style=" cursor: pointer;" onclick="popupeditnumber('<?php echo $rs['id'] ?>', '<?php echo $rs['number'] ?>', '<?php echo $rs['product_id'] ?>','<?php echo $rs['distcountprice'] ?>')"></i>
-                <?php } ?>
-                </td>
-                <td style=" text-align: center;"><?php echo $rs['unitname'] ?></td>
-                <td style=" text-align: right;"><?php echo number_format($sumrow, 2) ?></td>
-                <td style=" text-align: right;"><?php echo ($rs['distcountprice']) ? $rs['distcountprice'] : "" ?></td>
-                <td style=" text-align: right;"><?php echo number_format($rs['pricetotal'], 2) ?></td>
-                
-            </tr>
-        <?php endforeach; ?>
-    </tbody>
-    <tfoot>
-        <tr>
-            <td colspan="6" rowspan="5" valign="top">
-                หมายเหตุ
-            </td>
-        </tr>
-        <tr>
-            <td style="text-align: right;">รวมเงิน</td>
-            <td style=" text-align: right;"><?php echo number_format($sumAll, 2) ?></td>
-           
-        </tr>
-        <tr>
-            <td style="text-align: right;">ส่วนลด</td>
-            <td style=" text-align: right;"><?php echo number_format($sumdistcount, 2) ?></td>
-           
-        </tr>
-        <tr>
-            <td style="text-align: right;">
-                <?php if ($vat == 2) { ?>
-                    ยอดก่อนรวมภาษี
-                <?php } else { ?>
-                    ยอดหลังหักส่วนลด
-                <?php } ?>
-            </td>
-            <td style=" text-align: right;">
-                <?php
-                if ($vat == 2) {
-                    echo number_format($sumproduct - $taxresult, 2);
-                } else {
-                    echo number_format($sumproduct, 2);
-                }
-                ?>
-            </td>
-           
-        </tr>
-        <tr>
-            <td style="text-align: right;">ภาษีมูลค่าเพิ่ม 7 %</td>
-            <td style=" text-align: right;">
-                <?php
-                echo $taxresult;
-                ?>
-            </td>
-            
-        </tr>
+                                //vat
+                                if ($vat == 1) {
+                                    $tax = ($sumproduct * 7) / 100;
+                                    $taxresult = number_format($tax, 2);
+                                } else if ($vat == 2) {
+                                    $tax = ($sumproduct * 7) / 107;
+                                    $taxresult = number_format($tax, 2);
+                                } else {
+                                    $tax = 0;
+                                    $taxresult = 0;
+                                }
+                                ?>
+                                <tr>
+                                    <td style="text-align: center;"><?php echo $i ?></td>
+                                    <td><?php echo $rs['product_id'] ?></td>
+                                    <td><?php echo $rs['product_nameclinic'] ?></td>
+                                    <td style=" text-align: center;">
+                                        <?php echo number_format($rs['number']) ?>
+                                        <?php if ($order['status'] == "0") { ?>
+                                            <i class="fa fa-pencil text-warning" style=" cursor: pointer;" onclick="popupeditnumber('<?php echo $rs['id'] ?>', '<?php echo $rs['number'] ?>', '<?php echo $rs['product_id'] ?>', '<?php echo $rs['distcountprice'] ?>')"></i>
+                                        <?php } ?>
+                                    </td>
+                                    <td style=" text-align: center;"><?php echo $rs['unitname'] ?></td>
+                                    <td style=" text-align: right;"><?php echo number_format($sumrow, 2) ?></td>
+                                    <td style=" text-align: right;"><?php echo ($rs['distcountprice']) ? $rs['distcountprice'] : "" ?></td>
+                                    <td style=" text-align: right;"><?php echo number_format($rs['pricetotal'], 2) ?></td>
 
-        <tr>
-            <td colspan="6" style=" text-align: center;background: #111111; padding: 10px 5px;">
-                <?php
-                //$pricetotal = number_format(($priceresult + $tax), 2);
-                if ($vat == 2) {
-                    $totalResult = $sumproduct;
-                } else {
-                    $totalResult = ($sumproduct + $taxresult);
-                }
-                $priceresult = $totalResult;
-                $pricetotal = number_format(($priceresult), 2);
-                $priceCovert = str_replace(",", "", $pricetotal);
-                if (substr($priceCovert, -2) == "00") {
-                    $priceCoverts = str_replace(".00", "", $priceCovert);
-                } else {
-                    $priceCoverts = $priceCovert;
-                }
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="6" rowspan="5" valign="top">
+                                    หมายเหตุ
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;">รวมเงิน</td>
+                                <td style=" text-align: right;"><?php echo number_format($sumAll, 2) ?></td>
 
-                echo "(" . $Thaibath->convert($priceCoverts) . ")";
-                ?>
-            </td>
-            <td style="background: #111111;text-align: right;">รวมเงินทั้งสิ้น</td>
-            <td style=" text-align: right; background: #111111;"><?php echo number_format(sprintf('%.2f', $priceCovert), 2); ?></td>
-            
-        </tr>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;">ส่วนลด</td>
+                                <td style=" text-align: right;"><?php echo number_format($sumdistcount, 2) ?></td>
 
-        <input type="hidden" name="priceresult" id="priceresult" value="<?php echo $priceresult ?>">
-    </tfoot>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;">
+                                    <?php if ($vat == 2) { ?>
+                                        ยอดก่อนรวมภาษี
+                                    <?php } else { ?>
+                                        ยอดหลังหักส่วนลด
+                                    <?php } ?>
+                                </td>
+                                <td style=" text-align: right;">
+                                    <?php
+                                    if ($vat == 2) {
+                                        echo number_format($sumproduct - $taxresult, 2);
+                                    } else {
+                                        echo number_format($sumproduct, 2);
+                                    }
+                                    ?>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;">ภาษีมูลค่าเพิ่ม 7 %</td>
+                                <td style=" text-align: right;">
+                                    <?php
+                                    echo $taxresult;
+                                    ?>
+                                </td>
+
+                            </tr>
+
+                            <tr>
+                                <td colspan="6" style=" text-align: center;background: #111111; padding: 10px 5px;">
+                                    <?php
+                                    //$pricetotal = number_format(($priceresult + $tax), 2);
+                                    if ($vat == 2) {
+                                        $totalResult = $sumproduct;
+                                    } else {
+                                        $totalResult = ((int) $sumproduct + (int) $taxresult);
+                                    }
+                                    $priceresult = $totalResult;
+                                    $pricetotal = number_format(($priceresult), 2);
+                                    $priceCovert = str_replace(",", "", $pricetotal);
+                                    if (substr($priceCovert, -2) == "00") {
+                                        $priceCoverts = str_replace(".00", "", $priceCovert);
+                                    } else {
+                                        $priceCoverts = $priceCovert;
+                                    }
+
+                                    echo "(" . $Thaibath->convert($priceCoverts) . ")";
+                                    ?>
+                                </td>
+                                <td style="background: #111111;text-align: right;">รวมเงินทั้งสิ้น</td>
+                                <td style=" text-align: right; background: #111111;"><?php echo number_format(sprintf('%.2f', $priceCovert), 2); ?></td>
+
+                            </tr>
+
+                        <input type="hidden" name="priceresult" id="priceresult" value="<?php echo $priceresult ?>">
+                        </tfoot>
                     </table>
                 </div>
             </div>
@@ -304,13 +304,13 @@ $ItemModel = new CenterStockitem();
     <div class="col-lg-3 col-md-3 col-sm-12">
         <h4 style="font-family: Th;">สถานะ</h4>
         <div class="well" style=" text-align: center; text-align: left;">
-                <?php if ($order['status'] == '0') { ?>
-                    <h4 style="font-family: Th;"><i class="fa fa-check text-success"></i> สร้างใบสั่งซื้อ</h4>
-                    <h4 style="font-family: Th;"><i class="fa fa-remove text-danger"></i> ยืนยันรายการ</h4>
-                <?php } else { ?>
-                    <h4 style="font-family: Th;"><i class="fa fa-check text-success"></i> สร้างใบสั่งซื้อ</h4>
-                    <h4 style="font-family: Th;"><i class="fa fa-check text-success"></i> ยืนยันรายการ</h4>
-                <?php } ?>
+            <?php if ($order['status'] == '0') { ?>
+                <h4 style="font-family: Th;"><i class="fa fa-check text-success"></i> สร้างใบสั่งซื้อ</h4>
+                <h4 style="font-family: Th;"><i class="fa fa-remove text-danger"></i> ยืนยันรายการ</h4>
+            <?php } else { ?>
+                <h4 style="font-family: Th;"><i class="fa fa-check text-success"></i> สร้างใบสั่งซื้อ</h4>
+                <h4 style="font-family: Th;"><i class="fa fa-check text-success"></i> ยืนยันรายการ</h4>
+            <?php } ?>
         </div>
     </div>
 </div>
@@ -338,7 +338,7 @@ $ItemModel = new CenterStockitem();
 </div><!-- /.modal -->
 
 <script type="text/javascript">
-    
+
 
     function printDiv(divName) {
         var printContents = document.getElementById(divName).innerHTML;
@@ -353,11 +353,11 @@ $ItemModel = new CenterStockitem();
 
     function Confirmorder(order_id) {
         var r = confirm("ตรวจสอบข้อมูลก่อนยืนยันรายการ หลังจากนี้จะไม่สมารถทำรายการได้...?");
-        if(r == true){
+        if (r == true) {
             var url = "<?php echo Yii::app()->createUrl('orders/confirmorder') ?>";
             var data = {order_id: order_id};
-            
-            $.post(url, data, function (datas) {
+
+            $.post(url, data, function(datas) {
                 window.location.reload();
             });
         }
@@ -367,7 +367,7 @@ $ItemModel = new CenterStockitem();
         var url = "<?php echo Yii::app()->createUrl('orders/updatestatus') ?>";
         var order_id = "<?php echo $order_id ?>";
         var data = {order_id: order_id, status: status};
-        $.post(url, data, function (datas) {
+        $.post(url, data, function(datas) {
             window.location.reload();
         });
 
@@ -399,12 +399,12 @@ $ItemModel = new CenterStockitem();
             return false;
         }
         var data = {order_id: order_id, distcount: distcount};
-        $.post(url, data, function (datas) {
+        $.post(url, data, function(datas) {
             window.location.reload();
         });
     }
 
-    function popupeditnumber(id, number, product_id,distcount) {
+    function popupeditnumber(id, number, product_id, distcount) {
         $("#popupeditnumber").modal();
         $("#newsnumber").val(number);
         $("#distcountrow").val(distcount);
@@ -418,8 +418,8 @@ $ItemModel = new CenterStockitem();
         var product_id = $("#product_id").val();
         var newsnumber = $("#newsnumber").val();
         var distcount = $("#distcountrow").val();
-        var data = {id: id, newsnumber: newsnumber, product_id: product_id,distcount};
-        $.post(url, data, function (datas) {
+        var data = {id: id, newsnumber: newsnumber, product_id: product_id, distcount};
+        $.post(url, data, function(datas) {
             window.location.reload();
         });
     }

@@ -402,12 +402,16 @@ class ServiceController extends Controller {
         $service_id = Yii::app()->request->getPost('service_id');
         $price_total = Yii::app()->request->getPost('price_total');
         $payment = Yii::app()->request->getPost('payment');
+
+        $Config = new Configweb_model();
+        $BillCode = "RE" . $Config->autoId("service", "billcode", 8);
         $user_id = Masuser::model()->find("id=:id", array(":id" => Yii::app()->user->id))['user_id'];
         $columns = array(
             "status" => "4",
             "user_bill" => $user_id,
             "price_total" => $price_total,
             "payment" => $payment,
+            "billcode" => $BillCode
         );
         Yii::app()->db->createCommand()
                 ->update("service", $columns, "id = '$service_id'");
@@ -505,6 +509,7 @@ class ServiceController extends Controller {
     public function actionSaveappoint() {
         $serviceid = Yii::app()->request->getPost('service_id');
         $appoint = Yii::app()->request->getPost('appoint');
+        $patient_id = Yii::app()->request->getPost('patient_id');
         $appoint_hours = Yii::app()->request->getPost('appoint_hours');
         $appoint_minute = Yii::app()->request->getPost('appoint_minute');
         $appoint_detail = Yii::app()->request->getPost('appoint_detail');
@@ -516,6 +521,23 @@ class ServiceController extends Controller {
         );
         $rs = Yii::app()->db->createCommand()
                 ->update("service", $columns, "id = '$serviceid'");
+        //ลงก่อนลงวันนัด
+        Yii::app()->db->createCommand()
+                ->delete("appoint", "patient_id = '$patient_id' AND service_id = '$serviceid' ");
+        //ลงวันนัด
+        $columnsAppoint = array(
+            "appoint" => $appoint,
+            "timeappoint" => $appoint_hours . ":" . $appoint_minute,
+            "branch" => 1,
+            "type" => 2,
+            "etc" => $appoint_detail,
+            "status" => 0,
+            "service_id" => $serviceid,
+            "patient_id" => $patient_id,
+            "create_date" => date("Y-m-d H:i:s")
+        );
+        Yii::app()->db->createCommand()
+                ->insert("appoint", $columnsAppoint);
         if ($rs) {
             echo "1";
         } else {

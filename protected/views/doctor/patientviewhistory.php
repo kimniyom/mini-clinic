@@ -104,7 +104,7 @@ if (isset($model['birth'])) {
     -->
     <div data-options="region:'west',split:false" title="เมนู" style="width:300px;background:url('<?php echo Yii::app()->baseUrl ?>/images/wave-background.png') top center;">
 
-        <div class="row" style=" margin: 0px;">
+        <div class="row" style=" margin: 0px; position: relative;">
             <div class="col-md-9 col-lg-9 col-sm-9 col-xs-9" style=" padding: 0px;">
                 <button type="button" class="btn btn-default btn-block" onclick="$('#popupadddrug').window('open')" id="btn-left" style=" padding-top: 20px; padding-bottom: 20px;"><i class="fa fa-medkit text-success"></i> จ่ายยา / สินค้า</button>
             </div>
@@ -120,29 +120,30 @@ if (isset($model['birth'])) {
                 <input type="hidden" id="price_total"/>
             </div>
         </div>
-        <?php
-        if ($flag == "counter") {
-            if ($Modelservice['status'] == "4") {
-                $link = Yii::app()->createUrl('service/bill', array("service_id" => $service_id, 'promotion' => $promotion));
-                ?>
-                <div class="row" style=" margin: 0px;">
-                    <div class="col-md-12 col-lg-12" style=" padding: 0px;"><button type="button" class="btn btn-info btn-block" style="border-radius: 0px; border: none; text-align: center;" id="btn-left" onclick="PopupCenter('<?php echo $link ?>', 'ใบเสร็จ')"><i class="fa fa-file fa-2x"></i> <br/>ใบเสร็จ</button></div>
-                </div>
-                <div class="row" style=" margin: 0px;">
-                    <div class="col-md-12 col-lg-12" style=" padding: 0px;"><button type="button" class="btn btn-danger btn-block" style="border-radius: 0px; border: none; text-align: center;" id="btn-left" onclick="closePage()"><i class="fa fa-file fa-2x"></i> <br/>ปิดหน้านี้</button></div>
-                </div>
-            <?php } else { ?>
-                <div class="row" style=" margin: 0px;">
-                    <div class="col-md-12 col-lg-12" style=" padding: 0px;"><button type="button" class="btn btn-info btn-block" style="border-radius: 0px; border: none;"  onclick="billfalse()"><i class="fa fa-file fa-2x"></i> <br/>ใบเสร็จ</button></div>
-                </div>
-                <div class="row" style=" margin: 0px;">
-                    <div class="col-md-12 col-lg-12" style=" padding: 0px;"><button type="button" class="btn btn-success btn-block" style="border-radius: 0px;" onclick="confirmservice()"><i class="fa fa-save fa-2x"></i> <br/>บันทึก</button></div>
-                </div>
-                <?php
+        <div style=" position: absolute; bottom: 0px; width: 100%;">
+            <?php
+            if ($flag == "counter") {
+                if ($Modelservice['status'] == "4") {
+                    $link = Yii::app()->createUrl('service/bill', array("service_id" => $service_id, 'promotion' => $promotion));
+                    ?>
+                    <div class="row" style=" margin: 0px;">
+                        <div class="col-md-12 col-lg-12" style=" padding: 0px;"><button type="button" class="btn btn-info btn-block" style="border-radius: 0px; border: none; text-align: center;" id="btn-left" onclick="PopupCenter('<?php echo $link ?>', 'ใบเสร็จ')"><i class="fa fa-file fa-2x"></i> <br/>ใบเสร็จ</button></div>
+                    </div>
+                    <div class="row" style=" margin: 0px;">
+                        <div class="col-md-12 col-lg-12" style=" padding: 0px;"><button type="button" class="btn btn-danger btn-block" style="border-radius: 0px; border: none; text-align: center;" id="btn-left" onclick="closePage()"><i class="fa fa-file fa-2x"></i> <br/>ปิดหน้านี้</button></div>
+                    </div>
+                <?php } else { ?>
+                    <div class="row" style=" margin: 0px;">
+                        <div class="col-md-12 col-lg-12" style=" padding: 0px;"><button type="button" class="btn btn-info btn-block" style="border-radius: 0px; border: none;"  onclick="billfalse()"><i class="fa fa-file fa-2x"></i> <br/>ใบเสร็จ</button></div>
+                    </div>
+                    <div class="row" style=" margin: 0px;">
+                        <div class="col-md-12 col-lg-12" style=" padding: 0px;"><button type="button" class="btn btn-success btn-block" style="border-radius: 0px;" onclick="confirmservice()"><i class="fa fa-save fa-2x"></i> <br/>บันทึก</button></div>
+                    </div>
+                    <?php
+                }
             }
-        }
-        ?>
-
+            ?>
+        </div>
     </div>
     <div data-options="region:'center',title:'ลูกค้า<?php echo ($promotiondetail) ? "(" . $promotiondetail . ")" : ""; ?>',iconCls:'icon-ok'">
         <div class="easyui-tabs" data-options="fit:true,border:false,plain:true" id="tt">
@@ -185,8 +186,8 @@ if (isset($model['birth'])) {
                                     <td style="color: <?php echo ($rs['type'] == 2) ? "red;font-size:24px;" : ""; ?>"><?php echo $rs['method'] ?></td>
                                     <td style=" text-align: center;"><?php echo $rs['number'] ?></td>
                                     <!--
-                                                                            <td style="text-align: right;">​<?php //echo number_format($rs['price'], 2)                                                                   ?></td>
-                                                                            <td style="text-align: right;">​<?php //echo number_format($rs['total'], 2)                                                                   ?></td>
+                                                                            <td style="text-align: right;">​<?php //echo number_format($rs['price'], 2)                                                                                                                            ?></td>
+                                                                            <td style="text-align: right;">​<?php //echo number_format($rs['total'], 2)                                                                                                                            ?></td>
                                     -->
                                     <td style="text-align: center;">
                                         <?php if ($rs['type'] == 2) { ?>
@@ -219,39 +220,53 @@ if (isset($model['birth'])) {
                             </tr>
                             <tr>
                                 <td colspan="5" style="background: #FFFFFF;">
-                                    ใบรับรองแพทย์
-                                    <?php
-                                    if ($certifiate) {
-                                        $linkcertificate = $link = Yii::app()->createUrl('doctor/printcetificate', array("service_id" => $service_id));
-                                        ?>
-                                        <button type="button" class="btn btn-success" onclick="PopupCenter('<?php echo $linkcertificate ?>', 'ใบรับรองแพทย์')">พิพม์ใบรับรองแพทย์</button>
-                                    <?php } else { ?>
-                                        <button type="button" class="btn btn-warning" onclick="createCer()">ออกใบรับรองแพทย์</button>
-                                    <?php } ?>
-                                    <br/>
-                                    ใบส่งตัวรักษาต่อ
-                                    <?php
-                                    if ($refer) {
-                                        $linkrefer = $link = Yii::app()->createUrl('doctor/printrefer', array("service_id" => $service_id));
-                                        ?>
-                                        <button type="button" class="btn btn-info" onclick="PopupCenter('<?php echo $linkrefer ?>', 'ใบรับรองแพทย์')">พิพม์ใบส่งตัว</button>
-                                    <?php } else { ?>
-                                        -
-                                    <?php } ?>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div style=" float: left; width: 100px;">ใบรับรองแพทย์</div>
+                                            <div style=" float: left; margin-left: 10px;">
+                                                <?php
+                                                if ($certifiate) {
+                                                    $linkcertificate = $link = Yii::app()->createUrl('doctor/printcetificate', array("service_id" => $service_id));
+                                                    ?>
+                                                    <button type="button" class="btn btn-default" style=" width: 150px;font-size: 18px; padding: 4px; text-align: left; font-weight: bold;" onclick="PopupCenter('<?php echo $linkcertificate ?>', 'ใบรับรองแพทย์')"><i class="fa fa-print"></i> พิพม์ใบรับรองแพทย์</button>
+                                                <?php } else { ?>
+                                                    <button type="button" class="btn btn-default" style=" width: 150px;font-size: 18px; padding: 4px; text-align: left; font-weight: bold;" onclick="createCer()"><i class="fa fa-plus"></i> ออกใบรับรองแพทย์</button>
+                                                <?php } ?>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row" style=" margin-top: 10px;">
+                                        <div class="col-md-12">
+                                            <div style=" float: left; width: 100px;">ใบส่งตัวรักษาต่อ</div>
+                                            <div style=" float: left; margin-left: 10px;">
+                                                <?php
+                                                if ($refer) {
+                                                    $linkrefer = $link = Yii::app()->createUrl('doctor/printrefer', array("service_id" => $service_id));
+                                                    ?>
+                                                    <button type="button" class="btn btn-default" style=" width: 150px;font-size: 18px; padding: 4px;text-align: left;font-weight: bold;" onclick="PopupCenter('<?php echo $linkrefer ?>', 'ใบรับรองแพทย์')"><i class="fa fa-print"></i> พิพม์ใบส่งตัว</button>
+                                                <?php } else { ?>
+                                                    -
+                                                <?php } ?>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </td>
                             </tr>
                             <tr>
                                 <th colspan="5">
-                                    ราคายา
+                                    <div style=" float: left;">รวมค่ารักษา</div>
                                     <input type="text" id="sumpricedrug" value="<?php echo $sumserVice ?>" onKeyUp="if (this.value * 1 != this.value)
-                                                this.value = '';" >
-                                    <button class="btn btn-primary" onclick="editpriceDrug()"><i class="fa fa-pencil"></i> แก้ไข</button> <font id="status"></font>
-                                    <br/>
-                                    วิธีชำระเงิน
-                                    <ul>
-                                        <li><input type="radio" name="payment" value="1" <?php echo ($service['payment'] == "1") ? "checked='checked'" : ""; ?>/> เงินสด</li>
-                                        <li><input type="radio" name="payment" value="2" <?php echo ($service['payment'] == "2") ? "checked='checked'" : ""; ?>/> เงินโอน</li>
-                                    </ul>
+                                                this.value = '';" style=" float: left;  margin-left: 10px; margin-right: 10px; text-align: center; color: #ff0000;">
+                                    <button class="btn btn-primary" onclick="editpriceDrug()" style=" margin-top: 0px; float: left; font-size: 18px; padding: 4px;"><i class="fa fa-pencil"></i> ปรับราคาค่ารักษา</button> <font id="status"></font>
+                                    <div style=" clear: both">
+
+                                        วิธีชำระเงิน
+                                        <ul>
+                                            <li><input type="radio" name="payment" value="1" <?php echo ($service['payment'] == "1") ? "checked='checked'" : ""; ?>/> เงินสด</li>
+                                            <li><input type="radio" name="payment" value="2" <?php echo ($service['payment'] == "2") ? "checked='checked'" : ""; ?>/> เงินโอน</li>
+                                        </ul>
+                                    </div>
                                 </th>
                             </tr>
                         </tfoot>
@@ -565,8 +580,6 @@ if (isset($model['birth'])) {
         </div>
     </div>
 </div>
-
-
 
 <script>
     function loadimages() {

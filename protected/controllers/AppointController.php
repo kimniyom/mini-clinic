@@ -307,7 +307,6 @@ class AppointController extends Controller {
     }
 
     public function actionAddeven() {
-
         $Masuser = new Masuser();
         $Profile = $Masuser->GetProfile();
 
@@ -317,6 +316,11 @@ class AppointController extends Controller {
         $type = Yii::app()->request->getPost('type');
         $branch = Yii::app()->request->getPost('branch');
         $etc = Yii::app()->request->getPost('etc');
+        $patientId = $PatientModel['id'];
+        //Update สถานะก่อนหน้าก่อน
+        Yii::app()->db->createCommand()
+                ->update("appoint", array("status" => 1), "patient_id = '$patientId'");
+
         $columns = array(
             "appoint" => $appoint,
             "type" => $type,

@@ -55,7 +55,7 @@ $(document).ready(function() {
 });
 
 function checkstock(productid) {
-    var url = "index.php?r=patientdrug/checkstock";
+    var url = "?r=patientdrug/checkstock";
     var data = {product_id: productid};
     $.post(url, data, function(datas) {
         $("#stock").numberbox({value: datas.stock});
@@ -69,14 +69,14 @@ function openpopupservicedetail() {
 
 function getdetailservice() {
     var service_id = $("#service_id").val();
-    var url = 'index.php?r=doctor/getdetailserviceview&service_id=' + service_id;
+    var url = '?r=doctor/getdetailserviceview&service_id=' + service_id;
     $('#bodydetailservice').load(url);
 }
 
 
 /*Diag*/
 function getpricediag(id) {
-    var url = "index.php?r=patientdiag/getpricediag";
+    var url = "?r=patientdiag/getpricediag";
     var data = {id: id};
     $.post(url, data, function(datas) {
         //alert(datas);
@@ -88,7 +88,7 @@ function getpricediag(id) {
 
 /*
  function loaddiag() {
- var url = "index.php?r=patientdiag/getdiag";
+ var url = "?r=patientdiag/getdiag";
  var patient_id = $("#patient_id").val();
  var data = {patient_id: patient_id};
 
@@ -105,12 +105,12 @@ function openpopupservicediag() {
 
 function loaddetaildiag() {
     var service_id = $("#service_id").val();
-    var url = 'index.php?r=patientdiag/getdetaildiagview&service_id=' + service_id;
+    var url = '?r=patientdiag/getdetaildiagview&service_id=' + service_id;
     $('#bodydiagservice').load(url);
 }
 
 function deletediagservice(id) {
-    var url = "index.php?r=patientdiag/deletediagservice";
+    var url = "?r=patientdiag/deletediagservice";
     var data = {id: id};
     $.post(url, data, function(datas) {
         loaddetaildiag();
@@ -118,7 +118,7 @@ function deletediagservice(id) {
 }
 
 function loaddrug() {
-    var url = "index.php?r=patientdrug/getdrugview";
+    var url = "?r=patientdrug/getdrugview";
     var patient_id = $("#patient_id").val();
     var data = {patient_id: patient_id};
 
@@ -129,7 +129,7 @@ function loaddrug() {
 
 
 function loaddisease() {
-    var url = "index.php?r=patientdisease/getdiseaseview";
+    var url = "?r=patientdisease/getdiseaseview";
     var patient_id = $("#patient_id").val();
     var data = {patient_id: patient_id};
 
@@ -146,7 +146,7 @@ function popupcheckbody(pid, name, lname) {
 }
 
 function loadcheckbody() {
-    var url = "index.php?r=checkbody/check";
+    var url = "?r=checkbody/check";
     var patient_id = $("#patient_id").val();
     var data = {patient_id: patient_id};
 
@@ -161,7 +161,7 @@ function popuphistoryserviceall() {
 }
 
 function HistoryServiceAll() {
-    var url = "index.php?r=historyservice/historyall";
+    var url = "?r=historyservice/historyall";
     var patient_id = $("#patient_id").val();
     var data = {patient_id: patient_id};
     $.post(url, data, function(result) {
@@ -170,7 +170,7 @@ function HistoryServiceAll() {
 }
 
 function HistoryServiceAllmain() {
-    var url = "index.php?r=historyservice/historyallmain";
+    var url = "?r=historyservice/historyallmain";
     var patient_id = $("#patient_id").val();
     var data = {patient_id: patient_id};
     $.post(url, data, function(result) {
@@ -179,7 +179,7 @@ function HistoryServiceAllmain() {
 }
 
 function savediag() {
-    var url = "index.php?r=patientdiag/saveservicediag";
+    var url = "?r=patientdiag/saveservicediag";
     var diagcode = $("#diaginsert").val();
     var diagprice = $("#pricediag").val();
     var service_id = $("#service_id").val();
@@ -209,7 +209,7 @@ function resetformdiag() {
 }
 
 function saveserviceDetail() {
-    var url = "index.php?r=doctor/saveservicedetail";
+    var url = "?r=doctor/saveservicedetail";
     var patient_id = $("#patient_id").val();
     var detail = $("#service_detail").val();
     var comment = $("#service_comment").val();
@@ -241,7 +241,7 @@ function resetserviceDetail() {
 }
 
 function deletedetailservice(id) {
-    var url = "index.php?r=doctor/deletedetailservice";
+    var url = "?r=doctor/deletedetailservice";
     var data = {id: id};
     $.post(url, data, function(datas) {
         getdetailservice();
@@ -250,7 +250,7 @@ function deletedetailservice(id) {
 
 /*Drug Add*/
 function getpricedrug(productid) {
-    var url = "index.php?r=patientdrug/getpricedrug";
+    var url = "?r=patientdrug/getpricedrug";
     var data = {productid: productid};
     $.post(url, data, function(datas) {
         //alert(datas);
@@ -264,7 +264,7 @@ function getpricedrug(productid) {
 }
 
 function getdetaildrug(productid) {
-    var url = "index.php?r=patientdrug/getdetaildrug";
+    var url = "?r=patientdrug/getdetaildrug";
     var data = {productid: productid};
     $.post(url, data, function(datas) {
         $("#detaildrug").html(datas);
@@ -286,7 +286,7 @@ function openpopupservicedrug() {
 
 function loaddetaildrug() {
     var service_id = $("#service_id").val();
-    var url = 'index.php?r=patientdrug/getdetailservicedrugview&service_id=' + service_id;
+    var url = '?r=patientdrug/getdetailservicedrugview&service_id=' + service_id;
     $('#bodydrugservice').load(url);
 }
 
@@ -299,7 +299,7 @@ function resetserviceDrug() {
 
 function saveDrug() {
     calculatorDrug();
-    var url = "index.php?r=patientdrug/saveservicedrug";
+    var url = "?r=patientdrug/saveservicedrug";
     var druginsert = $('#druginsert').val();
     var drug_number = $('#drug_number').val();
     var pricedrug = $('#pricedrug').val();
@@ -339,12 +339,12 @@ function openpopupservicedetaildrug() {
 
 function loaddetaildrug() {
     var service_id = $("#service_id").val();
-    var url = 'index.php?r=patientdrug/getdetailservicedrugview&service_id=' + service_id;
+    var url = '?r=patientdrug/getdetailservicedrugview&service_id=' + service_id;
     $('#bodydrugservice').load(url);
 }
 
 function deletedrugservice(id) {
-    var url = "index.php?r=patientdrug/deletedrugservice";
+    var url = "?r=patientdrug/deletedrugservice";
     var data = {id: id};
     $.post(url, data, function(datas) {
         loaddetaildrug();
@@ -352,7 +352,7 @@ function deletedrugservice(id) {
 }
 
 function saveetc() {
-    var url = "index.php?r=doctor/saveetc";
+    var url = "?r=doctor/saveetc";
     var detail_etc = $('#detail_etc').val();
     var price_etc = $('#price_etc').val();
     var patient_id = $("#patient_id").val();
@@ -383,12 +383,12 @@ function openpopupservicedetailetc() {
 
 function loaddetailetc() {
     var service_id = $("#service_id").val();
-    var url = 'index.php?r=doctor/getdetailserviceetcview&service_id=' + service_id;
+    var url = '?r=doctor/getdetailserviceetcview&service_id=' + service_id;
     $('#bodyetcservice').load(url);
 }
 
 function deleteEtcService(id) {
-    var url = "index.php?r=doctor/deleteetcservice";
+    var url = "?r=doctor/deleteetcservice";
     var data = {id: id};
     $.post(url, data, function(datas) {
         loaddetailetc();
@@ -397,7 +397,7 @@ function deleteEtcService(id) {
 
 function loadhistory() {
     var patient_id = $("#patient_id").val();
-    var url = "index.php?r=patient/history";
+    var url = "?r=patient/history";
     var data = {patient_id: patient_id};
     $.post(url, data, function(result) {
         $("#history").html(result);
@@ -406,7 +406,7 @@ function loadhistory() {
 
 function sumservice() {
     var service_id = $("#service_id").val();
-    var url = "index.php?r=service/sumservice";
+    var url = "?r=service/sumservice";
     var data = {service_id: service_id};
     $.post(url, data, function(result) {
         $("#price_total").val(parseInt(result.replace(",", "")));
@@ -418,7 +418,7 @@ function confirmservice() {
     var service_id = $("#service_id").val();
     var price_total = $("#price_total").val();
     var payment = $('input[name=payment]:checked').val();
-    var url = "index.php?r=service/confirmservice";
+    var url = "?r=service/confirmservice";
     var data = {
         service_id: service_id,
         price_total: price_total,

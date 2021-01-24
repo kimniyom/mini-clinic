@@ -94,7 +94,7 @@ $Web = new Configweb_model();
                         'dayClick' => 'js:function(date, jsEvent, view) {
                 $("#date").val(date.format());
                 var ap_date = $("#date").val();
-                var url = "' . Yii::app()->createUrl("repair/create") . '&datealert="+ap_date
+                var url = "' . Yii::app()->createUrl("repair/create") . '?datealert="+ap_date
                 window.location=url;
         }',
                 )));
@@ -177,7 +177,7 @@ $Web = new Configweb_model();
         }
 
         var data = {id: id, price: price};
-        $.post(url, data, function (datas) {
+        $.post(url, data, function(datas) {
             window.location.reload();
         });
     }
@@ -188,7 +188,7 @@ $Web = new Configweb_model();
             var url = "<?php echo Yii::app()->createUrl('repair/deleteevent') ?>";
             var id = $("#repair_id").val();
             var data = {id: id};
-            $.post(url, data, function (datas) {
+            $.post(url, data, function(datas) {
                 window.location.reload();
             });
         }

@@ -46,14 +46,11 @@ $BranchModel = Branch::model()->find("id = '$branch'");
 <div class="panel panel-default" style=" margin-bottom: 0px;">
     <div class="panel-body" id="boxorders">
         <div style=" text-align: center;">
-            <h4 style=" margin-bottom: 0px;"><?php echo $BranchModel['branchname']; ?></h4><br/>
-            <?php echo $BranchModel['address']; ?><br/>
-            <?php echo $BranchModel['contact']; ?><br/>
             <h4 style=" margin: 0px;">ใบสั่งซื้อสินค้า</h4>
         </div>
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-6">
-                <table id="companysell">
+                <table >
                     <tr>
                         <td>ผู้ขาย : <?php echo $companySell['companyname'] ?></td>
                     </tr>
@@ -67,10 +64,12 @@ $BranchModel = Branch::model()->find("id = '$branch'");
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6">
                 <div style=" padding: 10px; position: relative; height: 100px;">
-                    <table style=" border: #cccccc solid 1px; float: right;">
-                        <tr style=" border-bottom: #cccccc solid 1px;">
-                            <td>รหัสสั่งซื้อเลขที่ : </td>
-                            <td><?php echo $order_id ?></td>
+                    <table style="float: right;">
+                        <tr>
+                            <td colspan="2" style=" text-align: center">
+                                รหัสสั่งซื้อเลขที่ <br/>
+                                <?php echo $order_id ?>
+                            </td>
                         </tr>
                         <tr>
                             <td>วันที่สั่งซื้อ : </td>
@@ -81,70 +80,52 @@ $BranchModel = Branch::model()->find("id = '$branch'");
             </div>
         </div>
     </div>
-    <hr/>
-    <div>
-        <label>ชื่อผู้ติดต่อ</label> <?php echo $BranchModel['menagers'] ?>
-        <label>โทรศัพท์</label> <?php echo $BranchModel['telmenager'] ?>
+    <div class="row">
+        <div class="col-md-4 col-lg-4">
+            <label>ภาษีมูลค่าเพิ่ม</label>
+            <select id="vat" class="form-control" onchange="loaddata()">
+                <option value="0" <?php echo ($order['vattype'] == 0) ? "selected" : "" ?>>ไม่มีภาษี</option>
+                <option value="1" <?php echo ($order['vattype'] == 1) ? "selected" : "" ?>>แยกภาษี 7%</option>
+                <option value="2" <?php echo ($order['vattype'] == 2) ? "selected" : "" ?>>รวมภาษี 7%</option>
+            </select>
+        </div>
     </div>
+
+    <hr/>
     <div class="well">
         <div class="row">
             <div class="col-md-6 col-lg-3">
-                <label for="">หมวดสินค้า*</label><br/>
+                <label for="">สินค้า*</label><br/>
                 <?php
                 $this->widget('booster.widgets.TbSelect2', array(
                     //'model' => $model,
                     'asDropDownList' => true,
                     //'attribute' => 'itemid',
-                    'name' => 'producttype',
-                    'id' => 'producttype',
-                    'data' => CHtml::listData(ProductType::model()->findAll("upper is null"), 'id', 'type_name'),
+                    'name' => 'product',
+                    'id' => 'product',
+                    'data' => CHtml::listData(ClinicStockproduct::model()->findAll(), 'product_id', 'product_name'),
                     //'value' => $model,
                     'options' => array(
                         'allowClear' => true,
                         //$model,
                         //'oid',
                         //'tags' => array('clever', 'is', 'better', 'clevertech'),
-                        'placeholder' => '== หมวดสินค้า ==',
+                        'placeholder' => '== รายการสินค้า ==',
                         'width' => '100%',
                     //'tokenSeparators' => array(',', ' ')
-                    )
+                    ),
                 ));
                 ?>
-            </div>
-            <div class="col-lg-3 col-md-6">
 
-                <div id="boxsubproducttype" style=" width: 100%;">
-                    <label for="">ประเภทสินค้า*</label>
-                    <select id="subproducttype" class="form-control">
-                        <option value=""></option>
-                    </select>
-                </div>
             </div>
 
-            <div class="col-lg-4 col-md-6">
-                <label for="">สินค้า*</label><br/>
-                <div id="boxproduct" style=" width: 100%;">
-                    <select id="product" class="form-control">
-                        <option value=""></option>
-                    </select>
-                </div>
-            </div>
-
-            <!--
-            <div class="col-lg-6">
-                <label for="">รหัสสินค้า*</label>
-                <input type="text" id="product_id" name="product_id" class="form-control" style="width:40%;" readonly="readonly"/>
-            </div>
-            -->
-        </div>
-        <div class="row">
             <div class="col-lg-2 col-md-6">
-                <label for="">จำนวน*</label><br/>
+                <label for="">จำนวน*<span id="unit"></span></label><br/>
                 <input type="text" class="form-control" id="number" value="1"/>
             </div>
-            <div class="col-md-3 col-lg-3">
-                <label for="">ส่วนลด%</label>
-                <input type="text" class="form-control" id="distcountpersent" value="0"/>
+            <div class="col-md-2 col-lg-2">
+                <label for="">ส่วนลด(บาท)</label>
+                <input type="text" class="form-control" id="distcountprice" value="0"/>
             </div>
             <div class="col-lg-1 col-md-2">
                 <button type="button" class="btn btn-block btn-success" style=" margin-top: 25px;" onclick="AddproductInlist()">เพิ่ม</button>
@@ -163,12 +144,12 @@ $BranchModel = Branch::model()->find("id = '$branch'");
 <script type="text/javascript">
     loaddata();
     $(document).ready(function() {
-        $("#producttype").change(function() {
-            var type_id = $("#producttype").val();
-            var url = "<?php echo Yii::app()->createUrl('producttype/getsubproduct') ?>";
-            var data = {type_id: type_id};
+        $("#product").change(function() {
+            var product_id = $("#product").val();
+            var data = {product_id: product_id};
+            var url = "<?php echo Yii::app()->createUrl('orders/detailproduct') ?>";
             $.post(url, data, function(datas) {
-                $("#boxsubproducttype").html(datas);
+                $("#unit").html("(" + datas + ")");
             });
         });
     });
@@ -177,12 +158,14 @@ $BranchModel = Branch::model()->find("id = '$branch'");
     }
 
     function loaddata() {
+        var vat = $("#vat").val();
         var url = "<?php echo Yii::app()->createUrl('orders/loaddata') ?>";
         var order_id = "<?php echo $order_id ?>";
         var branch = "<?php echo $branch ?>";
         var data = {
             order_id: order_id,
-            branch: branch
+            branch: branch,
+            vat: vat
         };
         $.post(url, data, function(datas) {
             $("#orderlist").html(datas);
@@ -200,8 +183,11 @@ $BranchModel = Branch::model()->find("id = '$branch'");
         var product = $("#product").val();
         var order_id = "<?php echo $order_id ?>";
         var number = $("#number").val();
-        var distcount = $("#distcountpersent").val();
+        var distcountprice = $("#distcountprice").val();
+        //var supplier = $("#supplier").val();
+        //var distcount = 0;
         //var private = $("input:radio[name=private]:checked").val();
+
         if (product == '' || number == '' || product == null) {
             sweetAlert("แจ้งเตือน...", "กรอกข้อมูลไม่ครบ!", "warning");
             return false;
@@ -211,23 +197,60 @@ $BranchModel = Branch::model()->find("id = '$branch'");
             product_id: product,
             order_id: order_id,
             number: number,
-            distcount: distcount
+            distcountprice: distcountprice
         };
 
         $.post(url, data, function(success) {
             loaddata();
+            $("#distcountprice").val("");
+            $('#product').select2("val", "");
+            $("#number").val("");
+            //combotype();
         });
     }
 
-    function Saveorder() {
+    function Saveorderssss() {
         var url = "<?php echo Yii::app()->createUrl('orders/view', array('order_id' => $order_id)) ?>";
         window.location = url;
+    }
+
+    function Saveorder() {
+        var url = "<?php echo Yii::app()->createUrl('orders/updateorder') ?>";
+        var order_id = "<?php echo $order_id ?>";
+        //var branch = "<?php //echo $branch  ?>";
+        //var supplier = $("#supplier").val();
+        var vattype = $("#vat").val();
+        var priceresult = $("#priceresult").val();
+
+        var data = {
+            order_id: order_id,
+            //branch: branch,
+            //supplier: supplier,
+            vattype: vattype,
+            priceresult: priceresult
+        };
+
+        var urlcheck = "<?php echo Yii::app()->createUrl('orders/checklistorder') ?>";
+        var daracheck = {order_id: order_id};
+        $.post(urlcheck, daracheck, function(datas) {
+            if (datas > 0) {
+                $.post(url, data, function(success) {
+                    var url = "<?php echo Yii::app()->createUrl('orders/view', array('order_id' => $order_id)) ?>";
+                    window.location = url;
+                });
+            } else {
+                //alert("ไม่มีรายการสินค้าในใบสั่งซื้อ");
+                sweetAlert("แจ้งเตือน...", "ไม่มีรายการสินค้าในใบสั่งซื้อ!", "warning");
+                return false;
+            }
+        });
+
+
     }
 
 </script>
 
 <script type="text/javascript">
-
     Setscreen();
     function Setscreen() {
         var screen = $(window).height();

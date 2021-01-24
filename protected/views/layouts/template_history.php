@@ -40,17 +40,17 @@
         <link rel="stylesheet" href="<?= Yii::app()->baseUrl; ?>/themes/dortor/bootstrap/css/bootstrap-theme.css" type="text/css" media="all" />
 
         <!--
-        <link rel="stylesheet" href="<?php //Yii::app()->baseUrl;              ?>/assets/gallery_img/dist/magnific-popup.css" type="text/css" media="all" />
-        <link rel="stylesheet" href="<?php //Yii::app()->baseUrl;              ?>/lib/DataTables-1.10.13/media/css/dataTables.bootstrap.css" type="text/css" media="all" />
-        <link rel="stylesheet" href="<?php //Yii::app()->baseUrl;              ?>/lib/DataTables-1.10.13/extensions/Buttons/css/buttons.dataTables.css" type="text/css" media="all" />
-        <link rel="stylesheet" href="<?php //Yii::app()->baseUrl;              ?>/lib/DataTables-1.10.13/extensions/Buttons/css/buttons.bootstrap.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="<?php //Yii::app()->baseUrl;                ?>/assets/gallery_img/dist/magnific-popup.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="<?php //Yii::app()->baseUrl;                ?>/lib/DataTables-1.10.13/media/css/dataTables.bootstrap.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="<?php //Yii::app()->baseUrl;                ?>/lib/DataTables-1.10.13/extensions/Buttons/css/buttons.dataTables.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="<?php //Yii::app()->baseUrl;                ?>/lib/DataTables-1.10.13/extensions/Buttons/css/buttons.bootstrap.css" type="text/css" media="all" />
         -->
         <link rel="stylesheet" href="<?php echo Yii::app()->baseUrl; ?>/css/font-awesome-4.3.0/css/font-awesome.css"/>
         <!--
-        <link rel="stylesheet" href="<?php //echo Yii::app()->baseUrl;                 ?>/css/font-awesome-4.3.0/css/font-awesome-animation.css"/>
-        <link rel="stylesheet" href="<?php //Yii::app()->baseUrl;                ?>/themes/dortor/css/simple-sidebar.css"/>
-        <link rel="stylesheet" href="<?php //Yii::app()->baseUrl;                ?>/assets/perfect-scrollbar/css/perfect-scrollbar.css"/>
-        <link rel="stylesheet" href="<?php //Yii::app()->baseUrl;                ?>/css/card-css/card-css.css"/>
+        <link rel="stylesheet" href="<?php //echo Yii::app()->baseUrl;                   ?>/css/font-awesome-4.3.0/css/font-awesome-animation.css"/>
+        <link rel="stylesheet" href="<?php //Yii::app()->baseUrl;                  ?>/themes/dortor/css/simple-sidebar.css"/>
+        <link rel="stylesheet" href="<?php //Yii::app()->baseUrl;                  ?>/assets/perfect-scrollbar/css/perfect-scrollbar.css"/>
+        <link rel="stylesheet" href="<?php //Yii::app()->baseUrl;                  ?>/css/card-css/card-css.css"/>
         -->
 
         <!-- Bootstrap CheckBox
@@ -61,15 +61,15 @@
         <script src="<?//= Yii::app()->baseUrl; ?>/themes/backend/bootstrap/js/bootstrap.js" type="text/javascript"></script>
         -->
         <!-- Magnific Popup core CSS file
-        <script type="text/javascript" charset="utf-8"src="<?php //Yii::app()->baseUrl;                                    ?>/assets/gallery_img/dist/jquery.magnific-popup.js"></script>
+        <script type="text/javascript" charset="utf-8"src="<?php //Yii::app()->baseUrl;                                      ?>/assets/gallery_img/dist/jquery.magnific-popup.js"></script>
         -->
         <!-- Data table
-        <script type="text/javascript" charset="utf-8"src="<?php //Yii::app()->baseUrl;                                    ?>/lib/DataTables-1.10.13/media/js/jquery.dataTables.js"></script>
-        <script type="text/javascript" charset="utf-8"src="<?php //Yii::app()->baseUrl;                                    ?>/lib/DataTables-1.10.13/media/js/dataTables.bootstrap.js"></script>
-        <script type="text/javascript" charset="utf-8"src="<?php //Yii::app()->baseUrl;                                    ?>/lib/DataTables-1.10.13/extensions/dataTables.buttons.min.js"></script>
-        <script type="text/javascript" charset="utf-8"src="<?php //Yii::app()->baseUrl;                                    ?>/lib/DataTables-1.10.13/extensions/buttons.html5.min.js"></script>
-        <script type="text/javascript" charset="utf-8"src="<?php //Yii::app()->baseUrl;                                    ?>/lib/DataTables-1.10.13/extensions/buttons.print.min.js"></script>
-        <script type="text/javascript" charset="utf-8"src="<?php //Yii::app()->baseUrl;                                    ?>/lib/DataTables-1.10.13/extensions/jszip.min.js"></script>
+        <script type="text/javascript" charset="utf-8"src="<?php //Yii::app()->baseUrl;                                      ?>/lib/DataTables-1.10.13/media/js/jquery.dataTables.js"></script>
+        <script type="text/javascript" charset="utf-8"src="<?php //Yii::app()->baseUrl;                                      ?>/lib/DataTables-1.10.13/media/js/dataTables.bootstrap.js"></script>
+        <script type="text/javascript" charset="utf-8"src="<?php //Yii::app()->baseUrl;                                      ?>/lib/DataTables-1.10.13/extensions/dataTables.buttons.min.js"></script>
+        <script type="text/javascript" charset="utf-8"src="<?php //Yii::app()->baseUrl;                                      ?>/lib/DataTables-1.10.13/extensions/buttons.html5.min.js"></script>
+        <script type="text/javascript" charset="utf-8"src="<?php //Yii::app()->baseUrl;                                      ?>/lib/DataTables-1.10.13/extensions/buttons.print.min.js"></script>
+        <script type="text/javascript" charset="utf-8"src="<?php //Yii::app()->baseUrl;                                      ?>/lib/DataTables-1.10.13/extensions/jszip.min.js"></script>
         -->
 
         <!-- DatePicker -->
@@ -84,15 +84,15 @@
         <script src="<?php echo Yii::app()->baseUrl; ?>/lib/sweet-alert/sweetalert.min.js" type="text/javascript"></script>
 
         <!--SELECT2 Combobox
-        <link rel="stylesheet" href="<?php //Yii::app()->baseUrl;                                     ?>/lib/select2-master/dist/css/select2.css" type="text/css" media="all" />
-        <link rel="stylesheet" href="<?php //Yii::app()->baseUrl;                                     ?>/lib/select2-bootstrap-theme-master/dist/select2-bootstrap.css" type="text/css" media="all" />
-        <script src="<?php //echo Yii::app()->baseUrl;                                     ?>/lib/select2-master/dist/js/select2.js" type="text/javascript"></script>
+        <link rel="stylesheet" href="<?php //Yii::app()->baseUrl;                                       ?>/lib/select2-master/dist/css/select2.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="<?php //Yii::app()->baseUrl;                                       ?>/lib/select2-bootstrap-theme-master/dist/select2-bootstrap.css" type="text/css" media="all" />
+        <script src="<?php //echo Yii::app()->baseUrl;                                       ?>/lib/select2-master/dist/js/select2.js" type="text/javascript"></script>
         -->
         <!-- Notify -->
         <link rel="stylesheet" href="<?= Yii::app()->baseUrl; ?>/css/animate.css" type="text/css" media="all" />
 
         <script src="<?php echo Yii::app()->baseUrl; ?>/lib/notify/bootstrap-notify/bootstrap-notify.js" type="text/javascript"></script>
-        <link rel="stylesheet" type="text/css" href="<?= Yii::app()->baseUrl; ?>/themes/dortor/assets/jquery-easyui/themes/metro-blue/easyui.css"/>
+        <link rel="stylesheet" type="text/css" href="<?= Yii::app()->baseUrl; ?>/themes/dortor/assets/jquery-easyui/themes/defaultcustom/easyui.css"/>
         <link rel="stylesheet" type="text/css" href="<?= Yii::app()->baseUrl; ?>/themes/dortor/assets/jquery-easyui/themes/icon.css"/>
         <link rel="stylesheet" type="text/css" href="<?= Yii::app()->baseUrl; ?>/themes/dortor/assets/jquery-easyui/themes/color.css"/>
         <script type="text/javascript" charset="utf-8"src="<?= Yii::app()->baseUrl; ?>/themes/dortor/assets/jquery-easyui/jquery.easyui.min.js"></script>

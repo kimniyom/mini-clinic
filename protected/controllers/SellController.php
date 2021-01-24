@@ -735,13 +735,14 @@ class SellController extends Controller {
 
     public function actionReporttoday() {
         $branch = Yii::app()->session['branch'];
+        $datesell = Yii::app()->request->getPost('datesell');
         $sql = "SELECT *
                     FROM
                     (
                             (SELECT s.id,l.sell_id,IFNULL(e.`name`,'ไม่ระบุ') AS `name`,IFNULL(e.lname,'') AS lname,s.number,l.total,l.date_sell,s.d_update
                                     FROM logsell l LEFT JOIN patient e ON l.pid = e.pid
                                     INNER JOIN sell s ON l.sell_id = s.sell_id
-                                    WHERE l.date_sell = DATE(NOW()) AND l.branch = '$branch' AND l.`typebuy` = '0'
+                                    WHERE l.date_sell = '$datesell' AND l.branch = '$branch' AND l.`typebuy` = '0'
                                     GROUP BY s.sell_id
                             )
                             UNION ALL
@@ -749,7 +750,7 @@ class SellController extends Controller {
                                     SELECT s.id,l.sell_id,IFNULL(e.`name`,'ไม่ระบุ') AS `name`,IFNULL(e.lname,'') AS lname,s.number,l.total,l.date_sell,s.d_update
                                     FROM logsell l LEFT JOIN employee e ON l.pid = e.pid
                                     INNER JOIN sell s ON l.sell_id = s.sell_id
-                                    WHERE l.date_sell = DATE(NOW()) AND l.branch = '$branch' AND l.`typebuy` = '1'
+                                    WHERE l.date_sell = '$datesell' AND l.branch = '$branch' AND l.`typebuy` = '1'
                                     GROUP BY s.sell_id
                             )
                     ) Q";

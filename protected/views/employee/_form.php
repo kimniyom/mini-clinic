@@ -8,6 +8,33 @@
     .row{
         margin-bottom: 10px;
     }
+
+    input[type='text']{
+        border-color: #333333;
+    }
+
+    .form-control{
+        background: #111111;
+    }
+    .select2-container {
+        background-color: #111111 !important;
+        border-radius: 5px;
+    }
+    .select2-drop{
+        background-color: #111111 !important;
+        border-color: #333333;
+        color:#666666;
+    }
+    .select2-search input {
+        background-color: #111111 !important;
+        border:none;
+    }
+    .select2-choice { background-color: #111111 !important; border-color:#222222 !important; height: 40px !important;}
+    .select2-search { background-color: #111111 !important; margin-top: 10px;}
+    .select2-arrow {
+        border-left: 0px solid transparent !important;
+        /* 2 */
+    }
 </style>
 
 <div class="panel panel-default" style=" margin-bottom: 0px;">
@@ -70,7 +97,7 @@
                       )
                       )
                       );
-                     * 
+                     *
                      */
                     ?>
 
@@ -259,7 +286,7 @@
                     <?php echo $form->error($model, 'salary'); ?>
                 </div>
             </div>
-               <div class="row">
+            <div class="row">
                 <div class="col-lg-2">
                     <?php echo $form->labelEx($model, 'guarantee'); ?>
                 </div>
@@ -273,11 +300,11 @@
                     <?php echo $form->labelEx($model, 'flagsalary'); ?>
                 </div>
                 <div class="col-lg-4">
-                    <?php echo $form->radioButtonList($model, 'flagsalary', array('0' => 'นำไปคิด','1' => 'ไม่นำไปคิด')); ?>
+                    <?php echo $form->radioButtonList($model, 'flagsalary', array('0' => 'นำไปคิด', '1' => 'ไม่นำไปคิด')); ?>
                     <?php echo $form->error($model, 'flagsalary'); ?>
                 </div>
             </div>
-            
+
             <div class="row">
                 <div class="col-lg-2">
                     <?php echo $form->labelEx($model, 'status_id'); ?>

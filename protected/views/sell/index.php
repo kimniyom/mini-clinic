@@ -144,7 +144,7 @@ $sell_id = "IVN" . $Config->RandstrgenNumber(5) . trim(time());
                     <?php endforeach; ?>
                 </select>
                 <!--
-                <input type="text" class="form-control" id="user" readonly="readonly" value="<?php //echo $Profile['name'] . " " . $Profile['lname']                                                                                                                                                    ?>"/>
+                <input type="text" class="form-control" id="user" readonly="readonly" value="<?php //echo $Profile['name'] . " " . $Profile['lname']                                                                                                                                                        ?>"/>
                 -->
             </div>
             <div class="well well-sm" style="margin-bottom:0px;">
@@ -426,7 +426,7 @@ POPUP EDIT NUMBER
         /*
          $("#card").change(function () {
          var card = $("#card").val();
-         var url = "<?php //echo Yii::app()->createUrl('sell/patient')                                                                                                                                                                     ?>";
+         var url = "<?php //echo Yii::app()->createUrl('sell/patient')                                                                                                                                                                         ?>";
          var data = {card: card};
          $.post(url, data, function (datas) {
          $("#patient").html(datas);
@@ -891,7 +891,8 @@ POPUP EDIT NUMBER
 
     function historyselltoday() {
         var url = "<?php echo Yii::app()->createUrl('sell/reporttoday') ?>";
-        var data = {};
+        var date_sell = $("#datesell").val();
+        var data = {datesell: date_sell};
         $.post(url, data, function(datas) {
             $("#reporttoday").html(datas);
         });
@@ -932,6 +933,10 @@ POPUP EDIT NUMBER
                 $("#productname").val(datas.productname);
                 $("#stock").html(datas.stock);
             }, 'json');
+        });
+
+        $("#datesell").change(function() {
+            historyselltoday();
         });
     });
 

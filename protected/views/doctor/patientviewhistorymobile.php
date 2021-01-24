@@ -227,8 +227,8 @@ if (isset($model['birth'])) {
                                     <td style="color: <?php echo ($rs['type'] == 2) ? "red;font-size:20px;" : ""; ?>"><?php echo $rs['method'] ?></td>
                                     <td style=" text-align: center;"><?php echo $rs['number'] ?></td>
                                     <!--
-                                                                            <td style="text-align: right;">​<?php //echo number_format($rs['price'], 2)   ?></td>
-                                                                            <td style="text-align: right;">​<?php //echo number_format($rs['total'], 2)   ?></td>
+                                                                            <td style="text-align: right;">​<?php //echo number_format($rs['price'], 2)     ?></td>
+                                                                            <td style="text-align: right;">​<?php //echo number_format($rs['total'], 2)     ?></td>
                                     -->
                                     <td style="text-align: center;">
                                         <?php if ($rs['type'] == 2) { ?>

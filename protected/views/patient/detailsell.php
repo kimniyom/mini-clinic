@@ -44,22 +44,22 @@
         $User = new Masuser();
         $BranchModel = new Branch();
         $Config = new Configweb_model();
-        $Employee = $User->GetDetailUser($detail['user_id']);
+        $Employee = Employee::model()->find("id=:id", array(":id" => $detail['user_id']));
         $Branch = $detail['branch'];
         $pid = $detail['pid'];
-        $patient = Patient::model()->find("pid=:pid",array(":pid"=>$pid));
-        $logo = Logo::model()->find("branch=:branch",array(":branch"=>$Branch))['logo'];
+        $patient = Patient::model()->find("pid=:pid", array(":pid" => $pid));
+        $Company = Companycenter::model()->find("id=:id", array(":id" => 1));
         ?>
 
 
         <div id="bill" style=" background: #ffffff; border: #000 solid 1px;padding: 20px;">
             <div id="head-bill" style=" text-align: left;">
                 <div style=" float: left">
-                    <img src="<?php echo Yii::app()->baseUrl; ?>/uploads/logo/<?php echo $logo ?>" style=" width: 48px;"/>
+                    <img src="<?php echo Yii::app()->baseUrl; ?>/uploads/logo/<?php echo $Company['logo'] ?>" style=" width: 48px;"/>
                 </div>
                 <div style=" float: left;">
-                    <h4><?php echo $Config->get_webname(); ?></h4>
-                    <?php echo Branch::model()->find("id=:id",array(":id"=>$Branch))['address'] ?>
+                    <h4><?php echo$Company['companyname'] ?></h4>
+                    <?php echo $Company['address'] ?>
                 </div>
             </div>
             <hr/>
@@ -68,32 +68,25 @@
                 <table style=" border: #cccccc solid 1px; width: 100%;">
                     <tr>
                         <td style=" width: 60%; border-right: #cccccc solid 1px; padding: 5px;">
-                            สาขา : <?php echo Branch::model()->find("id=:id",array(":id"=>$Branch))['branchname'] ?><br/>
                             ลูกค้า : คุณ <?php echo $patient['name'] . " " . $patient['lname'] ?>
                         </td>
                         <td style=" padding: 5px; text-align: right;">
                             <div class="pull-right">
                                 วันที่ : <?php echo $Config->thaidate($detail['date_sell']) ?><br/>
                                 รหัสบิล : <?php echo $detail['sell_id'] ?>
-
                             </div>
                         </td>
                     </tr>
                 </table>
 
             </div>
-
-
-
-
             <br/>
             <table class="table table-bordered">
                 <thead>
                     <tr>
                         <th style="text-align: center; width: 5%;">#</th>
                         <th>รายการ</th>
-                        <th style=" text-align: center; width: 10%;">จำนวน</th>
-                        <th style=" text-align: center; width: 10%;">ราคา / หน่วย</th>
+                        <th style=" text-align: center; width: 15%;">ราคา / หน่วย</th>
                         <th style=" text-align: center; width: 10%;">รวม</th>
                     </tr>
                 </thead>
@@ -110,7 +103,6 @@
                         <tr>
                             <td style=" text-align: center;"><?php echo $i ?></td>
                             <td><?php echo $rs['product_name'] ?></td>
-                            <td style=" text-align: center;"><?php echo $rs['total'] ?></td>
                             <td style="text-align: right;">​<?php echo number_format($rs['product_price'], 2) ?></td>
                             <td style="text-align: right;">​<?php echo number_format($priceRow, 2) ?></td>
                         </tr>
@@ -118,33 +110,28 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <td style=" text-align: right; font-weight: bold;" colspan="4">รวม</td>
+                        <td style=" text-align: right; font-weight: bold;" colspan="3">รวม</td>
                         <td style="text-align: right;"><?php echo number_format($sum, 2); ?></td>
                     </tr>
                     <tr>
-                        <td style=" text-align: right; font-weight: bold;" colspan="4">ส่วนลด</td>
+                        <td style=" text-align: right; font-weight: bold;" colspan="3">ส่วนลด</td>
                         <td style="text-align: right;"><?php echo number_format($logsell['distcount'], 2); ?></td>
                     </tr>
                     <tr>
-                        <td style=" text-align: right; font-weight: bold;" colspan="4">ราคาหักส่วนลด</td>
+                        <td style=" text-align: right; font-weight: bold;" colspan="3">ราคาหักส่วนลด</td>
                         <td style="text-align: right;"><?php echo number_format($logsell['totalfinal'], 2); ?></td>
                     </tr>
                     <tr>
-                        <td style=" text-align: right; font-weight: bold;" colspan="4">รับเงิน</td>
+                        <td style=" text-align: right; font-weight: bold;" colspan="3">ราคาสุทธิ</td>
                         <td style="text-align: right;"><?php echo number_format($logsell['income'], 2); ?></td>
                     </tr>
-                    <tr>
-                        <td style=" text-align: right; font-weight: bold;" colspan="4">เงินทอน</td>
-                        <td style="text-align: right;"><?php echo number_format($logsell['change'], 2); ?></td>
-                    </tr>
-
                 </tfoot>
             </table>
             <br/>
 
             <div style=" text-align: right;">
-                พนักงานขาย<br/> 
-                <?php echo $Employee['pername'] . $Employee['name'] . " " . $Employee['lname'] ?><br/>
+                พนักงานขาย<br/>
+                <?php echo $Employee['name'] . " " . $Employee['lname'] ?><br/>
             </div>
         </div>
 

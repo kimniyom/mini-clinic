@@ -40,7 +40,7 @@ $typeModel = new Gradcustomer();
     </div>
 </div>
 <script type="text/javascript">
-    $(document).ready(function () {
+    $(document).ready(function() {
         getdata();
     });
 
@@ -49,9 +49,9 @@ $typeModel = new Gradcustomer();
         var loading = '<i class="fa fa-spinner fa-spin fa-fw"></i>';
         $("#loading").html(loading);
         var branch = $("#branch").val();
-        var url = "<?php echo Yii::app()->createUrl('patient/serverside')    ?>";
+        var url = "<?php echo Yii::app()->createUrl('patient/serverside') ?>";
         var data = {branch: branch};
-        $.post(url, data, function (datas) {
+        $.post(url, data, function(datas) {
             $("#loading").html('');
             $("#showdata").html(datas);
         });
@@ -59,7 +59,7 @@ $typeModel = new Gradcustomer();
     /*
      function serverside() {
      var branch = $("#branch").val();
-     var url = "<?php //echo Yii::app()->createUrl('patient/serverside')    ?>";
+     var url = "<?php //echo Yii::app()->createUrl('patient/serverside')      ?>";
      var data = {branch: branch};
      var datatableAjax = $('#patient').dataTable({
      "processing": true,
@@ -77,7 +77,7 @@ $typeModel = new Gradcustomer();
 </script>
 
 
-<!-- 
+<!--
     ####################
     ### POPUPPATIENT ###
     ####################
@@ -126,7 +126,7 @@ $typeModel = new Gradcustomer();
         if (r == true) {
             var url = "<?php echo Yii::app()->createUrl('patient/delete') ?>";
             var data = {id: id};
-            $.post(url, data, function (success) {
+            $.post(url, data, function(success) {
                 window.location.reload();
             });
         }
@@ -147,7 +147,7 @@ $typeModel = new Gradcustomer();
             return false;
         }
 
-        $.post(url, data, function (result) {
+        $.post(url, data, function(result) {
             if (result == 1) {
                 $("#error").html("<p style='color:red;'>มีการลงทะเบียนลูกค้าในระบบแล้ว ... </p>");
             } else {

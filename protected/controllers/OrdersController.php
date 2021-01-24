@@ -32,7 +32,7 @@ class OrdersController extends Controller {
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
                 'actions' => array('create', 'update', 'loaddata', 'save', 'search',
                     'deleteorder', 'confirmorder', 'cutitems', 'print', 'bill', 'updatestatus',
-                    'checklistorder', 'adddistcount', 'editnumber', 'detailproduct'),
+                    'checklistorder', 'adddistcount', 'editnumber', 'detailproduct', 'updateorder'),
                 'users' => array('@'),
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -101,7 +101,7 @@ class OrdersController extends Controller {
         $OrderModel = new Orders();
         $data['order'] = $order;
         $data['orderlist'] = $OrderModel->Getlistorder($order_id, $branchId);
-        $data['supplier'] = CenterStockcompany::model()->find("id=:id",array(':id' => $order['supplier']));
+        $data['supplier'] = CenterStockcompany::model()->find("id=:id", array(':id' => $order['supplier']));
         $data['vat'] = $order['vattype'];
         if (Yii::app()->session['status'] == '1' || Yii::app()->session['status'] == '2' || Yii::app()->session['status'] == '6' || Yii::app()->session['status'] == '8') {
             //$ModelMix = new CenterStockmix();
@@ -121,7 +121,7 @@ class OrdersController extends Controller {
     public function actionCreate($branch) {
 
         $model = new Orders;
-        $orderId = "PO-".$model->autoId("orders", "order_id", "7");
+        $orderId = "PO-" . $model->autoId("orders", "order_id", "7");
         $branchModel = Branch::model()->find($branch);
         Yii::app()->db->createCommand()->delete("listorder", "order_id = '$orderId' ");
 
@@ -247,6 +247,7 @@ class OrdersController extends Controller {
         $data['orders'] = $order;
         $data['order'] = $OrderModel->Getlistorder($orderId, $branch);
         $data['vat'] = $vat;
+
         //print_r($data['order']);
         $this->renderPartial('listdata', $data);
     }
@@ -260,8 +261,6 @@ class OrdersController extends Controller {
         $vattype = Yii::app()->request->getPost('vattype');
         $priceresult = Yii::app()->request->getPost('priceresult');
         //$price = $this->actionCaculatororder($order_id);
-
-
         //$vat = ($price * 7) / 100; //ภาษี
         //$priceresult = ($price + $vat); //ราคาสุทธิ์
 
@@ -279,6 +278,34 @@ class OrdersController extends Controller {
         );
 
         Yii::app()->db->createCommand()->insert("orders", $columns);
+    }
+
+    public function actionUpdateorder() {
+        //$branch = Yii::app()->request->getPost('branch');
+        //$menager = Branch::model()->find("id = '$branch' ")['menagers'];
+        $author = Yii::app()->user->id;
+        $order_id = Yii::app()->request->getPost('order_id');
+        //$supplier = Yii::app()->request->getPost('supplier');
+        $vattype = Yii::app()->request->getPost('vattype');
+        $priceresult = Yii::app()->request->getPost('priceresult');
+        //$price = $this->actionCaculatororder($order_id);
+        //$vat = ($price * 7) / 100; //ภาษี
+        //$priceresult = ($price + $vat); //ราคาสุทธิ์
+
+        $columns = array(
+            //"order_id" => $order_id,
+            //"branch" => $branch,
+            "author" => $author,
+            //"price" => $price,
+            //"vat" => $vat,
+            //"supplier" => $supplier,
+            "vattype" => $vattype,
+            "priceresult" => $priceresult,
+            //"create_date" => date("Y-m-d"),
+            "d_update" => date("Y-m-d H:i:s")
+        );
+
+        Yii::app()->db->createCommand()->update("orders", $columns, "order_id = '$order_id'");
     }
 
     public function actionCaculatororder($orderId) {
@@ -394,7 +421,7 @@ class OrdersController extends Controller {
         $data['order'] = $order;
         $data['order_id'] = $order_id;
         $data['orderlist'] = $OrderModel->Getlistorder($order_id, $branchId);
-        $data['supplier'] = CenterStockcompany::model()->find("id=:id",array(':id' => $order['supplier']));
+        $data['supplier'] = CenterStockcompany::model()->find("id=:id", array(':id' => $order['supplier']));
         $data['vat'] = $order['vattype'];
         /* Config php7
           require_once ('lib/mpdf7/vendor/autoload.php');

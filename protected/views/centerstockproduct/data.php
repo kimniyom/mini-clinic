@@ -59,7 +59,7 @@
             //$img_title = $product_model->get_images_product_title($last['product_id']);
             $productID = $last['product_id'];
             $img_title = $product_model->firstpictures($last['product_id']);
-            $link = Yii::app()->createUrl('centerstockproduct/detail&product_id=' . $last['product_id']);
+            $link = Yii::app()->createUrl('centerstockproduct/detail?product_id=' . $last['product_id']);
             if ($last['status'] == "1") {
                 $textcolor = "#999999;";
             } else {
@@ -78,39 +78,38 @@
                 <td>
                     <div class="row">
                         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                           <center>
-                                    <img src="<?php echo Yii::app()->baseUrl ?>/<?php echo $img ?>" 
-                                         class="img-polaroid img-responsive" style=" max-height: 200px;"/>
-                                </center>
+                            <center>
+                                <img src="<?php echo Yii::app()->baseUrl ?>/<?php echo $img ?>"
+                                     class="img-polaroid img-responsive" style=" max-height: 200px;"/>
+                            </center>
                         </div>
-                <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-                    <font style=" color: red; font-size: 20px;">
-                    รหัส: <?php echo $last['product_id']; ?>
-                    ชื่อสามัญบริษัท: <?php echo $last['product_name']; ?>
-                    </font>
-                    <br/>
-
-                    <b>ชื่อเรียกในคลินิก:</b> <?php echo $last['product_nameclinic']; ?><br/>
-                    <b>หมวด:</b> <?php echo $last['category'] ?>
-                    <b>ประเภท:</b> <?php echo $last['type_name'] ?><br/>
-                    <?php if(Yii::app()->user->id != '15') { ?>
-                    <b>ต้นทุน:</b> <?php echo number_format($last['costs'], 2); ?> บาท<br/>
-                    <?php } ?>
-                    <b>ราคาขาย / หน่วย: <?php echo number_format($last['product_price'], 2); ?> บาท<br/>
-                    <b>หน่วยนับ:</b> <?php echo $last['unitname'] ?>
-                        <b>สถานะ:</b> <?php if ($last['status'] == "1") { ?>
-                            <font style="color: #cc0033;"><i class="fa fa-remove"></i> เลิกผลิต</font>
-                        <?php } else { ?>
-                            <font style="color: #669900;"><i class="fa fa-check"></i> ยังผลิต</font>
-                        <?php } ?>
-                    <div class="pull-right">
-                        <a href="<?php echo $link ?>" class="btn btn-default"><i class="fa fa-file"></i> รายละเอียด</a>
+                        <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                            <font style=" color: red; font-size: 20px;">
+                            รหัส: <?php echo $last['product_id']; ?>
+                            ชื่อสามัญบริษัท: <?php echo $last['product_name']; ?>
+                            </font>
+                            <br/>
+                            <b>ชื่อเรียกในคลินิก:</b> <?php echo $last['product_nameclinic']; ?><br/>
+                            <b>หมวด:</b> <?php echo $last['category'] ?>
+                            <b>ประเภท:</b> <?php echo $last['type_name'] ?><br/>
+                            <?php if (Yii::app()->user->id != '15') { ?>
+                                <b>ต้นทุน:</b> <?php echo number_format($last['costs'], 2); ?> บาท<br/>
+                            <?php } ?>
+                            <b>ราคาขาย / หน่วย: <?php echo number_format($last['product_price'], 2); ?> บาท<br/>
+                                <b>หน่วยนับ:</b> <?php echo $last['unitname'] ?>
+                                <b>สถานะ:</b> <?php if ($last['status'] == "1") { ?>
+                                    <font style="color: #cc0033;"><i class="fa fa-remove"></i> เลิกผลิต</font>
+                                <?php } else { ?>
+                                    <font style="color: #669900;"><i class="fa fa-check"></i> ยังผลิต</font>
+                                <?php } ?>
+                                <div class="pull-right">
+                                    <a href="<?php echo $link ?>" class="btn btn-default"><i class="fa fa-file"></i> รายละเอียด</a>
+                                </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            </td>
+                </td>
             </tr>
         <?php endforeach; ?>
     </tbody>
+</table>
 
-</div>
