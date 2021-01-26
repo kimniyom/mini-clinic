@@ -76,24 +76,34 @@ class PatientController extends Controller {
         $config = new Configweb_model();
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);
-
+        $error = "";
         if (isset($_POST['Patient'])) {
             $model->attributes = $_POST['Patient'];
             $cid = $_POST['Patient']['card'];
-            $user_id = Masuser::model()->find("id=:id", array(":id" => Yii::app()->user->id))['user_id'];
-            $model->card = str_replace("-", "", $cid);
-            $model->pid = $config->autoId("patient", "pid", "10");
-            $model->cn = $this->Getcn();
-            $model->d_update = date("Y-m-d");
-            $model->emp_id = $user_id;
-            if ($model->save()) {
-                //$this->redirect(array('patientcontact/create', 'id' => $model->id));
-                $this->redirect(array('view', 'id' => $model->id));
+            $card = $model->card = str_replace("-", "", $cid);
+            //check Cid 
+            $sql = "select count(*) as total from patient where card = '$card'";
+            $rs = Yii::app()->db->createCommand($sql)->queryRow();
+            if($rs['total'] > 0){
+                $error = "มีการลงทะเบียนด้วยเลขบัตรนี้แล้ว ..!";
+            } else {
+                $user_id = Masuser::model()->find("id=:id", array(":id" => Yii::app()->user->id))['user_id'];
+                $model->card = str_replace("-", "", $cid);
+                $model->pid = $config->autoId("patient", "pid", "10");
+                $model->cn = $this->Getcn();
+                $model->d_update = date("Y-m-d");
+                $model->emp_id = $user_id;
+                if ($model->save()) {
+                    //$this->redirect(array('patientcontact/create', 'id' => $model->id));
+                    $this->redirect(array('view', 'id' => $model->id));
+                }
+                $error = "";
             }
         }
 
         $this->render('create', array(
             'model' => $model,
+            'error' => $error
         ));
     }
 
@@ -136,13 +146,13 @@ class PatientController extends Controller {
         $model = $this->loadModel($id);
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);
-
+        $error = "";
         if (isset($_POST['Patient'])) {
             $model->attributes = $_POST['Patient'];
             $cid = $_POST['Patient']['card'];
             $model->card = str_replace("-", "", $cid);
             $model->d_update = date("Y-m-d");
-
+                $error = "";
             if ($model->save()) {
                 $this->redirect(array('view', 'id' => $model->id));
             }
@@ -150,6 +160,7 @@ class PatientController extends Controller {
 
         $this->render('update', array(
             'model' => $model,
+            'error' => $error
         ));
     }
 

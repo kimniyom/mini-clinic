@@ -8,7 +8,7 @@ $this->breadcrumbs = array(
 );
 ?>
 
-<?php $this->renderPartial('_form', array('model' => $model, 'head' => 'ลงทะเบียนลูกค้า'));?>
+<?php $this->renderPartial('_form', array('model' => $model, 'head' => 'ลงทะเบียนลูกค้า','error' => $error,'readonly' => false));?>
 <div class="modal fade" tabindex="-1" role="dialog" id="popupcheckpatient">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -28,7 +28,7 @@ $this->breadcrumbs = array(
 </div><!-- /.modal -->
 
 <script type="text/javascript">
-    popupcheckpatient();
+    //popupcheckpatient();
     function popupcheckpatient(){
         $("#popupcheckpatient").modal();
     }

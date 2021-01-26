@@ -12,4 +12,4 @@ $head = "แก้ไขข้อมูล ".$model->name.' '.$model->lname;
 
 
 
-<?php $this->renderPartial('_form', array('model'=>$model,'head' => $head )); ?>
+<?php $this->renderPartial('_form', array('model'=>$model,'head' => $head,'error' => $error,'readonly' => true )); ?>

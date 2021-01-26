@@ -1,4 +1,31 @@
+<style type="text/css">
+	.form-control{
+        background: #111111;
+    }
+    .row{
+        margin-top: 10px !important;
+    }
 
+    .select2-container {
+        background-color: #111111 !important;
+        border-radius: 5px;
+    }
+    .select2-drop{
+        background-color: #111111 !important;
+        border-color: #333333;
+        color:#666666;
+    }
+    .select2-search input {
+        background-color: #222222 !important;
+        border:none;
+    }
+    .select2-choice { background-color: #111111 !important; border-color:#222222 !important; height: 40px !important;}
+    .select2-search { background-color: #111111 !important; margin-top: 10px;}
+    .select2-arrow {
+        border-left: 0px solid transparent !important;
+        /* 2 */
+    }
+</style>
 <?php
 /* @var $this MasuserController */
 /* @var $model Masuser */
@@ -8,11 +35,11 @@ $this->breadcrumbs = array(
 );
 ?>
 
-<h4>แก้ไข username password</h4>
+<h4><i class="fa fa-lock"></i> แก้ไข username password</h4>
 <hr/>
 <div class="row" style="margin:0px;">
 	<div class="col-md-2 col-lg-2">
-		Username:
+		<i class="fa fa-user"></i> ผู้ใช้งาน:
 	</div>
 	<div class="col-md-6 col-lg-6">
 		<input type="text" name="username" class="form-control" id="username" value="<?php echo $model['username'] ?>" />
@@ -20,7 +47,7 @@ $this->breadcrumbs = array(
 </div>
 <div class="row" style="margin:0px;">
 	<div class="col-md-2 col-lg-2">
-		รหัสผ่านเดิม:
+		<i class="fa fa-key"></i> รหัสผ่านเดิม:
 	</div>
 	<div class="col-md-6 col-lg-6">
 		<input type="password" name="password" class="form-control" id="password"/>
@@ -29,7 +56,7 @@ $this->breadcrumbs = array(
 <hr/>
 <div class="row" style="margin:0px;">
 	<div class="col-md-2 col-lg-2">
-		รหัสผ่านใหม่:
+		<i class="fa fa-key"></i> รหัสผ่านใหม่:
 	</div>
 	<div class="col-md-6 col-lg-6">
 		<input type="password" name="newpassword" class="form-control" id="newpassword"/>

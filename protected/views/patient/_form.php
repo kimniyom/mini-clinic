@@ -26,9 +26,10 @@
         color:#666666;
     }
     .select2-search input {
-        background-color: #111111 !important;
+        background-color: #222222 !important;
         border:none;
     }
+
     .select2-choice { background-color: #111111 !important; border-color:#222222 !important; height: 40px !important;}
     .select2-search { background-color: #111111 !important; margin-top: 10px;}
     .select2-arrow {
@@ -53,6 +54,9 @@
         ?>
 
         <div class="panel-body" id="form-patient-body">
+            <?php if($error != ""){ ?>
+                <label class="alert alert-danger" style=" width: 100%;"><?php echo $error ?></label>
+            <?php } ?>
             <p class="note">Fields with <span class="required">*</span> are required.</p>
             <div style=" color: #ff0033;">
                 <?php echo $form->errorSummary($model); ?>
@@ -126,11 +130,12 @@
                     <?php echo $form->error($model, 'lname'); ?>
                 </div>
             </div>
-
+       
             <div class="row">
                 <div class="col-lg-2">
                     <?php echo $form->labelEx($model, 'card'); ?>
                 </div>
+                
                 <div class="col-lg-5">
                     <?php //echo $form->textField($model, 'card', array('size' => 60, 'maxlength' => 13, 'class' => 'form-control')); ?>
 
@@ -140,17 +145,21 @@
                         "attribute" => "card",
                         //"id" => 'card',
                         //"name" => 'card',
+
                         "mask" => '9-9999-99999-99-9',
                         "clientOptions" => array("autoUnmask" => true), /* autoUnmask defaults to false */
                         "defaults" => array("removeMaskOnSubmit" => false),
-                            /* once defaults are set will be applied to all the masked fields  removeMaskOnSubmit defaults to true */
+                        "options" => [
+                            'readonly' => $readonly,
+                            //'class' => "form-control",
+                        ],
                     ));
                     ?>
                     <?php echo $form->error($model, 'card'); ?>
 
                 </div>
             </div>
-
+     
 
             <div class="row">
                 <div class="col-lg-2">

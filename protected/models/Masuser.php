@@ -56,12 +56,12 @@ class Masuser extends CActiveRecord {
         return array(
             'id' => 'รหัส',
             'username' => 'Username',
-            'password' => 'รหัสผ่าน',
+            'password' => 'Password',
             'status' => 'สถานะ',
             'd_update' => 'วันที่',
             'create_date' => 'Create Date',
             'flag' => '0 = ยังเป็นพนักงาน 1 = ยกเลิกการเป็นพนักงาน',
-            'user_id' => 'ผู้ใช้งาน',
+            'user_id' => 'พนักงาน / เจ้าหน้าที่ / หมอ(ขอใช้ระบบ)',
         );
     }
 
