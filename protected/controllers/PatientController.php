@@ -565,16 +565,15 @@ class PatientController extends Controller {
     public function actionCheckpatientsmartcard() {
         header('Access-Control-Allow-Origin: *');
         header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
-        $name = Yii::app()->request->getPost('name');
-        $lname = Yii::app()->request->getPost('lname');
+        $body = file_get_contents('php://input');
+        $data = json_decode($body, true);
 
+        $card = $data['card'];
         $sql = "select p.*
 				from patient p
-				where p.name like '%$name%' and p.lname like '%$lname%'";
+				where p.card = '$card'";
         $rs = Yii::app()->db->createCommand($sql)->queryRow();
-        if (empty($rs['name'])) {
-            echo 1;
-        } else {
+        
             $sqlDrug = "SELECT GROUP_CONCAT(drug) AS drug FROM patient_drug WHERE patient_id = '" . $rs['id'] . "'";
             $rsDrug = Yii::app()->db->createCommand($sqlDrug)->queryRow();
 
@@ -590,7 +589,7 @@ class PatientController extends Controller {
                 "disease" => $rsDisease['disease'],
             );
             echo json_encode($json);
-        }
+        
     }
 
     public function actionRegistersmartcard() {

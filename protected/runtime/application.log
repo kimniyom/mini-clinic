@@ -4435,3 +4435,192 @@ Stack trace:
 REQUEST_URI=/mini-clinic/lib/ckeditor/skins/prestige/icons_hidpi.png?t=dee99e2
 HTTP_REFERER=http://localhost/mini-clinic/lib/ckeditor/skins/prestige/editor.css
 ---
+2021/01/27 09:19:43 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "lib/ckeditor/skins/prestige/icons_hidpi.png".' in /Applications/MAMP/htdocs/mini-clinic/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Applications/MAMP/htdocs/mini-clinic/framework/web/CWebApplication.php(141): CWebApplication->runController('lib/ckeditor/sk...')
+#1 /Applications/MAMP/htdocs/mini-clinic/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Applications/MAMP/htdocs/mini-clinic/index.php(15): CApplication->run()
+#3 {main}
+REQUEST_URI=/mini-clinic/lib/ckeditor/skins/prestige/icons_hidpi.png?t=dee99e2
+HTTP_REFERER=http://localhost/mini-clinic/lib/ckeditor/skins/prestige/editor.css
+---
+2021/01/27 09:20:01 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "lib/ckeditor/skins/prestige/icons_hidpi.png".' in /Applications/MAMP/htdocs/mini-clinic/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Applications/MAMP/htdocs/mini-clinic/framework/web/CWebApplication.php(141): CWebApplication->runController('lib/ckeditor/sk...')
+#1 /Applications/MAMP/htdocs/mini-clinic/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Applications/MAMP/htdocs/mini-clinic/index.php(15): CApplication->run()
+#3 {main}
+REQUEST_URI=/mini-clinic/lib/ckeditor/skins/prestige/icons_hidpi.png?t=dee99e2
+HTTP_REFERER=http://localhost/mini-clinic/lib/ckeditor/skins/prestige/editor.css
+---
+2021/01/27 10:00:21 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "lib/ckeditor/skins/prestige/icons_hidpi.png".' in /Applications/MAMP/htdocs/mini-clinic/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Applications/MAMP/htdocs/mini-clinic/framework/web/CWebApplication.php(141): CWebApplication->runController('lib/ckeditor/sk...')
+#1 /Applications/MAMP/htdocs/mini-clinic/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Applications/MAMP/htdocs/mini-clinic/index.php(15): CApplication->run()
+#3 {main}
+REQUEST_URI=/mini-clinic/lib/ckeditor/skins/prestige/icons_hidpi.png?t=dee99e2
+HTTP_REFERER=http://localhost/mini-clinic/lib/ckeditor/skins/prestige/editor.css
+---
+2021/01/27 10:07:39 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'ระบบไม่สามารถดำเนินการ "checkpatientsmartcardsss" ตามคำสั่งได้' in /Applications/MAMP/htdocs/mini-clinic/framework/web/CController.php:483
+Stack trace:
+#0 /Applications/MAMP/htdocs/mini-clinic/framework/web/CController.php(270): CController->missingAction('checkpatientsma...')
+#1 /Applications/MAMP/htdocs/mini-clinic/framework/web/CWebApplication.php(282): CController->run('checkpatientsma...')
+#2 /Applications/MAMP/htdocs/mini-clinic/framework/web/CWebApplication.php(141): CWebApplication->runController('patient/checkpa...')
+#3 /Applications/MAMP/htdocs/mini-clinic/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /Applications/MAMP/htdocs/mini-clinic/index.php(15): CApplication->run()
+#5 {main}
+REQUEST_URI=/mini-clinic/patient/checkpatientsmartcardsss
+---
+2021/01/27 10:12:11 [error] [system.db.CDbCommand] CDbCommand::fetch() failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'p.cid' in 'where clause'. The SQL statement executed was: select p.*
+				from patient p
+				where p.cid = ''.
+in /Applications/MAMP/htdocs/mini-clinic/protected/controllers/PatientController.php (574)
+in /Applications/MAMP/htdocs/mini-clinic/index.php (15)
+2021/01/27 10:12:11 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand ล้มเหลวในการดำเนินการเรียกลักษณะของ SQL: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'p.cid' in 'where clause'. The SQL statement executed was: select p.*
+				from patient p
+				where p.cid = ''' in /Applications/MAMP/htdocs/mini-clinic/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /Applications/MAMP/htdocs/mini-clinic/framework/db/CDbCommand.php(415): CDbCommand->queryInternal('fetch', Array, Array)
+#1 /Applications/MAMP/htdocs/mini-clinic/protected/controllers/PatientController.php(574): CDbCommand->queryRow()
+#2 /Applications/MAMP/htdocs/mini-clinic/framework/web/actions/CInlineAction.php(49): PatientController->actionCheckpatientsmartcard()
+#3 /Applications/MAMP/htdocs/mini-clinic/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#4 /Applications/MAMP/htdocs/mini-clinic/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#5 /Applications/MAMP/htdocs/mini-clinic/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#6 /Applications/MAMP/htdocs/mini-clinic/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#7 /Applications/MAMP/htdocs/mini-clinic/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#8 /Applications/MAMP/htdocs/mini-clinic/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#9 /Applications/MAMP/htdocs/mini-clinic/framework/web/CController.php(291): CFilterChain->run()
+#10 /Applications/MAMP/htdocs/mini-clinic/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 /Applications/MAMP/htdocs/mini-clinic/framework/web/CWebApplication.php(282): CController->run('checkpatientsma...')
+#12 /Applications/MAMP/htdocs/mini-clinic/framework/web/CWebApplication.php(141): CWebApplication->runController('patient/checkpa...')
+#13 /Applications/MAMP/htdocs/mini-clinic/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#14 /Applications/MAMP/htdocs/mini-clinic/index.php(15): CApplication->run()
+#15 {main}
+REQUEST_URI=/mini-clinic/patient/checkpatientsmartcard
+---
+2021/01/27 10:12:47 [error] [system.db.CDbCommand] CDbCommand::fetch() failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'p.cid' in 'where clause'. The SQL statement executed was: select p.*
+				from patient p
+				where p.cid = ''.
+in /Applications/MAMP/htdocs/mini-clinic/protected/controllers/PatientController.php (574)
+in /Applications/MAMP/htdocs/mini-clinic/index.php (15)
+2021/01/27 10:12:47 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand ล้มเหลวในการดำเนินการเรียกลักษณะของ SQL: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'p.cid' in 'where clause'. The SQL statement executed was: select p.*
+				from patient p
+				where p.cid = ''' in /Applications/MAMP/htdocs/mini-clinic/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /Applications/MAMP/htdocs/mini-clinic/framework/db/CDbCommand.php(415): CDbCommand->queryInternal('fetch', Array, Array)
+#1 /Applications/MAMP/htdocs/mini-clinic/protected/controllers/PatientController.php(574): CDbCommand->queryRow()
+#2 /Applications/MAMP/htdocs/mini-clinic/framework/web/actions/CInlineAction.php(49): PatientController->actionCheckpatientsmartcard()
+#3 /Applications/MAMP/htdocs/mini-clinic/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#4 /Applications/MAMP/htdocs/mini-clinic/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#5 /Applications/MAMP/htdocs/mini-clinic/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#6 /Applications/MAMP/htdocs/mini-clinic/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#7 /Applications/MAMP/htdocs/mini-clinic/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#8 /Applications/MAMP/htdocs/mini-clinic/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#9 /Applications/MAMP/htdocs/mini-clinic/framework/web/CController.php(291): CFilterChain->run()
+#10 /Applications/MAMP/htdocs/mini-clinic/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 /Applications/MAMP/htdocs/mini-clinic/framework/web/CWebApplication.php(282): CController->run('checkpatientsma...')
+#12 /Applications/MAMP/htdocs/mini-clinic/framework/web/CWebApplication.php(141): CWebApplication->runController('patient/checkpa...')
+#13 /Applications/MAMP/htdocs/mini-clinic/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#14 /Applications/MAMP/htdocs/mini-clinic/index.php(15): CApplication->run()
+#15 {main}
+REQUEST_URI=/mini-clinic/patient/checkpatientsmartcard
+---
+2021/01/27 10:20:18 [error] [php] Undefined index: cid (/Applications/MAMP/htdocs/mini-clinic/protected/controllers/PatientController.php:568)
+Stack trace:
+#0 /Applications/MAMP/htdocs/mini-clinic/framework/web/filters/CFilterChain.php(133): PatientController->runAction()
+#1 /Applications/MAMP/htdocs/mini-clinic/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#2 /Applications/MAMP/htdocs/mini-clinic/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#3 /Applications/MAMP/htdocs/mini-clinic/framework/web/filters/CInlineFilter.php(58): PatientController->filterAccessControl()
+#4 /Applications/MAMP/htdocs/mini-clinic/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#5 /Applications/MAMP/htdocs/mini-clinic/framework/web/CController.php(291): CFilterChain->run()
+#6 /Applications/MAMP/htdocs/mini-clinic/framework/web/CController.php(265): PatientController->runActionWithFilters()
+#7 /Applications/MAMP/htdocs/mini-clinic/framework/web/CWebApplication.php(282): PatientController->run()
+#8 /Applications/MAMP/htdocs/mini-clinic/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /Applications/MAMP/htdocs/mini-clinic/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /Applications/MAMP/htdocs/mini-clinic/index.php(15): CWebApplication->run()
+REQUEST_URI=/mini-clinic/patient/checkpatientsmartcard
+in /Applications/MAMP/htdocs/mini-clinic/protected/controllers/PatientController.php (568)
+in /Applications/MAMP/htdocs/mini-clinic/index.php (15)
+2021/01/27 10:22:06 [error] [php] Undefined index: card (/Applications/MAMP/htdocs/mini-clinic/protected/controllers/PatientController.php:568)
+Stack trace:
+#0 /Applications/MAMP/htdocs/mini-clinic/framework/web/filters/CFilterChain.php(133): PatientController->runAction()
+#1 /Applications/MAMP/htdocs/mini-clinic/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#2 /Applications/MAMP/htdocs/mini-clinic/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#3 /Applications/MAMP/htdocs/mini-clinic/framework/web/filters/CInlineFilter.php(58): PatientController->filterAccessControl()
+#4 /Applications/MAMP/htdocs/mini-clinic/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#5 /Applications/MAMP/htdocs/mini-clinic/framework/web/CController.php(291): CFilterChain->run()
+#6 /Applications/MAMP/htdocs/mini-clinic/framework/web/CController.php(265): PatientController->runActionWithFilters()
+#7 /Applications/MAMP/htdocs/mini-clinic/framework/web/CWebApplication.php(282): PatientController->run()
+#8 /Applications/MAMP/htdocs/mini-clinic/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /Applications/MAMP/htdocs/mini-clinic/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /Applications/MAMP/htdocs/mini-clinic/index.php(15): CWebApplication->run()
+REQUEST_URI=/mini-clinic/patient/checkpatientsmartcard
+in /Applications/MAMP/htdocs/mini-clinic/protected/controllers/PatientController.php (568)
+in /Applications/MAMP/htdocs/mini-clinic/index.php (15)
+2021/01/27 10:40:47 [error] [php] Undefined index: card (/Applications/MAMP/htdocs/mini-clinic/protected/controllers/PatientController.php:568)
+Stack trace:
+#0 /Applications/MAMP/htdocs/mini-clinic/framework/web/filters/CFilterChain.php(133): PatientController->runAction()
+#1 /Applications/MAMP/htdocs/mini-clinic/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#2 /Applications/MAMP/htdocs/mini-clinic/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#3 /Applications/MAMP/htdocs/mini-clinic/framework/web/filters/CInlineFilter.php(58): PatientController->filterAccessControl()
+#4 /Applications/MAMP/htdocs/mini-clinic/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#5 /Applications/MAMP/htdocs/mini-clinic/framework/web/CController.php(291): CFilterChain->run()
+#6 /Applications/MAMP/htdocs/mini-clinic/framework/web/CController.php(265): PatientController->runActionWithFilters()
+#7 /Applications/MAMP/htdocs/mini-clinic/framework/web/CWebApplication.php(282): PatientController->run()
+#8 /Applications/MAMP/htdocs/mini-clinic/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /Applications/MAMP/htdocs/mini-clinic/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /Applications/MAMP/htdocs/mini-clinic/index.php(15): CWebApplication->run()
+REQUEST_URI=/mini-clinic/patient/checkpatientsmartcard
+in /Applications/MAMP/htdocs/mini-clinic/protected/controllers/PatientController.php (568)
+in /Applications/MAMP/htdocs/mini-clinic/index.php (15)
+2021/01/27 10:58:07 [error] [php] Missing argument 1 for CHttpRequest::getPost(), called in /Applications/MAMP/htdocs/mini-clinic/protected/controllers/PatientController.php on line 569 and defined (/Applications/MAMP/htdocs/mini-clinic/framework/web/CHttpRequest.php:197)
+Stack trace:
+#0 /Applications/MAMP/htdocs/mini-clinic/framework/web/CController.php(308): CInlineAction->runWithParams()
+#1 /Applications/MAMP/htdocs/mini-clinic/framework/web/filters/CFilterChain.php(133): PatientController->runAction()
+#2 /Applications/MAMP/htdocs/mini-clinic/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#3 /Applications/MAMP/htdocs/mini-clinic/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#4 /Applications/MAMP/htdocs/mini-clinic/framework/web/filters/CInlineFilter.php(58): PatientController->filterAccessControl()
+#5 /Applications/MAMP/htdocs/mini-clinic/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#6 /Applications/MAMP/htdocs/mini-clinic/framework/web/CController.php(291): CFilterChain->run()
+#7 /Applications/MAMP/htdocs/mini-clinic/framework/web/CController.php(265): PatientController->runActionWithFilters()
+#8 /Applications/MAMP/htdocs/mini-clinic/framework/web/CWebApplication.php(282): PatientController->run()
+#9 /Applications/MAMP/htdocs/mini-clinic/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#10 /Applications/MAMP/htdocs/mini-clinic/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#11 /Applications/MAMP/htdocs/mini-clinic/index.php(15): CWebApplication->run()
+REQUEST_URI=/mini-clinic/patient/checkpatientsmartcard
+in /Applications/MAMP/htdocs/mini-clinic/protected/controllers/PatientController.php (569)
+in /Applications/MAMP/htdocs/mini-clinic/index.php (15)
+2021/01/27 10:58:42 [error] [php] Missing argument 1 for CHttpRequest::getPost(), called in /Applications/MAMP/htdocs/mini-clinic/protected/controllers/PatientController.php on line 569 and defined (/Applications/MAMP/htdocs/mini-clinic/framework/web/CHttpRequest.php:197)
+Stack trace:
+#0 /Applications/MAMP/htdocs/mini-clinic/framework/web/CController.php(308): CInlineAction->runWithParams()
+#1 /Applications/MAMP/htdocs/mini-clinic/framework/web/filters/CFilterChain.php(133): PatientController->runAction()
+#2 /Applications/MAMP/htdocs/mini-clinic/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#3 /Applications/MAMP/htdocs/mini-clinic/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#4 /Applications/MAMP/htdocs/mini-clinic/framework/web/filters/CInlineFilter.php(58): PatientController->filterAccessControl()
+#5 /Applications/MAMP/htdocs/mini-clinic/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#6 /Applications/MAMP/htdocs/mini-clinic/framework/web/CController.php(291): CFilterChain->run()
+#7 /Applications/MAMP/htdocs/mini-clinic/framework/web/CController.php(265): PatientController->runActionWithFilters()
+#8 /Applications/MAMP/htdocs/mini-clinic/framework/web/CWebApplication.php(282): PatientController->run()
+#9 /Applications/MAMP/htdocs/mini-clinic/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#10 /Applications/MAMP/htdocs/mini-clinic/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#11 /Applications/MAMP/htdocs/mini-clinic/index.php(15): CWebApplication->run()
+REQUEST_URI=/mini-clinic/patient/checkpatientsmartcard
+in /Applications/MAMP/htdocs/mini-clinic/protected/controllers/PatientController.php (569)
+in /Applications/MAMP/htdocs/mini-clinic/index.php (15)
+2021/01/27 11:09:07 [error] [php] Undefined variable: sata (/Applications/MAMP/htdocs/mini-clinic/protected/controllers/PatientController.php:571)
+Stack trace:
+#0 /Applications/MAMP/htdocs/mini-clinic/framework/web/filters/CFilterChain.php(133): PatientController->runAction()
+#1 /Applications/MAMP/htdocs/mini-clinic/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#2 /Applications/MAMP/htdocs/mini-clinic/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#3 /Applications/MAMP/htdocs/mini-clinic/framework/web/filters/CInlineFilter.php(58): PatientController->filterAccessControl()
+#4 /Applications/MAMP/htdocs/mini-clinic/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#5 /Applications/MAMP/htdocs/mini-clinic/framework/web/CController.php(291): CFilterChain->run()
+#6 /Applications/MAMP/htdocs/mini-clinic/framework/web/CController.php(265): PatientController->runActionWithFilters()
+#7 /Applications/MAMP/htdocs/mini-clinic/framework/web/CWebApplication.php(282): PatientController->run()
+#8 /Applications/MAMP/htdocs/mini-clinic/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /Applications/MAMP/htdocs/mini-clinic/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /Applications/MAMP/htdocs/mini-clinic/index.php(15): CWebApplication->run()
+REQUEST_URI=/mini-clinic/patient/checkpatientsmartcard
+in /Applications/MAMP/htdocs/mini-clinic/protected/controllers/PatientController.php (571)
+in /Applications/MAMP/htdocs/mini-clinic/index.php (15)
