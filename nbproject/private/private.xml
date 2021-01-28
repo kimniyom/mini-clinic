@@ -3,37 +3,35 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/mini-clinic/protected/controllers/ListorderController.php</file>
+            <file>file:/C:/xampp/htdocs/mini-clinic/protected/views/employee/_form.php</file>
+            <file>file:/C:/xampp/htdocs/mini-clinic/protected/views/repair/listexpenses.php</file>
+            <file>file:/C:/xampp/htdocs/mini-clinic/protected/views/doctor/patientviewhistorymobile.php</file>
+            <file>file:/C:/xampp/htdocs/mini-clinic/protected/views/centerstockproduct/data.php</file>
             <file>file:/C:/xampp/htdocs/mini-clinic/protected/views/orders/update.php</file>
             <file>file:/C:/xampp/htdocs/mini-clinic/protected/views/orders/print.php</file>
-            <file>file:/C:/xampp/htdocs/mini-clinic/protected/views/sell/payment.php</file>
-            <file>file:/C:/xampp/htdocs/mini-clinic/protected/views/sell/bill.php</file>
-            <file>file:/C:/xampp/htdocs/mini-clinic/protected/models/Items.php</file>
-            <file>file:/C:/xampp/htdocs/mini-clinic/protected/controllers/StoreclinicController.php</file>
             <file>file:/C:/xampp/htdocs/mini-clinic/protected/controllers/OrdersController.php</file>
-            <file>file:/C:/xampp/htdocs/mini-clinic/protected/models/CenterStockproduct.php</file>
             <file>file:/C:/xampp/htdocs/mini-clinic/protected/views/sell/index.php</file>
-            <file>file:/C:/xampp/htdocs/mini-clinic/protected/models/Sell.php</file>
-            <file>file:/C:/xampp/htdocs/mini-clinic/protected/views/centerstockproduct/create.php</file>
-            <file>file:/C:/xampp/htdocs/mini-clinic/protected/views/layouts/template_backend.php</file>
-            <file>file:/C:/xampp/htdocs/mini-clinic/protected/views/orders/resultsearch.php</file>
+            <file>file:/C:/xampp/htdocs/mini-clinic/protected/views/doctor/patientviewhistory.php</file>
+            <file>file:/C:/xampp/htdocs/mini-clinic/protected/views/repair/expenses.php</file>
+            <file>file:/C:/xampp/htdocs/mini-clinic/protected/models/Configweb_model.php</file>
             <file>file:/C:/xampp/htdocs/mini-clinic/protected/views/orders/create.php</file>
-            <file>file:/C:/xampp/htdocs/mini-clinic/protected/views/store/index.php</file>
-            <file>file:/C:/xampp/htdocs/mini-clinic/protected/config/main.php</file>
-            <file>file:/C:/xampp/htdocs/mini-clinic/protected/views/report/reportproductsalable.php</file>
-            <file>file:/C:/xampp/htdocs/mini-clinic/protected/views/layouts/template_sell.php</file>
+            <file>file:/C:/xampp/htdocs/mini-clinic/protected/views/doctor/patientview.php</file>
+            <file>file:/C:/xampp/htdocs/mini-clinic/protected/views/orders/viewcenter.php</file>
+            <file>file:/C:/xampp/htdocs/mini-clinic/protected/views/doctor/index.php</file>
+            <file>file:/C:/xampp/htdocs/mini-clinic/protected/views/layouts/template_history.php</file>
+            <file>file:/C:/xampp/htdocs/mini-clinic/protected/views/centerstockproduct/update.php</file>
+            <file>file:/C:/xampp/htdocs/mini-clinic/protected/views/repair/create.php</file>
+            <file>file:/C:/xampp/htdocs/mini-clinic/protected/views/doctor/refer.php</file>
             <file>file:/C:/xampp/htdocs/mini-clinic/protected/models/Orders.php</file>
-            <file>file:/C:/xampp/htdocs/mini-clinic/protected/controllers/SellController.php</file>
+            <file>file:/C:/xampp/htdocs/mini-clinic/protected/views/repair/_form.php</file>
             <file>file:/C:/xampp/htdocs/mini-clinic/protected/views/orders/index.php</file>
-            <file>file:/C:/xampp/htdocs/mini-clinic/protected/views/sell/comboproduct.php</file>
-            <file>file:/C:/xampp/htdocs/mini-clinic/protected/views/report/reportsellall.php</file>
-            <file>file:/C:/xampp/htdocs/mini-clinic/protected/views/report/datareportsellproduct.php</file>
-            <file>file:/C:/xampp/htdocs/mini-clinic/protected/views/orders/bill.php</file>
-            <file>file:/C:/xampp/htdocs/mini-clinic/protected/views/report/reportsellproduct.php</file>
-            <file>file:/C:/xampp/htdocs/mini-clinic/protected/views/report/datareportcostprofit.php</file>
-            <file>file:/C:/xampp/htdocs/mini-clinic/protected/views/report/dataproductsalable.php</file>
+            <file>file:/C:/xampp/htdocs/mini-clinic/protected/views/doctor/views.php</file>
+            <file>file:/C:/xampp/htdocs/mini-clinic/protected/views/patient/_form.php</file>
+            <file>file:/C:/xampp/htdocs/mini-clinic/protected/views/centerstockproduct/index.php</file>
+            <file>file:/C:/xampp/htdocs/mini-clinic/protected/views/doctor/certificate.php</file>
+            <file>file:/C:/xampp/htdocs/mini-clinic/protected/controllers/DoctorController.php</file>
             <file>file:/C:/xampp/htdocs/mini-clinic/protected/views/storeclinic/index.php</file>
-            <file>file:/C:/xampp/htdocs/mini-clinic/protected/views/orders/listdata.php</file>
+            <file>file:/C:/xampp/htdocs/mini-clinic/protected/views/repair/carlendar.php</file>
         </group>
     </open-files>
 </project-private>
