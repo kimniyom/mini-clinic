@@ -596,32 +596,41 @@ class PatientController extends Controller {
         header('Access-Control-Allow-Origin: *');
         header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
         try {
+            $body = file_get_contents('php://input');
+            $data = json_decode($body, true);
+
             $config = new Configweb_model();
-            $card = Yii::app()->request->getPost('card');
-            $name = Yii::app()->request->getPost('name');
-            $lname = Yii::app()->request->getPost('lname');
-            $birth = Yii::app()->request->getPost('birth');
-            $tel = Yii::app()->request->getPost('tel');
-            $contact = Yii::app()->request->getPost('contact');
-            $sex = Yii::app()->request->getPost('sex');
-            $patientdrug = Yii::app()->request->getPost('patient_drug');
-            $patientdisease = Yii::app()->request->getPost('patient_disease');
+            $card = $data['card'];
+            $name = $data['name'];
+            $lname = $data['lname'];
+            $birth = $data['birth'];
+            $tel = $data['tel'];
+            $contact = $data['contact'];
+            $sex = $data['sex'];
+            $patientdrug = $data['patient_drug'];
+            $patientdisease = $data['patient_disease'];
             $cn = $this->Getcn();
             $pid = $config->autoId("patient", "pid", "10");
+            if($sex == "ชาย"){
+                $sexs = "M";
+            } else {
+                $sexs = "F";
+            }
             $columns = array(
+                "oid" => '008',
                 "name" => $name,
                 "lname" => $lname,
                 "card" => $card,
                 "birth" => $birth,
                 "tel" => $tel,
                 "contact" => $contact,
-                "sex" => $sex,
+                "sex" => $sexs,
                 "branch" => "1",
                 "cn" => $cn,
                 "pid" => $pid,
                 "type" => "3",
                 "create_date" => date("Y-m-d H:i:s"),
-                "d_update" => date("Y-m-d H:i:s"),
+                "d_update" => date("Y-m-d H:i:s")
             );
 
             Yii::app()->db->createCommand()
@@ -646,31 +655,23 @@ class PatientController extends Controller {
         header('Access-Control-Allow-Origin: *');
         header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
         try {
-            $id = Yii::app()->request->getPost('id');
-            $card = Yii::app()->request->getPost('card');
-            $name = Yii::app()->request->getPost('name');
-            $lname = Yii::app()->request->getPost('lname');
-            $birth = Yii::app()->request->getPost('birth');
-            $tel = Yii::app()->request->getPost('tel');
-            $contact = Yii::app()->request->getPost('contact');
-            $sex = Yii::app()->request->getPost('sex');
-            $patientdrug = Yii::app()->request->getPost('patient_drug');
-            $patientdisease = Yii::app()->request->getPost('patient_disease');
-            //$cn = $this->Getcn();
+            $body = file_get_contents('php://input');
+            $data = json_decode($body, true);
+
+            $config = new Configweb_model();
+            $id = $data['id'];
+            $patientdrug = $data['patient_drug'];
+            $patientdisease = $data['patient_disease'];
+            $tel = $data['tel'];
+
             $columns = array(
-                "name" => $name,
-                "lname" => $lname,
-                "card" => $card,
-                "birth" => $birth,
                 "tel" => $tel,
-                "contact" => $contact,
-                "sex" => $sex,
-                "d_update" => date("Y-m-d H:i:s"),
+                "d_update" => date("Y-m-d H:i:s")
             );
 
-            Yii::app()->db->createCommand()
+            $rs = Yii::app()->db->createCommand()
                     ->update("patient", $columns, "id = '$id'");
-
+            
             $Json = array("status" => 1);
 
             if ($patientdrug != "" || $patientdisease != "") {

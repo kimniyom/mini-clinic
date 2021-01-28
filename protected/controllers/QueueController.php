@@ -304,4 +304,78 @@ class QueueController extends Controller {
         return $str;
     }
 
+    ////////////////// SmartCard ///////////////////
+    public function actionSaveseqsmartcard(){
+        header('Access-Control-Allow-Origin: *');
+        header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+        
+        $body = file_get_contents('php://input');
+        $data = json_decode($body, true);
+
+        $patient = $data['patient'];
+        $date_service = date("Y-m-d");
+        $branch = "1";
+
+        //ดึงข้อมูลวันนัดล่าสุดมาอัพเดท5้ามีการนัด
+        $sql = "SELECT * FROM appoint WHERE patient_id = '$patient' AND status = '0' LIMIT 1";
+        $appoint = Yii::app()->db->createCommand($sql)->queryRow();
+        if ($appoint['appoint']) {
+            $id = $appoint['id'];
+            $status = array("status" => '1');
+            Yii::app()->db->createCommand()
+                    ->update("appoint", $status, "id = '$id'");
+        }
+
+        $columns = array(
+            "patient_id" => $patient,
+            "branch" => $branch,
+            "user_id" => 1,
+            "service_date" => $date_service,
+        );
+
+        Yii::app()->db->createCommand()
+                ->insert("service", $columns);
+
+        //รหัสบริการมากสุด
+        $sqlMaxservice = "SELECT MAX(id) AS id FROM service ";
+        $rsService = Yii::app()->db->createCommand($sqlMaxservice)->queryRow();
+        $ServiceId = $rsService['id'];
+
+        //ตรวจร่างกาย
+        $btemp = $data['btemp'];
+        $pr = $data['pr'];
+        $rr = $data['rr'];
+        $weight = $data['weight'];
+        $height = $data['height'];
+        $ht = $data['ht'];
+        $waistline = $data['waistline'];
+        $cc = $data['cc'];
+        $user_id = Masuser::model()->find("id=:id", array(":id" => Yii::app()->user->id))['user_id'];
+        $columnsbody = array(
+            "patient_id" => $patient,
+            "btemp" => $btemp,
+            "pr" => $pr,
+            "rr" => $rr,
+            "weight" => $weight,
+            "height" => $height,
+            "ht" => $ht,
+            "waistline" => $waistline,
+            "cc" => $cc,
+            "date_serv" => $date_service,
+            "user_id" => 1,
+            "service_id" => $ServiceId,
+        );
+
+        $rs = Yii::app()->db->createCommand()
+                ->insert("checkbody", $columnsbody);
+
+        if($rs){
+            $json = array("status" => 1);
+        } else {
+            $json = array("status" => 0);
+        }
+
+        echo json_encode($json);
+    }
+
 }
