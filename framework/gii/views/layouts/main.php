@@ -26,11 +26,7 @@ $cs->registerCssFile($baseUrl.'/js/fancybox/jquery.fancybox-1.3.1.css');
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
 
 	<script type="text/javascript" src="<?php echo $this->module->assetsUrl; ?>/js/main.js"></script>
-<style type="text/css">
-	#header a{
-		color: #000000;
-	}
-</style>
+
 </head>
 
 <body>
@@ -38,7 +34,7 @@ $cs->registerCssFile($baseUrl.'/js/fancybox/jquery.fancybox-1.3.1.css');
 <div class="container" id="page">
 	<div id="header">
 		<div class="top-menus">
-		<?php echo CHtml::link('help','http://www.yiiframework.com/doc/guide/topics.gii'); ?> |
+		<?php echo CHtml::link('help','https://www.yiiframework.com/doc/guide/1.1/en/topics.gii'); ?> |
 		<?php echo CHtml::link('webapp',Yii::app()->homeUrl); ?> |
 		<a href="http://www.yiiframework.com">yii</a>
 		<?php if(!Yii::app()->user->isGuest): ?>

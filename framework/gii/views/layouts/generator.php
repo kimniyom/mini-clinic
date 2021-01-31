@@ -1,8 +1,3 @@
-<style type="text/css">
-	#sidebar a{
-		color: #000000;
-	}
-</style>
 <?php $this->beginContent('gii.views.layouts.main'); ?>
 <div class="container">
 	<div class="span-4">
